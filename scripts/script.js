@@ -7,13 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
     header.addEventListener('click', () => {
       const isOpen = item.classList.contains('active');
 
-      // Закрываем все открытые секции
       accordionItems.forEach(i => {
         i.classList.remove('active');
         i.querySelector('.accordion-body').style.maxHeight = null;
       });
 
-      // Если кликнули по закрытой — открываем её
       if (!isOpen) {
         item.classList.add('active');
         const body = item.querySelector('.accordion-body');
@@ -35,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   burgerBtn.addEventListener('click', toggleMenu);
 
-// Закрываем меню при клике на ссылку
   menuLinks.forEach(link => {
     link.addEventListener('click', () => {
       if (mobileMenu.classList.contains('active')) {

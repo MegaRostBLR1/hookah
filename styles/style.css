@@ -28,6 +28,11 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
+
+/*img {*/
+/*  width: 100%;*/
+/*}*/
+
 section {
   padding: 100px 0;
 }
@@ -92,6 +97,7 @@ section {
 }
 
 
+
 /* Header */
 .header {
   position: fixed;
@@ -142,8 +148,7 @@ section {
   color: var(--accent);
 }
 
-
-/* Базовые стили для бургера (скрыт по умолчанию) */
+/* Burger */
 .burger-btn {
   display: none;
   flex-direction: column;
@@ -153,7 +158,7 @@ section {
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 1100; /* Выше мобильного меню */
+  z-index: 1100;
   padding: 0;
 }
 
@@ -165,11 +170,11 @@ section {
   transition: 0.3s ease;
 }
 
-/* Стили мобильного меню */
+/* Mobile Menu */
 .mobile-menu {
   position: fixed;
   top: 0;
-  right: -100%; /* Спрятано справа */
+  right: -100%;
   width: 100%;
   height: 100vh;
   background: #0a0a0b;
@@ -181,7 +186,7 @@ section {
 }
 
 .mobile-menu.active {
-  right: 0; /* Выезжает */
+  right: 0;
 }
 
 .nav-list-mobile {
@@ -199,36 +204,6 @@ section {
   color: white;
   text-decoration: none;
   font-weight: 600;
-}
-
-
-@media (max-width: 990px) {
-  .desktop-nav,
-  .desktop-btn {
-    display: none;
-  }
-
-  .burger-btn {
-    display: flex;
-  }
-
-  .burger-btn.active span:nth-child(1) {
-    transform: translateY(9px) rotate(45deg);
-  }
-  .burger-btn.active span:nth-child(2) {
-    opacity: 0;
-  }
-  .burger-btn.active span:nth-child(3) {
-    transform: translateY(-9px) rotate(-45deg);
-  }
-
-  body.no-scroll {
-    overflow: hidden;
-  }
-
-  .mobile-nav {
-    text-align: center;
-  }
 }
 
 
@@ -294,23 +269,12 @@ section {
   gap: 15px;
 }
 
-/* Адаптация под мобильные устройства */
-@media (max-width: 768px) {
-  .hero-btns {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .btn-large {
-    width: 100%; /* Кнопки на всю ширину для удобства нажатия */
-  }
-}
 
 
 /* How it works */
 .steps {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
 }
 
@@ -414,35 +378,6 @@ section {
   font-size: 0.95rem;
 }
 
-/* Адаптивность для преимуществ */
-@media (max-width: 992px) {
-  .benefits-wrapper {
-    grid-template-columns: 1fr;
-  }
-
-  .benefits-accent {
-    min-height: 300px;
-    align-items: center;
-    text-align: center;
-    background-size: contain;
-  }
-
-  .accent-content {
-    width: 100%;
-  }
-
-  .benefit-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
-  }
-
-  .benefit-desc {
-    text-align: left;
-    color: var(--text-muted);
-  }
-}
-
 
 
 /* Demo */
@@ -466,7 +401,7 @@ section {
 
 .product-wide-card {
   display: grid;
-  grid-template-columns: 1fr 1.2fr 1fr; /* Три части */
+  grid-template-columns: 1fr 1.2fr 1fr;
   background: var(--bg-card);
   border-radius: var(--border-radius);
   overflow: hidden;
@@ -486,7 +421,6 @@ section {
   overflow: hidden;
 }
 
-/* Стили для фото */
 .product-part img {
   width: 100%;
   height: 100%;
@@ -498,7 +432,6 @@ section {
   transform: scale(1.05);
 }
 
-/* Стили для центральной части с описанием */
 .info-main {
   padding: 40px;
   display: flex;
@@ -544,52 +477,7 @@ section {
   color: var(--white);
 }
 
-/* Лейблы на фото */
-.kit-label {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background: rgba(0, 0, 0, 0.7);
-  padding: 8px 15px;
-  border-radius: 8px;
-  font-size: 0.8rem;
-  z-index: 2;
-  backdrop-filter: blur(5px);
-}
 
-@media (max-width: 768px) {
-  .product-wide-card {
-    grid-template-columns: 1fr; /* На мобильных всё в одну колонку */
-  }
-  .photo-main {
-    height: 300px;
-  }
-  .photo-kit {
-    display: block;
-    height: 250px;
-  }
-  .info-main {
-    border: none;
-    text-align: center;
-  }
-
-  .photo-main,
-  .photo-kit {
-    padding: 20px;
-  }
-}
-
-
-
-/* Адаптивность для каталога */
-@media (max-width: 576px) {
-  .catalog-grid {
-    grid-template-columns: 1fr;
-  }
-  .product-image {
-    height: 200px;
-  }
-}
 
 /* Contacts Section */
 .contacts {
@@ -598,7 +486,7 @@ section {
 
 .contacts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
 }
 
@@ -616,7 +504,6 @@ section {
   background: #1e1e21;
 }
 
-/* Выделяем карточку доставки */
 .contact-icon {
   color: var(--accent);
   margin-bottom: 25px;
@@ -649,11 +536,6 @@ section {
 }
 
 
-@media (max-width: 768px) {
-  .contact-card {
-    padding: 30px 20px;
-  }
-}
 
 /* FAQ Accordion */
 .accordion {
@@ -728,50 +610,4 @@ section {
 .footer-links a:hover {
   color: var(--accent);
   transition: var(--transition);
-}
-
-
-
-/* Responsive */
-@media (max-width: 1024px) {
-  .apply-wrapper {
-    grid-template-columns: 1fr;
-    padding: 40px;
-  }
-  .pricing-grid {
-    gap: 20px;
-  }
-  .price-card.featured {
-    transform: scale(1);
-  }
-}
-
-@media (max-width: 768px) {
-  .nav {
-    display: none;
-  }
-  .header-container {
-    justify-content: space-between;
-    gap: 50px;
-  }
-  .section-title {
-    font-size: 2rem;
-  }
-  .footer-container {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-content h1 {
-    font-size: 2.1rem;
-  }
-  .apply-info h2 {
-    font-size: 2rem;
-  }
-  .price {
-    font-size: 2.2rem;
-  }
 }
