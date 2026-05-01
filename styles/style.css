@@ -421,9 +421,14 @@ section {
   }
 
   .benefits-accent {
-    height: 300px;
+    min-height: 300px;
     align-items: center;
     text-align: center;
+    background-size: contain;
+  }
+
+  .accent-content {
+    width: 100%;
   }
 
   .benefit-header {
@@ -485,7 +490,7 @@ section {
 .product-part img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   transition: transform 0.5s ease;
 }
 
@@ -550,16 +555,6 @@ section {
   font-size: 0.8rem;
   z-index: 2;
   backdrop-filter: blur(5px);
-}
-
-/* Адаптивность */
-@media (max-width: 1200px) {
-  .product-wide-card {
-    grid-template-columns: 1fr 1fr; /* На планшетах убираем одну колонку или перестраиваем */
-  }
-  .photo-kit {
-    display: none; /* Скрываем фото комплектации на средних экранах */
-  }
 }
 
 @media (max-width: 768px) {
@@ -730,6 +725,11 @@ section {
   font-size: 0.9rem;
 }
 
+.footer-links a:hover {
+  color: var(--accent);
+  transition: var(--transition);
+}
+
 
 
 /* Responsive */
@@ -766,7 +766,7 @@ section {
 
 @media (max-width: 480px) {
   .hero-content h1 {
-    font-size: 2.2rem;
+    font-size: 2.1rem;
   }
   .apply-info h2 {
     font-size: 2rem;
