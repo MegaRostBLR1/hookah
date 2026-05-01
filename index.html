@@ -13,15 +13,17 @@
 
 <header class="header">
     <div class="container header-container">
-        <div class="logo">
+        <a class="logo" href="#hero">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2C12 2 15 6 15 9C15 11.2091 13.2091 13 11 13C8.79086 13 7 11.2091 7 9C7 7.5 7.5 6 8.5 4.5" stroke="#E63946" stroke-width="2" stroke-linecap="round"/>
                 <path d="M19 12V20C19 21.1046 18.1046 22 17 22H7C5.89543 22 5 21.1046 5 20V12" stroke="white" stroke-width="2"/>
                 <path d="M10 17H14" stroke="white" stroke-width="2" stroke-linecap="round"/>
             </svg>
             <span>E-Hookah</span>
-        </div>
-        <nav class="nav">
+        </a>
+
+        <!-- Основная навигация (скроется на мобильных) -->
+        <nav class="nav desktop-nav">
             <ul class="nav-list">
                 <li><a href="#how">Как работает</a></li>
                 <li><a href="#benefits">Преимущества</a></li>
@@ -30,11 +32,32 @@
                 <li><a href="#faq">FAQ</a></li>
             </ul>
         </nav>
-        <a href="tel:+375296543711" class="btn btn-primary">Позвонить</a>
+        <a href="tel:+375296540311" class="btn btn-primary desktop-btn">Позвонить</a>
+
+        <!-- Кнопка Бургер -->
+        <button class="burger-btn" id="burgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </div>
 </header>
 
-<section class="hero">
+<!-- Мобильное меню -->
+<div class="mobile-menu" id="mobileMenu">
+    <nav class="mobile-nav">
+        <ul class="nav-list-mobile">
+            <li><a href="#how">Как работает</a></li>
+            <li><a href="#benefits">Преимущества</a></li>
+            <li><a href="#catalog">Ассотримент</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <a href="tel:+375296540311" class="btn btn-primary">Позвонить</a>
+    </nav>
+</div>
+
+<section class="hero" id="hero">
     <div class="container hero-content">
         <div class="hero-top-info">
             <span class="age-badge">18+</span>
@@ -128,7 +151,7 @@
                 <div class="benefit-item">
                     <div class="benefit-header">
                         <span class="benefit-title">Гарантия</span>
-                        <span class="benefit-desc">6 месяцев гарантии на электронный кальян.<br>Гарантия не распространяется на&nbsp;комплектующие.</span>
+                        <span class="benefit-desc">6 месяцев гарантии на электронный кальян. Гарантия не распространяется на комплектующие.</span>
                     </div>
                 </div>
                 <div class="benefit-item">
@@ -163,7 +186,7 @@
                             <span class="price-label">Цена за комплект:</span>
                             <span class="product-price">790 руб.</span>
                         </div>
-                        <a href="mailto:info@ehookah.by" class="btn btn-primary">Напишите нам</a>
+                        <a href="mailto:kos42rus@gmail.com" class="btn btn-primary">Напишите нам</a>
                     </div>
                 </div>
 
@@ -187,7 +210,7 @@
                             <span class="price-label">Цена за комплект:</span>
                             <span class="product-price">590 руб.</span>
                         </div>
-                        <a href="mailto:info@ehookah.by" class="btn btn-primary">Напишите нам</a>
+                        <a href="mailto:kos42rus@gmail.com" class="btn btn-primary">Напишите нам</a>
                     </div>
                 </div>
 
@@ -211,7 +234,7 @@
                             <span class="price-label">Цена за комплект:</span>
                             <span class="product-price">290 руб.</span>
                         </div>
-                        <a href="mailto:info@ehookah.by" class="btn btn-primary">Напишите нам</a>
+                        <a href="mailto:kos42rus@gmail.com" class="btn btn-primary">Напишите нам</a>
                     </div>
                 </div>
 
@@ -235,7 +258,7 @@
                             <span class="price-label">Цена за комплект:</span>
                             <span class="product-price">190 руб.</span>
                         </div>
-                        <a href="mailto:info@ehookah.by" class="btn btn-primary">Напишите нам</a>
+                        <a href="mailto:kos42rus@gmail.com" class="btn btn-primary">Напишите нам</a>
                     </div>
                 </div>
 
@@ -271,7 +294,7 @@
                     </svg>
                 </div>
                 <h3>Телефон</h3>
-                <a href="tel:+375296543711" class="contact-link">+375 (29) 654-031-11</a>
+                <a href="tel:+375296540311" class="contact-link">+375 (29) 654-03-11</a>
             </div>
 
             <div class="contact-card">

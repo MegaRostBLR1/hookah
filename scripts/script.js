@@ -21,4 +21,26 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  const burgerBtn = document.getElementById('burgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const body = document.body;
+  const menuLinks = document.querySelectorAll('.nav-list-mobile a');
+
+  function toggleMenu() {
+    burgerBtn.classList.toggle('active');
+    mobileMenu.classList.toggle('active');
+    body.classList.toggle('no-scroll');
+  }
+
+  burgerBtn.addEventListener('click', toggleMenu);
+
+// Закрываем меню при клике на ссылку
+  menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (mobileMenu.classList.contains('active')) {
+        toggleMenu();
+      }
+    });
+  });
 });
