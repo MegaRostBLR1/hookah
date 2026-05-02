@@ -20,6 +20,9 @@
 
   body.no-scroll {
     overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
   }
 
   .mobile-nav {
@@ -42,7 +45,15 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 939px) {
+  .step-card:last-child,
+  .contact-card:last-child {
+    grid-column-start: 1;
+    grid-column-end: -1;
+  }
+}
+
+@media (max-width: 767px) {
   .hero-btns {
     flex-direction: column;
     align-items: flex-start;
@@ -84,6 +95,10 @@
   .header-container {
     justify-content: space-between;
     gap: 50px;
+  }
+
+  .benefits-wrapper {
+    grid-template-columns: 1fr;
   }
 
   .footer-container {
