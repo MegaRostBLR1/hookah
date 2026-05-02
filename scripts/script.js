@@ -24,11 +24,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileMenu = document.getElementById('mobileMenu');
   const body = document.body;
   const menuLinks = document.querySelectorAll('.nav-list-mobile a');
+  let scrollPos = 0;
 
   function toggleMenu() {
+    const willBeActive = !mobileMenu.classList.contains('active');
+
+    if (willBeActive) {
+      scrollPos = window.scrollY;
+      body.style.top = `-${scrollPos}px`;
+      body.classList.add('no-scroll');
+    } else {
+      body.classList.remove('no-scroll');
+      body.style.top = '';
+      window.scrollTo(0, scrollPos);
+    }
+
     burgerBtn.classList.toggle('active');
     mobileMenu.classList.toggle('active');
-    body.classList.toggle('no-scroll');
   }
 
   burgerBtn.addEventListener('click', toggleMenu);
