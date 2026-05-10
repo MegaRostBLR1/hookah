@@ -1,3 +1,17 @@
+@media screen and (max-width: 1024px) {
+  .product-wide-card {
+    grid-template-columns: 1fr;
+  }
+
+  .hookah-small-accessories__desctop {
+    display: none;
+  }
+
+  .hookah-small-accessories__mobile {
+    display: block;
+  }
+}
+
 @media (max-width: 992px) {
   .desktop-nav,
   .desktop-btn {
@@ -61,10 +75,6 @@
 
   .btn-large {
     width: 100%;
-  }
-
-  .product-wide-card {
-    grid-template-columns: 1fr;
   }
 
   .photo-main,
