@@ -68,6 +68,9 @@
 }
 
 @media (max-width: 767px) {
+  .hero-content h1 {
+    font-size: 55px;
+  }
   .hero-btns {
     flex-direction: column;
     align-items: flex-start;
@@ -77,8 +80,7 @@
     width: 100%;
   }
 
-  .photo-main,
-  .photo-kit {
+  .photo-main {
     padding: 20px;
     display: block;
     height: 300px;
@@ -118,6 +120,28 @@
   }
 }
 
+@media (max-width: 600px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .section-title,
+  .info-content h3 {
+    font-size: 1.5rem;
+  }
+  .price {
+    font-size: 2.2rem;
+  }
+
+  .step-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .product-price {
+    font-size: 2rem;
+  }
+}
+
 @media (max-width: 576px) {
   .catalog-grid {
     grid-template-columns: 1fr;
@@ -127,14 +151,8 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 360px) {
   .hero-content h1 {
     font-size: 1.7rem;
-  }
-  .apply-info h2 {
-    font-size: 2rem;
-  }
-  .price {
-    font-size: 2.2rem;
   }
 }
