@@ -27,6 +27,9 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
+  /* Улучшение отрисовки шрифтов */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 section {
@@ -66,6 +69,7 @@ section {
 
 .btn-primary:hover {
   background-color: var(--accent-hover);
+  -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
   box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
 }
@@ -101,6 +105,7 @@ section {
   left: 0;
   width: 100%;
   background: rgba(10, 10, 11, 0.9);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   z-index: 1000;
   padding: 15px 0;
@@ -124,7 +129,7 @@ section {
 }
 
 .logo span {
-  text-wrap: nowrap;
+  white-space: nowrap;
 }
 
 .nav-list {
@@ -283,6 +288,7 @@ section {
 }
 
 .step-card:hover {
+  -webkit-transform: translateY(-5px);
   transform: translateY(-5px);
   background: #1e1e21;
 }
@@ -350,6 +356,7 @@ section {
 }
 
 .benefit-item:hover {
+  -webkit-transform: translateY(-5px);
   transform: translateY(-5px);
   background: #1e1e21;
 }
@@ -423,7 +430,12 @@ section {
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.5s ease, object-position 0.5s ease;
+  transition: -webkit-transform 0.5s ease, transform 0.5s ease, object-position 0.5s ease;
+  /* Хак для плавности в Safari и предотвращения размытия */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .hookah-small img {
@@ -431,16 +443,19 @@ section {
 }
 
 .hookah-big img {
-  transform: scale(1.4);
+  -webkit-transform: scale(1.4) translateZ(0);
+  transform: scale(1.4) translateZ(0);
 }
 
 .product-wide-card:hover .hookah-small img,
 .product-wide-card:hover .photo-kit img {
-  transform: scale(1.05);
+  -webkit-transform: scale(1.05) translateZ(0);
+  transform: scale(1.05) translateZ(0);
 }
 
 .product-wide-card:hover .hookah-big img {
-  transform: scale(1.45);
+  -webkit-transform: scale(1.45) translateZ(0);
+  transform: scale(1.45) translateZ(0);
 }
 
 .info-main {
@@ -489,11 +504,13 @@ section {
 }
 
 .hookah-small-accessories img {
-  transform: scale(1.2);
+  -webkit-transform: scale(1.2) translateZ(0);
+  transform: scale(1.2) translateZ(0);
 }
 
-.product-wide-card:hover:hover .hookah-small-accessories img {
-  transform: scale(1.25);
+.product-wide-card:hover .hookah-small-accessories img {
+  -webkit-transform: scale(1.25) translateZ(0);
+  transform: scale(1.25) translateZ(0);
 }
 
 .hookah-small-accessories__desctop {
@@ -527,6 +544,7 @@ section {
 }
 
 .contact-card:hover {
+  -webkit-transform: translateY(-5px);
   transform: translateY(-5px);
   background: #1e1e21;
 }
