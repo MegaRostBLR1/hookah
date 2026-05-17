@@ -169,6 +169,12 @@
     gap: var(--space-lg)
   }
 
+  .how,
+  .catalog,
+  .contacts{
+    padding-bottom: 0;
+  }
+
   .footer-container {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
