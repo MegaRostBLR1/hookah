@@ -110,7 +110,7 @@
 
 @media (max-width: 767px) {
   section {
-    padding: var(--space-lg) 0
+    padding: var(--space-xxl) 0
   }
 
   .hero {
