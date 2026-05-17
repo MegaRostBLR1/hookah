@@ -1,37 +1,35 @@
-/* ==================== MEDIA QUERIES ==================== */
-
 @media screen and (max-width: 1024px) {
   .product-wide-card {
     -ms-grid-columns: 1fr;
-    grid-template-columns: 1fr;
+    grid-template-columns:1fr
   }
 
   .hookah-small-accessories__desctop {
-    display: none;
+    display: none
   }
 
   .hookah-small-accessories__mobile {
-    display: block;
+    display: block
   }
 
   .benefits-wrapper {
     -ms-grid-columns: 1fr;
-    grid-template-columns: 1fr;
-    gap: 30px;
+    grid-template-columns:1fr;
+    gap: var(--space-md)
   }
 
   .benefits-accent {
     background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../images/benefits-mob.png");
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../images/benefits-mob.png");
-    aspect-ratio: 16 / 9;
-    padding: 40px 30px;
+    aspect-ratio: 16/9;
+    padding: var(--space-md) var(--space-sm)
   }
 
-  @supports not (aspect-ratio: 16 / 9) {
+  @supports not(aspect-ratio:16/9) {
     .benefits-accent {
       height: 0;
       padding-bottom: 56.25%;
-      position: relative;
+      position: relative
     }
 
     .benefits-accent .accent-content {
@@ -40,53 +38,47 @@
       left: 0;
       width: 100%;
       height: 100%;
-      padding: 40px 30px;
+      padding: var(--space-md) var(--space-sm)
     }
   }
 }
 
 @media (max-width: 992px) {
   .desktop-nav, .desktop-btn {
-    display: none;
+    display: none
   }
 
   .burger-btn {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
-    display: flex;
+    display: flex
   }
 
   .burger-btn.active span:nth-child(1) {
     -webkit-transform: translateY(9px) rotate(45deg);
-    -moz-transform: translateY(9px) rotate(45deg);
-    -ms-transform: translateY(9px) rotate(45deg);
-    -o-transform: translateY(9px) rotate(45deg);
-    transform: translateY(9px) rotate(45deg);
+    transform: translateY(9px) rotate(45deg)
   }
 
   .burger-btn.active span:nth-child(2) {
-    opacity: 0;
+    opacity: 0
   }
 
   .burger-btn.active span:nth-child(3) {
     -webkit-transform: translateY(-9px) rotate(-45deg);
-    -moz-transform: translateY(-9px) rotate(-45deg);
-    -ms-transform: translateY(-9px) rotate(-45deg);
-    -o-transform: translateY(-9px) rotate(-45deg);
-    transform: translateY(-9px) rotate(-45deg);
+    transform: translateY(-9px) rotate(-45deg)
   }
 
   body.no-scroll {
-    overflow: hidden;
+    overflow: hidden
   }
 
   .mobile-nav {
-    text-align: center;
+    text-align: center
   }
 
   .accent-content {
-    width: 100%;
+    width: 100%
   }
 
   .benefit-header {
@@ -99,12 +91,12 @@
     -webkit-align-items: flex-start;
     -ms-flex-align: start;
     align-items: flex-start;
-    gap: 5px;
+    gap: var(--space-xs)
   }
 
   .benefit-desc {
     text-align: left;
-    color: #a0a0a5;
+    color: #a0a0a5
   }
 }
 
@@ -112,17 +104,17 @@
   .step-card:last-child, .contact-card:last-child {
     -ms-grid-column: 1;
     -ms-grid-column-span: 3;
-    grid-column: 1 / -1;
+    grid-column: 1/-1
   }
 }
 
 @media (max-width: 767px) {
   .hero {
-    background-position: 60% center;
+    background-position: 60% center
   }
 
   .hero-content h1 {
-    font-size: 55px;
+    font-size: 55px
   }
 
   .hero-btns {
@@ -134,35 +126,35 @@
     -webkit-box-align: start;
     -webkit-align-items: flex-start;
     -ms-flex-align: start;
-    align-items: flex-start;
+    align-items: flex-start
   }
 
   .btn-large {
-    width: 100%;
+    width: 100%
   }
 
   .photo-main {
-    padding: 20px;
+    padding: var(--space-sm);
     display: block;
-    height: 300px;
+    height: 300px
   }
 
   .photo-main img, .photo-kit img {
     -o-object-fit: contain;
-    object-fit: contain;
+    object-fit: contain
   }
 
   .info-main {
     border: none;
-    text-align: center;
+    text-align: center
   }
 
   .contact-card {
-    padding: 30px 20px;
+    padding: var(--space-md) var(--space-sm)
   }
 
   .nav {
-    display: none;
+    display: none
   }
 
   .header-container {
@@ -170,7 +162,7 @@
     -webkit-justify-content: space-between;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    gap: 50px;
+    gap: var(--space-lg)
   }
 
   .footer-container {
@@ -179,96 +171,60 @@
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
     flex-direction: column;
-    gap: 20px;
-    text-align: center;
+    gap: var(--space-md);
+    text-align: center
   }
 }
 
 @media (max-width: 600px) {
   .hero-content h1 {
-    font-size: 2rem;
+    font-size: 2rem
   }
 
   .section-title, .info-content h3 {
-    font-size: 1.5rem;
+    font-size: 1.5rem
   }
 
   .price {
-    font-size: 2.2rem;
+    font-size: 2.2rem
   }
 
   .step-card h3 {
-    font-size: 1.25rem;
+    font-size: 1.25rem
   }
 
   .product-price {
-    font-size: 2rem;
+    font-size: 2rem
   }
 }
 
 @media (max-width: 576px) {
   .catalog-grid {
     -ms-grid-columns: 1fr;
-    grid-template-columns: 1fr;
+    grid-template-columns:1fr
   }
 
   .product-image {
-    height: 200px;
+    height: 200px
   }
 }
 
 @media (max-width: 374px) {
   .nav-list-mobile li {
-    margin-bottom: 15px;
+    margin-bottom: var(--space-sm)
   }
 
   .nav-list-mobile a {
-    font-size: 1.3rem;
+    font-size: 1.3rem
   }
 }
 
 @media (max-width: 360px) {
   .hero-content h1 {
-    font-size: 1.7rem;
+    font-size: 1.7rem
   }
 
   .benefits-accent {
-    padding: 30px 20px;
-  }
-}
-
-/* ==================== PRINT & ACCESSIBILITY ==================== */
-@media print {
-  .header, .footer, .burger-btn, .mobile-menu, .hero-btns, .btn {
-    display: none !important;
-  }
-
-  body {
-    background: #fff;
-    color: #000;
-    font-size: 12pt;
-  }
-
-  section {
-    padding: 20px 0;
-    page-break-inside: avoid;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    -webkit-animation-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-    -webkit-transition-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-
-  .step-card:hover, .benefit-item:hover, .contact-card:hover, .product-wide-card:hover, .btn-primary:hover {
-    -webkit-transform: none !important;
-    -moz-transform: none !important;
-    -ms-transform: none !important;
-    -o-transform: none !important;
-    transform: none !important;
+    padding: var(--space-md) var(--space-sm)
   }
 }

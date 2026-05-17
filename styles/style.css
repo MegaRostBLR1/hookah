@@ -1,10 +1,9 @@
-/* ==================== RESET & BASE ==================== */
 *, *::before, *::after {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding: 0
 }
 
 html {
@@ -13,7 +12,7 @@ html {
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
-  scroll-behavior: smooth;
+  scroll-behavior: smooth
 }
 
 body {
@@ -23,14 +22,14 @@ body {
   background-color: #0a0a0b;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: hidden
 }
 
 img, svg {
   display: block;
   max-width: 100%;
   height: auto;
-  border: 0;
+  border: 0
 }
 
 button {
@@ -39,20 +38,19 @@ button {
   line-height: inherit;
   cursor: pointer;
   background: none;
-  border: none;
+  border: none
 }
 
 a {
   color: inherit;
   text-decoration: none;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent
 }
 
 ul {
-  list-style: none;
+  list-style: none
 }
 
-/* ==================== VARIABLES ==================== */
 :root {
   --bg-dark: #0a0a0b;
   --bg-card: #161618;
@@ -64,36 +62,39 @@ ul {
   --transition: all 0.3s ease;
   --border-radius: 16px;
   --container-width: 1200px;
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-xxl: 100px
 }
 
-/* Fallback for browsers without CSS variables */
-@supports not (--css: variables) {
+@supports not(--css:variables) {
   .btn-primary {
     background-color: #E63946;
-    color: #ffffff;
+    color: #ffffff
   }
 }
 
-/* ==================== LAYOUT ==================== */
 section {
-  padding: 100px 0;
+  padding: var(--space-xxl) 0
 }
 
 .section-title {
   text-align: center;
   font-size: 2.5rem;
-  margin-bottom: 60px;
-  font-weight: 800;
+  margin-bottom: var(--space-lg);
+  font-weight: 800
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
-  width: 100%;
+  padding: 0 var(--space-sm);
+  width: 100%
 }
 
-/* ==================== BUTTONS ==================== */
 .btn {
   display: inline-block;
   padding: 12px 28px;
@@ -102,57 +103,49 @@ section {
   font-weight: 600;
   cursor: pointer;
   -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
   border: none;
   text-align: center;
   -webkit-appearance: none;
   -moz-appearance: none;
-  appearance: none;
+  appearance: none
 }
 
 .btn-primary {
   background-color: #E63946;
-  color: #ffffff;
+  color: #ffffff
 }
 
 .btn-primary:hover {
   background-color: #f74d5a;
   -webkit-transform: translateY(-2px);
-  -moz-transform: translateY(-2px);
-  -ms-transform: translateY(-2px);
-  -o-transform: translateY(-2px);
   transform: translateY(-2px);
   -webkit-box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
-  -moz-box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
-  box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+  box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3)
 }
 
 .btn-outline {
   background: transparent;
   border: 2px solid #E63946;
-  color: #E63946;
+  color: #E63946
 }
 
 .btn-outline:hover {
   background: #E63946;
-  color: #ffffff;
+  color: #ffffff
 }
 
 .btn-large {
   padding: 18px 40px;
   font-size: 1.1rem;
   background-color: #E63946;
-  color: #ffffff;
+  color: #ffffff
 }
 
 .btn-full {
-  width: 100%;
+  width: 100%
 }
 
-/* ==================== HEADER ==================== */
 .header {
   position: fixed;
   top: 0;
@@ -160,16 +153,15 @@ section {
   width: 100%;
   background: rgba(10, 10, 11, 0.9);
   -webkit-backdrop-filter: blur(10px);
-  -moz-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   z-index: 1000;
-  padding: 15px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05)
 }
 
-@supports not ((-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px))) {
+@supports not((-webkit-backdrop-filter:blur(10px)) or (backdrop-filter:blur(10px))) {
   .header {
-    background: #0a0a0b;
+    background: #0a0a0b
   }
 }
 
@@ -185,7 +177,7 @@ section {
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
-  align-items: center;
+  align-items: center
 }
 
 .logo {
@@ -197,11 +189,11 @@ section {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  gap: 10px;
+  gap: var(--space-xs);
   font-weight: 800;
   font-size: 1.5rem;
   color: #ffffff;
-  white-space: nowrap;
+  white-space: nowrap
 }
 
 .nav-list {
@@ -209,21 +201,20 @@ section {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  gap: 30px;
+  gap: var(--space-md)
 }
 
 .nav-list a {
   color: #a0a0a5;
   font-weight: 500;
   -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease
 }
 
 .nav-list a:hover {
-  color: #E63946;
+  color: #E63946
 }
 
-/* Burger */
 .burger-btn {
   display: none;
   -webkit-box-orient: vertical;
@@ -241,7 +232,7 @@ section {
   border: none;
   cursor: pointer;
   z-index: 1100;
-  padding: 0;
+  padding: 0
 }
 
 .burger-btn span {
@@ -250,10 +241,9 @@ section {
   height: 2px;
   background-color: white;
   -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
+  transition: 0.3s ease
 }
 
-/* Mobile Menu */
 .mobile-menu {
   position: fixed;
   top: 0;
@@ -275,30 +265,29 @@ section {
   -ms-flex-align: center;
   align-items: center;
   -webkit-transition: right 0.4s ease-in-out;
-  transition: right 0.4s ease-in-out;
+  transition: right 0.4s ease-in-out
 }
 
 .mobile-menu.active {
-  right: 0;
+  right: 0
 }
 
 .nav-list-mobile {
   list-style: none;
   padding: 0;
-  text-align: center;
+  text-align: center
 }
 
 .nav-list-mobile li {
-  margin-bottom: 30px;
+  margin-bottom: var(--space-md)
 }
 
 .nav-list-mobile a {
   font-size: 1.5rem;
   color: white;
-  font-weight: 600;
+  font-weight: 600
 }
 
-/* ==================== HERO ==================== */
 .hero {
   height: 100vh;
   width: 100%;
@@ -316,15 +305,15 @@ section {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
-  justify-content: flex-start;
+  justify-content: flex-start
 }
 
 .hero-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 var(--space-sm);
   width: 100%;
-  text-align: left;
+  text-align: left
 }
 
 .hero-top-info {
@@ -336,8 +325,8 @@ section {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  gap: 15px;
-  margin-bottom: 25px;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm)
 }
 
 .age-badge {
@@ -364,7 +353,7 @@ section {
   -ms-flex-negative: 0;
   flex-shrink: 0;
   text-align: center;
-  line-height: 1;
+  line-height: 1
 }
 
 .hero-content h1 {
@@ -372,14 +361,14 @@ section {
   font-size: 72px;
   font-weight: 800;
   line-height: 1.1;
-  margin-bottom: 20px;
+  margin-bottom: var(--space-sm)
 }
 
 .hero-content p {
   max-width: 530px;
   font-size: 1.2rem;
   color: #a0a0a5;
-  margin-bottom: 35px;
+  margin-bottom: var(--space-md)
 }
 
 .hero-btns {
@@ -387,10 +376,9 @@ section {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  gap: 15px;
+  gap: var(--space-sm)
 }
 
-/* ==================== STEPS (HOW) ==================== */
 .steps {
   display: -webkit-box;
   display: -webkit-flex;
@@ -399,23 +387,23 @@ section {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: var(--space-md)
 }
 
-@supports (display: grid) {
+@supports (display:grid) {
   .steps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))
   }
 
   .step-card {
-    min-width: 0;
+    min-width: 0
   }
 }
 
 .step-card {
   background: #161618;
-  padding: 40px;
+  padding: var(--space-lg);
   border-radius: 16px;
   text-align: center;
   -webkit-transition: all 0.3s ease;
@@ -423,37 +411,33 @@ section {
   -webkit-box-flex: 1;
   -webkit-flex: 1 1 280px;
   -ms-flex: 1 1 280px;
-  flex: 1 1 280px;
+  flex: 1 1 280px
 }
 
 .step-card:hover {
   -webkit-transform: translateY(-5px);
-  -moz-transform: translateY(-5px);
-  -ms-transform: translateY(-5px);
-  -o-transform: translateY(-5px);
   transform: translateY(-5px);
-  background: #1e1e21;
+  background: #1e1e21
 }
 
 .step-icon {
   display: flex;
   justify-content: center;
-  margin-bottom: 25px;
-  color: #E63946;
+  margin-bottom: var(--space-md);
+  color: #E63946
 }
 
 .step-card h3 {
-  margin-bottom: 15px;
-  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+  font-size: 1.5rem
 }
 
 .step-card p {
-  color: #a0a0a5;
+  color: #a0a0a5
 }
 
-/* ==================== BENEFITS ==================== */
 .benefits {
-  background-color: #0a0a0b;
+  background-color: #0a0a0b
 }
 
 .benefits-wrapper {
@@ -464,21 +448,21 @@ section {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: var(--space-lg);
   -webkit-box-align: stretch;
   -webkit-align-items: stretch;
   -ms-flex-align: stretch;
-  align-items: stretch;
+  align-items: stretch
 }
 
-@supports (display: grid) {
+@supports (display:grid) {
   .benefits-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns:1fr 1.5fr
   }
 
   .benefits-accent, .benefits-list {
-    min-width: 0;
+    min-width: 0
   }
 }
 
@@ -486,7 +470,7 @@ section {
   background: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../images/benefits-desc.png") center/cover no-repeat;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../images/benefits-desc.png") center/cover no-repeat;
   border-radius: 16px;
-  padding: 60px 40px;
+  padding: var(--space-lg);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -499,17 +483,17 @@ section {
   -webkit-box-flex: 1;
   -webkit-flex: 1 1 300px;
   -ms-flex: 1 1 300px;
-  flex: 1 1 300px;
+  flex: 1 1 300px
 }
 
 .accent-content h2 {
   font-size: 2.5rem;
-  margin: 15px 0;
-  line-height: 1.2;
+  margin: var(--space-sm) 0;
+  line-height: 1.2
 }
 
 .accent-content p {
-  color: #a0a0a5;
+  color: #a0a0a5
 }
 
 .benefits-list {
@@ -522,35 +506,32 @@ section {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--space-sm);
   -webkit-box-flex: 1;
   -webkit-flex: 1 1 400px;
   -ms-flex: 1 1 400px;
-  flex: 1 1 400px;
+  flex: 1 1 400px
 }
 
-@supports (display: grid) {
+@supports (display:grid) {
   .benefits-list {
-    min-width: 0;
+    min-width: 0
   }
 }
 
 .benefit-item {
   background: #161618;
-  padding: 25px 30px;
+  padding: var(--space-md) var(--space-lg);
   border-radius: 16px;
   border-left: 4px solid transparent;
   -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease
 }
 
 .benefit-item:hover {
   -webkit-transform: translateY(-5px);
-  -moz-transform: translateY(-5px);
-  -ms-transform: translateY(-5px);
-  -o-transform: translateY(-5px);
   transform: translateY(-5px);
-  background: #1e1e21;
+  background: #1e1e21
 }
 
 .benefit-header {
@@ -566,23 +547,22 @@ section {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  gap: 20px;
+  gap: var(--space-md)
 }
 
 .benefit-title {
   font-weight: 700;
   font-size: 1.1rem;
   color: #E63946;
-  min-width: 180px;
+  min-width: 180px
 }
 
 .benefit-desc {
   color: #ffffff;
   text-align: right;
-  font-size: 0.95rem;
+  font-size: 0.95rem
 }
 
-/* ==================== DEMO ==================== */
 .demo {
   height: 100vh;
   width: 100%;
@@ -599,40 +579,38 @@ section {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
-  justify-content: flex-start;
+  justify-content: flex-start
 }
 
-/* ==================== CATALOG ==================== */
 .catalog-wide-list:not(:last-child) {
-  margin-bottom: 40px;
+  margin-bottom: var(--space-md)
 }
 
 .product-wide-card {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1.2fr 1fr;
-  grid-template-columns: 1fr 1.2fr 1fr;
+  grid-template-columns:1fr 1.2fr 1fr;
   background: #161618;
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.05);
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  min-height: 400px;
+  min-height: 400px
 }
 
 .product-wide-card:hover {
   border-color: #E63946;
   -webkit-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  background: #1e1e21;
+  background: #1e1e21
 }
 
 .product-part {
   position: relative;
   overflow: hidden;
-  height: 100%;
+  height: 100%
 }
 
 .product-part img, .photo-kit img {
@@ -648,13 +626,10 @@ section {
   -moz-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-transform: translateZ(0);
-  -moz-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  -o-transform: translateZ(0);
-  transform: translateZ(0);
+  transform: translateZ(0)
 }
 
-@supports not (object-fit: cover) {
+@supports not(object-fit:cover) {
   .product-part img, .photo-kit img {
     width: auto;
     height: auto;
@@ -664,45 +639,32 @@ section {
     top: 50%;
     left: 50%;
     -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)
   }
 }
 
 .hookah-small img {
   -o-object-position: 56%;
-  object-position: 56%;
+  object-position: 56%
 }
 
 .hookah-big img {
   -webkit-transform: scale(1.4) translateZ(0);
-  -moz-transform: scale(1.4) translateZ(0);
-  -ms-transform: scale(1.4) translateZ(0);
-  -o-transform: scale(1.4) translateZ(0);
-  transform: scale(1.4) translateZ(0);
+  transform: scale(1.4) translateZ(0)
 }
 
-.product-wide-card:hover .hookah-small img,
-.product-wide-card:hover .photo-kit img {
+.product-wide-card:hover .hookah-small img, .product-wide-card:hover .photo-kit img {
   -webkit-transform: scale(1.05) translateZ(0);
-  -moz-transform: scale(1.05) translateZ(0);
-  -ms-transform: scale(1.05) translateZ(0);
-  -o-transform: scale(1.05) translateZ(0);
-  transform: scale(1.05) translateZ(0);
+  transform: scale(1.05) translateZ(0)
 }
 
 .product-wide-card:hover .hookah-big img {
   -webkit-transform: scale(1.45) translateZ(0);
-  -moz-transform: scale(1.45) translateZ(0);
-  -ms-transform: scale(1.45) translateZ(0);
-  -o-transform: scale(1.45) translateZ(0);
-  transform: scale(1.45) translateZ(0);
+  transform: scale(1.45) translateZ(0)
 }
 
 .info-main {
-  padding: 40px;
+  padding: var(--space-lg);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -712,73 +674,66 @@ section {
   -ms-flex-align: center;
   align-items: center;
   border-left: 1px solid rgba(255, 255, 255, 0.05);
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(255, 255, 255, 0.05)
 }
 
 .available {
-  color: #7fff00;
+  color: #7fff00
 }
 
 .none {
-  color: #ff0000;
+  color: #ff0000
 }
 
 .info-content h3 {
   font-size: 2rem;
-  margin-bottom: 20px;
-  color: #E63946;
+  margin-bottom: var(--space-md);
+  color: #E63946
 }
 
 .info-content p {
   color: #a0a0a5;
-  margin-bottom: 30px;
-  line-height: 1.6;
+  margin-bottom: var(--space-md);
+  line-height: 1.6
 }
 
 .product-price-wrapper {
-  margin-bottom: 30px;
+  margin-bottom: var(--space-md)
 }
 
 .price-label {
   display: block;
   font-size: 0.9rem;
   color: #a0a0a5;
-  margin-bottom: 5px;
+  margin-bottom: var(--space-xs)
 }
 
 .product-price {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #ffffff
 }
 
 .hookah-small-accessories img {
   -webkit-transform: scale(1.2) translateZ(0);
-  -moz-transform: scale(1.2) translateZ(0);
-  -ms-transform: scale(1.2) translateZ(0);
-  -o-transform: scale(1.2) translateZ(0);
-  transform: scale(1.2) translateZ(0);
+  transform: scale(1.2) translateZ(0)
 }
 
 .product-wide-card:hover .hookah-small-accessories img {
   -webkit-transform: scale(1.25) translateZ(0);
-  -moz-transform: scale(1.25) translateZ(0);
-  -ms-transform: scale(1.25) translateZ(0);
-  -o-transform: scale(1.25) translateZ(0);
-  transform: scale(1.25) translateZ(0);
+  transform: scale(1.25) translateZ(0)
 }
 
 .hookah-small-accessories__desctop {
-  display: block;
+  display: block
 }
 
 .hookah-small-accessories__mobile {
-  display: none;
+  display: none
 }
 
-/* ==================== CONTACTS ==================== */
 .contacts {
-  background-color: #0a0a0b;
+  background-color: #0a0a0b
 }
 
 .contacts-grid {
@@ -789,23 +744,23 @@ section {
   -webkit-flex-wrap: wrap;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: var(--space-md)
 }
 
-@supports (display: grid) {
+@supports (display:grid) {
   .contacts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))
   }
 
   .contact-card {
-    min-width: 0;
+    min-width: 0
   }
 }
 
 .contact-card {
   background: #161618;
-  padding: 50px 40px;
+  padding: var(--space-lg) var(--space-md);
   border-radius: 16px;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.05);
@@ -814,21 +769,18 @@ section {
   -webkit-box-flex: 1;
   -webkit-flex: 1 1 280px;
   -ms-flex: 1 1 280px;
-  flex: 1 1 280px;
+  flex: 1 1 280px
 }
 
 .contact-card:hover {
   -webkit-transform: translateY(-5px);
-  -moz-transform: translateY(-5px);
-  -ms-transform: translateY(-5px);
-  -o-transform: translateY(-5px);
   transform: translateY(-5px);
-  background: #1e1e21;
+  background: #1e1e21
 }
 
 .contact-icon {
   color: #E63946;
-  margin-bottom: 25px;
+  margin-bottom: var(--space-md);
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -836,18 +788,18 @@ section {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
-  justify-content: center;
+  justify-content: center
 }
 
 .contact-card h3 {
   font-size: 1.5rem;
-  margin-bottom: 15px;
-  color: #ffffff;
+  margin-bottom: var(--space-sm);
+  color: #ffffff
 }
 
 .contact-card p, .contact-subtext {
   color: #a0a0a5;
-  font-size: 1rem;
+  font-size: 1rem
 }
 
 .contact-link {
@@ -855,26 +807,25 @@ section {
   font-size: 1.25rem;
   font-weight: 700;
   -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease
 }
 
 .contact-link:hover {
-  color: #E63946;
+  color: #E63946
 }
 
-/* ==================== FAQ ==================== */
 .accordion {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0 auto
 }
 
 .accordion-item {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1)
 }
 
 .accordion-header {
   width: 100%;
-  padding: 25px 0;
+  padding: var(--space-md) 0;
   font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
@@ -895,38 +846,37 @@ section {
   background: none;
   border: none;
   color: inherit;
-  text-align: left;
+  text-align: left
 }
 
 .accordion-header:hover {
-  color: #E63946;
+  color: #E63946
 }
 
 .accordion-header::after {
   content: "+";
-  font-size: 1.5rem;
+  font-size: 1.5rem
 }
 
 .accordion-item.active .accordion-header::after {
-  content: "−";
+  content: "−"
 }
 
 .accordion-body {
   max-height: 0;
   overflow: hidden;
   -webkit-transition: max-height 0.3s ease-out;
-  transition: max-height 0.3s ease-out;
+  transition: max-height 0.3s ease-out
 }
 
 .accordion-content {
-  padding-bottom: 25px;
-  color: #a0a0a5;
+  padding-bottom: var(--space-md);
+  color: #a0a0a5
 }
 
-/* ==================== FOOTER ==================== */
 .footer {
-  padding: 60px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: var(--space-lg) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.05)
 }
 
 .footer-container {
@@ -941,7 +891,7 @@ section {
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
-  align-items: center;
+  align-items: center
 }
 
 .footer-links {
@@ -949,17 +899,49 @@ section {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  gap: 20px;
+  gap: var(--space-md)
 }
 
 .footer-links a {
   color: #a0a0a5;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.9rem
 }
 
 .footer-links a:hover {
   color: #E63946;
   -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease
+}
+
+@media print {
+  .header, .footer, .burger-btn, .mobile-menu, .hero-btns, .btn {
+    display: none !important
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 12pt
+  }
+
+  section {
+    padding: 20px 0;
+    page-break-inside: avoid
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    -webkit-animation-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    -webkit-transition-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important
+  }
+
+  .step-card:hover, .benefit-item:hover, .contact-card:hover, .product-wide-card:hover, .btn-primary:hover {
+    -webkit-transform: none !important;
+    transform: none !important
+  }
 }
