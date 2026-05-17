@@ -10,6 +10,18 @@
   .hookah-small-accessories__mobile {
     display: block;
   }
+
+  .benefits-wrapper {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .benefits-accent {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)),
+    url("../images/benefits-mob.png");
+    aspect-ratio: 16 / 9;
+    padding: 40px 30px;
+  }
 }
 
 @media (max-width: 992px) {
@@ -67,6 +79,10 @@
 }
 
 @media (max-width: 767px) {
+  .hero {
+    background-position: 60% center;
+  }
+
   .hero-content h1 {
     font-size: 55px;
   }
@@ -108,10 +124,6 @@
     gap: 50px;
   }
 
-  .benefits-wrapper {
-    grid-template-columns: 1fr;
-  }
-
   .footer-container {
     flex-direction: column;
     gap: 20px;
@@ -150,8 +162,22 @@
   }
 }
 
+@media (max-width: 374px) {
+  .nav-list-mobile li {
+    margin-bottom: 15px;
+  }
+
+  .nav-list-mobile a {
+    font-size: 1.3rem;
+  }
+}
+
 @media (max-width: 360px) {
   .hero-content h1 {
     font-size: 1.7rem;
+  }
+
+  .benefits-accent {
+    padding: 30px 20px;
   }
 }
