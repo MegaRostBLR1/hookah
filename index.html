@@ -2,7 +2,10 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
     <title>E-Hookah</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +19,7 @@
 <header class="header">
     <div class="container header-container">
         <a class="logo" href="#hero">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
                 <path d="M12 2C12 2 15 6 15 9C15 11.2091 13.2091 13 11 13C8.79086 13 7 11.2091 7 9C7 7.5 7.5 6 8.5 4.5" stroke="#E63946" stroke-width="2" stroke-linecap="round"/>
                 <path d="M19 12V20C19 21.1046 18.1046 22 17 22H7C5.89543 22 5 21.1046 5 20V12" stroke="white" stroke-width="2"/>
                 <path d="M10 17H14" stroke="white" stroke-width="2" stroke-linecap="round"/>
@@ -24,20 +27,18 @@
             <span>E-Hookah</span>
         </a>
 
-        <!-- Основная навигация (скроется на мобильных) -->
-        <nav class="nav desktop-nav">
+        <nav class="nav desktop-nav" aria-label="Основная навигация">
             <ul class="nav-list">
                 <li><a href="#how">Как работает</a></li>
                 <li><a href="#benefits">Преимущества</a></li>
-                <li><a href="#catalog">Ассотримент</a></li>
+                <li><a href="#catalog">Ассортимент</a></li>
                 <li><a href="#contacts">Контакты</a></li>
                 <li><a href="#faq">FAQ</a></li>
             </ul>
         </nav>
         <a href="tel:+375296656478" class="btn btn-primary desktop-btn">Позвонить</a>
 
-        <!-- Кнопка Бургер -->
-        <button class="burger-btn" id="burgerBtn">
+        <button class="burger-btn" id="burgerBtn" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
             <span></span>
             <span></span>
             <span></span>
@@ -45,13 +46,12 @@
     </div>
 </header>
 
-<!-- Мобильное меню -->
-<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Мобильное меню">
     <nav class="mobile-nav">
         <ul class="nav-list-mobile">
             <li><a href="#how">Как работает</a></li>
             <li><a href="#benefits">Преимущества</a></li>
-            <li><a href="#catalog">Ассотримент</a></li>
+            <li><a href="#catalog">Ассортимент</a></li>
             <li><a href="#contacts">Контакты</a></li>
             <li><a href="#faq">FAQ</a></li>
         </ul>
@@ -59,275 +59,270 @@
     </nav>
 </div>
 
-<section class="hero" id="hero">
-    <div class="container hero-content">
-        <div class="hero-top-info">
-            <span class="age-badge">18+</span>
+<main>
+    <section class="hero" id="hero">
+        <div class="container hero-content">
+            <div class="hero-top-info">
+                <span class="age-badge" aria-label="Только для совершеннолетних">18+</span>
+            </div>
+            <h1 class="hero-title">Электрокальян на&nbsp;традиционном табаке</h1>
+            <p class="hero-subtitle">Кальян без углей — чистый вкус</p>
+            <div class="hero-btns">
+                <a href="#catalog" class="btn btn-primary">Выбрать модель</a>
+            </div>
         </div>
-        <h1 class="hero-title">Электрокальян на&nbsp;традиционном табаке</h1>
-        <p class="hero-subtitle">Кальян без углей — чистый&nbsp;вкус</p>
-        <div class="hero-btns">
-            <a href="#catalog" class="btn btn-primary">Выбрать модель</a>
-        </div>
-    </div>
-</section>
+    </section>
 
-<section id="how" class="how">
-    <div class="container">
-        <h2 class="section-title">Как это работает</h2>
-        <div class="steps">
-            <div class="step-card">
-                <div class="step-icon">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                    </svg>
-                </div>
-                <h3>Активация</h3>
-                <p>Просто включите устройство нажатием одной кнопки. Никаких плиток для розжига.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-icon">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="3"></circle>
-                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                    </svg>
-                </div>
-                <h3>Настройка</h3>
-                <p>Регулируйте температуру 2&nbsp;кнопками, для получения идеального баланса вкуса и&nbsp;дыма.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-icon">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l9.72-9.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                    </svg>
-                </div>
-                <h3>Релакс</h3>
-                <p>Наслаждайтесь любимым вкусом до&nbsp;4&nbsp;часов работы на&nbsp;одном заряде аккумулятора.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="benefits" class="benefits">
-    <div class="container">
-        <h2 class="section-title">Преимущества электрокальяна</h2>
-        <div class="benefits-wrapper">
-            <div class="benefits-accent">
-                <div class="accent-content">
-                    <span class="badge">E-Hookah Tech</span>
-                    <p>Новый стандарт качества и безопасности в индустрии.</p>
-                </div>
-            </div>
-            <div class="benefits-list">
-                <div class="benefit-item">
-                    <div class="benefit-header">
-                        <span class="benefit-title">Безопасно</span>
-                        <span class="benefit-desc">Нет горячих углей и&nbsp;угарного газа</span>
+    <section id="how" class="how">
+        <div class="container">
+            <h2 class="section-title">Как это работает</h2>
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-icon" aria-hidden="true">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
                     </div>
+                    <h3>Активация</h3>
+                    <p>Просто включите устройство нажатием одной кнопки. Никаких плиток для розжига.</p>
                 </div>
-                <div class="benefit-item">
-                    <div class="benefit-header">
-                        <span class="benefit-title">Комфортно</span>
-                        <span class="benefit-desc">5&nbsp;минут и&nbsp;кальян готов к&nbsp;употреблению в&nbsp;любом месте</span>
+                <div class="step-card">
+                    <div class="step-icon" aria-hidden="true">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
                     </div>
+                    <h3>Настройка</h3>
+                    <p>Регулируйте температуру 2 кнопками, для получения идеального баланса вкуса и дыма.</p>
                 </div>
-                <div class="benefit-item">
-                    <div class="benefit-header">
-                        <span class="benefit-title">Время употребления</span>
-                        <span class="benefit-desc">На&nbsp;одном заряде работает до&nbsp;4&nbsp;часов</span>
+                <div class="step-card">
+                    <div class="step-icon" aria-hidden="true">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l9.72-9.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
                     </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-header">
-                        <span class="benefit-title">Экономия</span>
-                        <span class="benefit-desc">На&nbsp;одну сессию нужно всего 12гр табака и&nbsp;не&nbsp;нужен уголь</span>
-                    </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-header">
-                        <span class="benefit-title">Удобство</span>
-                        <span class="benefit-desc">Контролируемая температура 2&nbsp;кнопками, что продлевает вкус</span>
-                    </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-header">
-                        <span class="benefit-title">Гарантия</span>
-                        <span class="benefit-desc">6&nbsp;месяцев гарантии на&nbsp;электронный кальян. Гарантия не&nbsp;распространяется на&nbsp;комплектующие</span>
-                    </div>
-                </div>
-                <div class="benefit-item">
-                    <div class="benefit-header">
-                        <span class="benefit-title">Комплектация</span>
-                        <span class="benefit-desc">Все необходимое идет в&nbsp;комплекте</span>
-                    </div>
+                    <h3>Релакс</h3>
+                    <p>Наслаждайтесь любимым вкусом до 4 часов работы на одном заряде аккумулятора.</p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section class="demo">
-</section>
-
-<section id="catalog" class="catalog">
-    <div class="container">
-        <h2 class="section-title">Наш ассортимент</h2>
-        <div class="catalog-wide-list">
-            <div class="product-wide-card">
-                <div class="product-part hookah-small">
-                    <img src="images/hookah-small.png" alt="Электрокальян">
+    <section id="benefits" class="benefits">
+        <div class="container">
+            <h2 class="section-title">Преимущества электрокальяна</h2>
+            <div class="benefits-wrapper">
+                <div class="benefits-accent">
+                    <div class="accent-content">
+                        <span class="badge">E-Hookah Tech</span>
+                        <p>Новый стандарт качества и безопасности в индустрии.</p>
+                    </div>
                 </div>
-
-                <div class="product-part info-main">
-                    <div class="info-content">
-                        <span class="product-status available">В наличии</span>
-                        <h3>E-Hookah Air One</h3>
-                        <p>Базовая модель с&nbsp;интеллектуальным контролем тяги и&nbsp;увеличенным объемом пара. Идеально подходит для домашнего использования.</p>
-                        <div class="product-price-wrapper">
-                            <span class="price-label">Цена за комплект:</span>
-                            <span class="product-price">590 руб.</span>
+                <div class="benefits-list">
+                    <div class="benefit-item">
+                        <div class="benefit-header">
+                            <span class="benefit-title">Безопасно</span>
+                            <span class="benefit-desc">Нет горячих углей и угарного газа</span>
                         </div>
-                        <a href="mailto:kos42rus@gmail.com" class="btn btn-primary">Напишите нам</a>
                     </div>
-                </div>
-
-                <div class="product-part photo-kit hookah-small-accessories">
-                    <img class="hookah-small-accessories__desctop" src="images/hookah-small-accessories-desc.png" alt="Комплектация">
-                    <img class="hookah-small-accessories__mobile" src="images/hookah-small-accessories-mob.png" alt="Комплектация">
-                </div>
-            </div>
-        </div>
-        <div class="catalog-wide-list">
-            <div class="product-wide-card">
-                <div class="product-part hookah-big">
-                    <img src="images/hookah-big.png" alt="Электрокальян">
-                </div>
-
-                <div class="product-part info-main">
-                    <div class="info-content">
-                        <span class="product-status available">В наличии</span>
-                        <h3>E-Hookah Air One</h3>
-                        <p>Базовая модель с&nbsp;интеллектуальным контролем тяги и&nbsp;увеличенным объемом пара. Идеально подходит для домашнего использования.</p>
-                        <div class="product-price-wrapper">
-                            <span class="price-label">Цена за комплект:</span>
-                            <span class="product-price">850 руб.</span>
+                    <div class="benefit-item">
+                        <div class="benefit-header">
+                            <span class="benefit-title">Комфортно</span>
+                            <span class="benefit-desc">5 минут и кальян готов к употреблению в любом месте</span>
                         </div>
-                        <a href="mailto:kos42rus@gmail.com" class="btn btn-primary">Напишите нам</a>
                     </div>
-                </div>
-
-                <div class="product-part photo-kit">
-                    <img class="hookah-small-accessories__desctop" src="images/hookah-big-accessories-desc.png" alt="Комплектация">
-                    <img class="hookah-small-accessories__mobile" src="images/hookah-big-accessories-mob.png" alt="Комплектация">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="contacts" class="contacts">
-    <div class="container">
-        <h2 class="section-title">Свяжитесь с нами</h2>
-        <div class="contacts-grid">
-            <div class="contact-card accent-card">
-                <div class="contact-icon">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="1" y="3" width="15" height="13"></rect>
-                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
-                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
-                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
-                    </svg>
-                </div>
-                <h3>Доставка</h3>
-                <p>Доставка по&nbsp;Беларуси&nbsp;— <strong>Бесплатно</strong></p>
-            </div>
-
-            <div class="contact-card">
-                <div class="contact-icon">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                    </svg>
-                </div>
-                <h3>Телефон</h3>
-                <a href="tel:+375296656478" class="contact-link">+375 (29) 665-64-78</a>
-            </div>
-
-            <div class="contact-card">
-                <div class="contact-icon">
-                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                </div>
-                <h3>E-mail</h3>
-                <a href="mailto:kos42rus@gmail.com" class="contact-link">kos42rus@gmail.com</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="faq" class="faq">
-    <div class="container">
-        <h2 class="section-title">Часто задаваемые вопросы</h2>
-        <div class="accordion">
-            <div class="accordion-item">
-                <div class="accordion-header">Какой табак использовать?</div>
-                <div class="accordion-body">
-                    <div class="accordion-content">
-                        Для кальяна нужно использовать обычный/традиционный табак.
+                    <div class="benefit-item">
+                        <div class="benefit-header">
+                            <span class="benefit-title">Время употребления</span>
+                            <span class="benefit-desc">На одном заряде работает до 4 часов</span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <div class="accordion-header">Электронный кальян дымный?</div>
-                <div class="accordion-body">
-                    <div class="accordion-content">
-                        Да, за&nbsp;счет тонкой регулировки температуры, электронные кальяны не&nbsp;уступают по&nbsp;дымности традиционным кальянам.
+                    <div class="benefit-item">
+                        <div class="benefit-header">
+                            <span class="benefit-title">Экономия</span>
+                            <span class="benefit-desc">На одну сессию нужно всего 12гр табака и не нужен уголь</span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <div class="accordion-header">Как долго держится заряд?</div>
-                <div class="accordion-body">
-                    <div class="accordion-content">
-                        Полного заряда аккумулятора хватает на&nbsp;2-4&nbsp;часа, в&nbsp;зависимости от&nbsp;модели электронного кальяна и&nbsp;температуры использования.
+                    <div class="benefit-item">
+                        <div class="benefit-header">
+                            <span class="benefit-title">Удобство</span>
+                            <span class="benefit-desc">Контролируемая температура 2 кнопками, что продлевает вкус</span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <div class="accordion-header">Вкусопередача отличается от&nbsp;традиционного кальяна?</div>
-                <div class="accordion-body">
-                    <div class="accordion-content">
-                        Да, за&nbsp;счет тонкой регулировки и&nbsp;постоянной температуры и&nbsp;отсутсвие углей, вкусопередача лучше и&nbsp;чище, по&nbsp;сравнению с&nbsp;традиционным кальяном.
+                    <div class="benefit-item">
+                        <div class="benefit-header">
+                            <span class="benefit-title">Гарантия</span>
+                            <span class="benefit-desc">6 месяцев гарантии на электронный кальян. Гарантия не распространяется на комплектующие</span>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <div class="accordion-header">Нужны&nbsp;ли угли для кальяна?</div>
-                <div class="accordion-body">
-                    <div class="accordion-content">
-                        Нет, для использования электронного кальяна угли не&nbsp;нужны, за&nbsp;счет этого нет выделения СО2 и&nbsp;продуктов горения.
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <div class="accordion-header">Где можно использовать электронный кальян?</div>
-                <div class="accordion-body">
-                    <div class="accordion-content">
-                        В&nbsp;любом удобном месте (в&nbsp;помещение, на&nbsp;улице, в&nbsp;машине и&nbsp;т.д.).
+                    <div class="benefit-item">
+                        <div class="benefit-header">
+                            <span class="benefit-title">Комплектация</span>
+                            <span class="benefit-desc">Все необходимое идет в комплекте</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <section class="demo" aria-hidden="true"></section>
+
+    <section id="catalog" class="catalog">
+        <div class="container">
+            <h2 class="section-title">Наш ассортимент</h2>
+            <div class="catalog-wide-list">
+                <div class="product-wide-card">
+                    <div class="product-part hookah-small">
+                        <img src="images/hookah-small.png" alt="Электрокальян E-Hookah Air One малый">
+                    </div>
+                    <div class="product-part info-main">
+                        <div class="info-content">
+                            <span class="product-status available">В наличии</span>
+                            <h3>E-Hookah Air One</h3>
+                            <p>Базовая модель с интеллектуальным контролем тяги и увеличенным объемом пара. Идеально подходит для домашнего использования.</p>
+                            <div class="product-price-wrapper">
+                                <span class="price-label">Цена за комплект:</span>
+                                <span class="product-price">590 руб.</span>
+                            </div>
+                            <a href="mailto:kos42rus@gmail.com" class="btn btn-primary">Напишите нам</a>
+                        </div>
+                    </div>
+                    <div class="product-part photo-kit hookah-small-accessories">
+                        <img class="hookah-small-accessories__desctop" src="images/hookah-small-accessories-desc.png" alt="Комплектация малого кальяна">
+                        <img class="hookah-small-accessories__mobile" src="images/hookah-small-accessories-mob.png" alt="Комплектация малого кальяна">
+                    </div>
+                </div>
+            </div>
+            <div class="catalog-wide-list">
+                <div class="product-wide-card">
+                    <div class="product-part hookah-big">
+                        <img src="images/hookah-big.png" alt="Электрокальян E-Hookah Air One большой">
+                    </div>
+                    <div class="product-part info-main">
+                        <div class="info-content">
+                            <span class="product-status available">В наличии</span>
+                            <h3>E-Hookah Air One Pro</h3>
+                            <p>Расширенная модель с увеличенной батареей и премиальными материалами. Для ценителей длительного использования.</p>
+                            <div class="product-price-wrapper">
+                                <span class="price-label">Цена за комплект:</span>
+                                <span class="product-price">850 руб.</span>
+                            </div>
+                            <a href="mailto:kos42rus@gmail.com" class="btn btn-primary">Напишите нам</a>
+                        </div>
+                    </div>
+                    <div class="product-part photo-kit">
+                        <img class="hookah-small-accessories__desctop" src="images/hookah-big-accessories-desc.png" alt="Комплектация большого кальяна">
+                        <img class="hookah-small-accessories__mobile" src="images/hookah-big-accessories-mob.png" alt="Комплектация большого кальяна">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacts" class="contacts">
+        <div class="container">
+            <h2 class="section-title">Свяжитесь с нами</h2>
+            <div class="contacts-grid">
+                <div class="contact-card accent-card">
+                    <div class="contact-icon" aria-hidden="true">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="3" width="15" height="13"></rect>
+                            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                        </svg>
+                    </div>
+                    <h3>Доставка</h3>
+                    <p>Доставка по Беларуси — <strong>Бесплатно</strong></p>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon" aria-hidden="true">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                    </div>
+                    <h3>Телефон</h3>
+                    <a href="tel:+375296656478" class="contact-link">+375 (29) 665-64-78</a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon" aria-hidden="true">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </div>
+                    <h3>E-mail</h3>
+                    <a href="mailto:kos42rus@gmail.com" class="contact-link">kos42rus@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">Часто задаваемые вопросы</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" type="button" aria-expanded="false">Какой табак использовать?</button>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            Для кальяна нужно использовать обычный/традиционный табак.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" type="button" aria-expanded="false">Электронный кальян дымный?</button>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            Да, за счет тонкой регулировки температуры, электронные кальяны не уступают по дымности традиционным кальянам.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" type="button" aria-expanded="false">Как долго держится заряд?</button>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            Полного заряда аккумулятора хватает на 2-4 часа, в зависимости от модели электронного кальяна и температуры использования.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" type="button" aria-expanded="false">Вкусопередача отличается от традиционного кальяна?</button>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            Да, за счет тонкой регулировки и постоянной температуры и отсутствия углей, вкусопередача лучше и чище, по сравнению с традиционным кальяном.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" type="button" aria-expanded="false">Нужны ли угли для кальяна?</button>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            Нет, для использования электронного кальяна угли не нужны, за счет этого нет выделения СО2 и продуктов горения.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" type="button" aria-expanded="false">Где можно использовать электронный кальян?</button>
+                    <div class="accordion-body">
+                        <div class="accordion-content">
+                            В любом удобном месте (в помещение, на улице, в машине и т.д.).
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
 <footer class="footer">
     <div class="container footer-container">
         <p>&copy; <span class="year" id="year"></span> E-Hookah Service. Все права защищены.</p>
         <div class="footer-links">
-            <a href="#catalog">Ассотримент</a>
+            <a href="#catalog">Ассортимент</a>
             <a href="#contacts">Контакты</a>
         </div>
     </div>
