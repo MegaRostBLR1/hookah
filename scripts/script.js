@@ -36,7 +36,6 @@
     initAccordion();
     initMobileMenu();
     initYear();
-    initSmoothScroll();
   });
 
   // ===== АККОРДЕОН =====
@@ -143,56 +142,6 @@
   function initYear() {
     var yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
-  }
-
-  // ===== ПЛАВНЫЙ СКРОЛЛ (FALLBACK) =====
-  function initSmoothScroll() {
-    var supportsSmoothScroll = 'scrollBehavior' in document.documentElement.style;
-    var anchorLinks = document.querySelectorAll('a[href^="#"]:not([href="#"])');
-
-    for (var i = 0; i < anchorLinks.length; i++) {
-      anchorLinks[i].addEventListener('click', function(e) {
-        e = e || window.event;
-        var targetId = this.getAttribute('href');
-        if (!targetId || targetId === '#') return;
-        var targetEl = document.querySelector(targetId);
-        if (!targetEl) return;
-        if (e.preventDefault) e.preventDefault();
-
-        var headerOffset = 80;
-        var rect = targetEl.getBoundingClientRect();
-        var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-        var offsetPosition = rect.top + scrollTop - headerOffset;
-
-        if (supportsSmoothScroll) {
-          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-        } else {
-          smoothScrollFallback(offsetPosition, 800);
-        }
-      });
-    }
-  }
-
-  function smoothScrollFallback(to, duration) {
-    var start = window.pageYOffset || document.documentElement.scrollTop || 0;
-    var change = to - start;
-    var currentTime = 0;
-    var increment = 16;
-
-    function animate() {
-      currentTime += increment;
-      var val = easeInOutQuad(currentTime, start, change, duration);
-      window.scrollTo(0, val);
-      if (currentTime < duration) setTimeout(animate, increment);
-    }
-    animate();
-  }
-
-  function easeInOutQuad(t, b, c, d) {
-    t /= d / 2;
-    if (t < 1) return c / 2 * t * t + b;
-    t--;
-    return -c / 2 * (t * (t - 2) - 1) + b;
   }
 
 })();
