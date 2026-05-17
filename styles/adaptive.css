@@ -109,6 +109,10 @@
 }
 
 @media (max-width: 767px) {
+  section {
+    padding: var(--space-xl) 0
+  }
+
   .hero {
     background-position: 60% center
   }
