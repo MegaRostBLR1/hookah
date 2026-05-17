@@ -27,7 +27,6 @@ body {
   color: var(--text-main);
   line-height: 1.6;
   overflow-x: hidden;
-  /* Улучшение отрисовки шрифтов */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -126,6 +125,7 @@ section {
   font-size: 1.5rem;
   color: var(--white);
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .logo span {
@@ -323,7 +323,7 @@ section {
 
 .benefits-accent {
   background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)),
-  url("../images/benefits.jpg") center/cover no-repeat;
+  url("../images/benefits-desc.png") center/cover no-repeat;
   border-radius: var(--border-radius);
   padding: 60px 40px;
   display: flex;
@@ -431,7 +431,6 @@ section {
   object-fit: cover;
   object-position: center;
   transition: -webkit-transform 0.5s ease, transform 0.5s ease, object-position 0.5s ease;
-  /* Хак для плавности в Safari и предотвращения размытия */
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-transform: translateZ(0);
