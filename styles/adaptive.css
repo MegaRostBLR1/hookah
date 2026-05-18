@@ -184,6 +184,11 @@
     gap: var(--space-md);
     text-align: center
   }
+
+  .demo {
+    /* На мобильных 100vh может быть слишком много, переводим на авто-высоту по пропорции */
+    height: auto;
+  }
 }
 
 @media (max-width: 600px) {

@@ -564,10 +564,20 @@ section {
 }
 
 .demo {
-  height: 100vh;
   width: 100%;
-  min-height: 700px;
-  background: url("../images/hookahs.png") bottom/cover no-repeat;
+  /* Удаляем жесткую min-height, иначе на 320px блок останется огромным, а картинка сожмется */
+  /* min-height: 700px; */
+
+  /* Автоматически управляет высотой в зависимости от ширины */
+  aspect-ratio: 16 / 9;
+
+  /* Меняем cover на contain, чтобы картинка всегда была видна целиком */
+  background: url("../images/hookahs.png") bottom/contain no-repeat;
+
+  /* Плавный переход для адаптивности (при изменении размеров окна) */
+  transition: all 0.3s ease;
+
+  /* Ваши флексы остаются без изменений */
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -579,7 +589,7 @@ section {
   -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
-  justify-content: flex-start
+  justify-content: flex-start;
 }
 
 .catalog-wide-list:not(:last-child) {
