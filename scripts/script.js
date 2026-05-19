@@ -1,11 +1,10 @@
 (function() {
   'use strict';
 
-  // Polyfill для Element.matches (IE11)
   if (!Element.prototype.matches) {
     Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
   }
-  // Polyfill для Element.closest (IE11)
+
   if (!Element.prototype.closest) {
     Element.prototype.closest = function(selector) {
       var el = this;
@@ -17,7 +16,6 @@
     };
   }
 
-  // Кроссбраузерный DOM Ready
   function onDOMReady(callback) {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', callback);
@@ -26,19 +24,16 @@
     }
   }
 
-  // Утилита: ширина скроллбара
   function getScrollbarWidth() {
     return window.innerWidth - document.documentElement.clientWidth;
   }
 
-  // ===== MAIN INIT =====
   onDOMReady(function() {
     initAccordion();
     initMobileMenu();
     initYear();
   });
 
-  // ===== АККОРДЕОН =====
   function initAccordion() {
     var accordionItems = document.querySelectorAll('.accordion-item');
     for (var i = 0; i < accordionItems.length; i++) {
@@ -52,7 +47,6 @@
 
           var isOpen = item.classList.contains('active');
 
-          // Закрыть все
           for (var j = 0; j < accordionItems.length; j++) {
             var otherItem = accordionItems[j];
             var otherBody = otherItem.querySelector('.accordion-body');
@@ -62,7 +56,6 @@
             if (otherHeader) otherHeader.setAttribute('aria-expanded', 'false');
           }
 
-          // Открыть текущий
           if (!isOpen) {
             var body = item.querySelector('.accordion-body');
             if (body) {
@@ -75,7 +68,6 @@
       })(accordionItems[i]);
     }
 
-    // Пересчёт при ресайзе
     window.addEventListener('resize', function() {
       var activeItems = document.querySelectorAll('.accordion-item.active');
       for (var k = 0; k < activeItems.length; k++) {
@@ -85,12 +77,12 @@
     });
   }
 
-  // ===== МОБИЛЬНОЕ МЕНЮ =====
   function initMobileMenu() {
     var burgerBtn = document.getElementById('burgerBtn');
     var mobileMenu = document.getElementById('mobileMenu');
     var body = document.body;
     var menuLinks = document.querySelectorAll('.nav-list-mobile a');
+    var menuCallButton = mobileMenu.querySelector('.btn-primary');
 
     if (!burgerBtn || !mobileMenu) return;
 
@@ -128,7 +120,10 @@
       menuLinks[l].addEventListener('click', function() { closeMenu(); });
     }
 
-    // Escape & Overlay click
+    if (menuCallButton) {
+      menuCallButton.addEventListener('click', function() { closeMenu(); });
+    }
+
     document.addEventListener('keydown', function(e) {
       e = e || window.event;
       if ((e.keyCode || e.which) === 27 && mobileMenu.classList.contains('active')) closeMenu();
@@ -138,7 +133,6 @@
     });
   }
 
-  // ===== ГОД В ФУТЕРЕ =====
   function initYear() {
     var yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();

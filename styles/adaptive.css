@@ -1,14 +1,21 @@
 @media screen and (max-width: 1024px) {
   .product-wide-card {
     -ms-grid-columns: 1fr;
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
+    max-height: none;
   }
 
-  .hookah-small-accessories__desctop {
+  .hookah-small-accessories__desc,
+  .hookah-small__desc,
+  .hookah-big-accessories__desc,
+  .hookah-big__desc {
     display: none
   }
 
-  .hookah-small-accessories__mobile {
+  .hookah-small-accessories__mobile,
+  .hookah-small__mobile,
+  .hookah-big-accessories__mobile,
+  .hookah-big__mobile{
     display: block
   }
 
@@ -186,7 +193,6 @@
   }
 
   .demo {
-    /* На мобильных 100vh может быть слишком много, переводим на авто-высоту по пропорции */
     height: auto;
   }
 }
