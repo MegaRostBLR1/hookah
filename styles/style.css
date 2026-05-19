@@ -12,7 +12,7 @@ html {
   -ms-text-size-adjust: 100%;
   text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
-  scroll-behavior: smooth; /* Плавный скролл силами браузера */
+  scroll-behavior: smooth;
 }
 
 body {
@@ -565,19 +565,9 @@ section {
 
 .demo {
   width: 100%;
-  /* Удаляем жесткую min-height, иначе на 320px блок останется огромным, а картинка сожмется */
-  /* min-height: 700px; */
-
-  /* Автоматически управляет высотой в зависимости от ширины */
   aspect-ratio: 16 / 9;
-
-  /* Меняем cover на contain, чтобы картинка всегда была видна целиком */
   background: url("../images/hookahs.png") bottom/contain no-repeat;
-
-  /* Плавный переход для адаптивности (при изменении размеров окна) */
   transition: all 0.3s ease;
-
-  /* Ваши флексы остаются без изменений */
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -607,7 +597,8 @@ section {
   border: 1px solid rgba(255, 255, 255, 0.05);
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease;
-  min-height: 400px
+  min-height: 400px;
+  max-height: 526px;
 }
 
 .product-wide-card:hover {
@@ -617,10 +608,21 @@ section {
   background: #1e1e21
 }
 
+.product-wide-card:hover img {
+  transform: scale(1.05);
+}
+
 .product-part {
   position: relative;
   overflow: hidden;
   height: 100%
+}
+
+.hookah-small-accessories__mobile,
+.hookah-small__mobile,
+.hookah-big-accessories__mobile,
+.hookah-big__mobile {
+  display: none;
 }
 
 .product-part img, .photo-kit img {
@@ -656,21 +658,6 @@ section {
 .hookah-small img {
   -o-object-position: 56%;
   object-position: 56%
-}
-
-.hookah-big img {
-  -webkit-transform: scale(1.4) translateZ(0);
-  transform: scale(1.4) translateZ(0)
-}
-
-.product-wide-card:hover .hookah-small img, .product-wide-card:hover .photo-kit img {
-  -webkit-transform: scale(1.05) translateZ(0);
-  transform: scale(1.05) translateZ(0)
-}
-
-.product-wide-card:hover .hookah-big img {
-  -webkit-transform: scale(1.45) translateZ(0);
-  transform: scale(1.45) translateZ(0)
 }
 
 .info-main {
@@ -722,16 +709,6 @@ section {
   font-size: 2.5rem;
   font-weight: 800;
   color: #ffffff
-}
-
-.hookah-small-accessories img {
-  -webkit-transform: scale(1.2) translateZ(0);
-  transform: scale(1.2) translateZ(0)
-}
-
-.product-wide-card:hover .hookah-small-accessories img {
-  -webkit-transform: scale(1.25) translateZ(0);
-  transform: scale(1.25) translateZ(0)
 }
 
 .hookah-small-accessories__desctop {
