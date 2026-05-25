@@ -26,8 +26,8 @@
   }
 
   .benefits-accent {
-    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../images/benefits-mob.png");
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../images/benefits-mob.png");
+    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../images/benefits-mob.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../images/benefits-mob.jpg");
     aspect-ratio: 16/9;
     padding: var(--space-md) var(--space-sm)
   }
