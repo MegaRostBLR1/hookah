@@ -292,8 +292,8 @@ section {
   height: 100vh;
   width: 100%;
   min-height: 700px;
-  background: -webkit-linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%), url("../images/banner.png") center/cover no-repeat;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%), url("../images/banner.png") center/cover no-repeat;
+  background: -webkit-linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%), url("../images/banner.jpg") center/cover no-repeat;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%), url("../images/banner.jpg") center/cover no-repeat;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -467,8 +467,8 @@ section {
 }
 
 .benefits-accent {
-  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../images/benefits-desc.png") center/cover no-repeat;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../images/benefits-desc.png") center/cover no-repeat;
+  background: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../images/benefits-desc.jpg") center/cover no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../images/benefits-desc.jpg") center/cover no-repeat;
   border-radius: 16px;
   padding: var(--space-lg);
   display: -webkit-box;
@@ -566,7 +566,7 @@ section {
 .demo {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: url("../images/hookahs.png") bottom/contain no-repeat;
+  background: url("../images/hookahs.jpg") bottom/contain no-repeat;
   transition: all 0.3s ease;
   display: -webkit-box;
   display: -webkit-flex;
