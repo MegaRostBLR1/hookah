@@ -691,7 +691,7 @@ section {
 .info-content p {
   color: #a0a0a5;
   margin-bottom: var(--space-md);
-  line-height: 1.6
+  line-height: 1.6;
 }
 
 .product-price-wrapper {
@@ -756,7 +756,8 @@ section {
   -webkit-box-flex: 1;
   -webkit-flex: 1 1 280px;
   -ms-flex: 1 1 280px;
-  flex: 1 1 280px
+  flex: 1 1 280px;
+  font-style: normal;
 }
 
 .contact-card:hover {
