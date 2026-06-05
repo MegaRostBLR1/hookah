@@ -48,6 +48,23 @@
       padding: var(--space-md) var(--space-sm)
     }
   }
+
+  .info-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .info-content p {
+    color: #a0a0a5;
+    margin-bottom: var(--space-md);
+    line-height: 1.6;
+    text-align: center
+  }
+
+  .info-content div {
+    text-align: center;
+  }
 }
 
 @media (max-width: 992px) {
