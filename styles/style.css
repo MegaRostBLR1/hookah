@@ -871,7 +871,7 @@ section {
   margin-top: var(--space-md);
   color: #a0a0a5;
   font-size: 0.85rem;
-  text-align: center
+  text-align: left
 }
 
 .footer-legal {
