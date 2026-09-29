@@ -390,17 +390,6 @@ section {
   gap: var(--space-md)
 }
 
-@supports (display:grid) {
-  .steps {
-    display: grid;
-    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))
-  }
-
-  .step-card {
-    min-width: 0
-  }
-}
-
 .step-card {
   background: #161618;
   padding: var(--space-lg);
@@ -732,17 +721,6 @@ section {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   gap: var(--space-md)
-}
-
-@supports (display:grid) {
-  .contacts-grid {
-    display: grid;
-    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))
-  }
-
-  .contact-card {
-    min-width: 0
-  }
 }
 
 .contact-card {

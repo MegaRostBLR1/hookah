@@ -124,14 +124,6 @@
   }
 }
 
-@media (max-width: 939px) {
-  .step-card:last-child, .contact-card:last-child {
-    -ms-grid-column: 1;
-    -ms-grid-column-span: 3;
-    grid-column: 1/-1
-  }
-}
-
 @media (max-width: 767px) {
   section {
     padding: var(--space-xxl) 0
