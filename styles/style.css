@@ -1139,8 +1139,9 @@ section {
 }
 
 .order-form__field textarea {
-  resize: vertical;
+  resize: none;
   min-height: 100px;
+  overflow-y: auto;
 }
 
 .order-form__field input:focus-visible,
