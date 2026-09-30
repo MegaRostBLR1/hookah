@@ -1,31 +1,20 @@
 (function() {
   'use strict';
 
-  if (!Element.prototype.matches) {
-    Element.prototype.matches = Element.prototype.msMatchesSelector || Element.prototype.webkitMatchesSelector;
-  }
-
-  if (!Element.prototype.closest) {
-    Element.prototype.closest = function(selector) {
-      let currentElement = this;
-      while (currentElement) {
-        if (currentElement.matches(selector)) return currentElement;
-        currentElement = currentElement.parentElement;
-      }
-      return null;
-    };
-  }
-
-  function onDOMReady(callback) {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', callback);
-    } else {
-      callback();
-    }
-  }
-
   function getScrollbarWidth() {
     return window.innerWidth - document.documentElement.clientWidth;
+  }
+
+  function setBodyScrollLock(locked) {
+    if (locked) {
+      const scrollBarWidth = getScrollbarWidth();
+      if (scrollBarWidth > 0) document.body.style.paddingRight = `${scrollBarWidth}px`;
+      document.body.classList.add('no-scroll');
+      return;
+    }
+
+    document.body.classList.remove('no-scroll');
+    document.body.style.paddingRight = '';
   }
 
   const ORDER_ENDPOINT = '';
@@ -34,12 +23,10 @@
     'air-one-pro': { name: 'E-Hookah Air One Pro', price: 850 }
   };
 
-  onDOMReady(function() {
-    initAccordion();
-    initMobileMenu();
-    initYear();
-    initOrderForm();
-  });
+  initAccordion();
+  initMobileMenu();
+  initYear();
+  initOrderForm();
 
   function initAccordion() {
     const accordionItems = document.querySelectorAll('.accordion-item');
@@ -49,9 +36,6 @@
       if (!accordionHeader) return;
 
       accordionHeader.addEventListener('click', function(event) {
-        event = event || window.event;
-        if (event.preventDefault) event.preventDefault();
-
         const isAccordionOpen = accordionItem.classList.contains('active');
 
         accordionItems.forEach((otherItem) => {
@@ -86,7 +70,6 @@
   function initMobileMenu() {
     const burgerButton = document.getElementById('burgerBtn');
     const mobileMenu = document.getElementById('mobileMenu');
-    const pageBody = document.body;
     const mobileMenuLinks = document.querySelectorAll('.nav-list-mobile a');
     const mobileMenuActionButton = mobileMenu ? mobileMenu.querySelector('.btn-primary') : null;
 
@@ -96,26 +79,27 @@
       const isOpening = !mobileMenu.classList.contains('active');
 
       if (isOpening) {
-        const scrollBarWidth = getScrollbarWidth();
-        if (scrollBarWidth > 0) pageBody.style.paddingRight = `${scrollBarWidth}px`;
-        pageBody.classList.add('no-scroll');
+        setBodyScrollLock(true);
         burgerButton.setAttribute('aria-expanded', 'true');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+        const firstFocusableElement = mobileMenu.querySelector('a, button');
+        if (firstFocusableElement) firstFocusableElement.focus();
       } else {
-        pageBody.classList.remove('no-scroll');
-        pageBody.style.paddingRight = '';
-        burgerButton.setAttribute('aria-expanded', 'false');
+        closeMobileMenu();
+        return;
       }
 
-      burgerButton.classList.toggle('active');
-      mobileMenu.classList.toggle('active');
+      burgerButton.classList.add('active');
+      mobileMenu.classList.add('active');
     }
 
     function closeMobileMenu() {
-      pageBody.classList.remove('no-scroll');
-      pageBody.style.paddingRight = '';
+      setBodyScrollLock(false);
       burgerButton.classList.remove('active');
       mobileMenu.classList.remove('active');
       burgerButton.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      burgerButton.focus();
     }
 
     burgerButton.addEventListener('click', function(event) {
@@ -133,9 +117,7 @@
     }
 
     document.addEventListener('keydown', function(event) {
-      event = event || window.event;
-      const escapeKey = event.keyCode || event.which;
-      if (escapeKey === 27 && mobileMenu.classList.contains('active')) {
+      if (event.key === 'Escape' && mobileMenu.classList.contains('active')) {
         closeMobileMenu();
       }
     });
@@ -237,6 +219,8 @@
       } else {
         cart.set(productId, nextQuantity);
       }
+
+      if (cart.size === 0) isCartOpen = false;
       renderCart();
     }
 
@@ -273,16 +257,13 @@
       renderModalSummary();
       setFormStatus('', '');
       orderModal.hidden = false;
-      const scrollBarWidth = getScrollbarWidth();
-      if (scrollBarWidth > 0) document.body.style.paddingRight = `${scrollBarWidth}px`;
-      document.body.classList.add('no-scroll');
+      setBodyScrollLock(true);
       document.getElementById('orderName').focus();
     }
 
     function closeModal() {
       orderModal.hidden = true;
-      document.body.classList.remove('no-scroll');
-      document.body.style.paddingRight = '';
+      setBodyScrollLock(false);
       if (lastFocusedElement) lastFocusedElement.focus();
     }
 
@@ -355,7 +336,8 @@
           body: JSON.stringify(payload)
         });
 
-        if (!response.ok) throw new Error('Request failed');
+        const result = await response.json().catch(() => null);
+        if (!response.ok || !result?.success) throw new Error('Request failed');
 
         setFormStatus('Заявка отправлена. Мы свяжемся с вами.', 'success');
         orderForm.reset();
