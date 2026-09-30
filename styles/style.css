@@ -976,7 +976,13 @@ section {
   padding: var(--space-md);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+}
+
+.order-cart__content {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .order-cart__header,
@@ -997,12 +1003,6 @@ section {
 .order-cart__title,
 .order-modal__title {
   font-size: 1.25rem;
-}
-
-.order-cart__actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
 }
 
 .order-cart__close {
@@ -1035,7 +1035,6 @@ section {
   display: flex;
   flex-direction: column;
   gap: var(--space-xs);
-  max-height: 180px;
   overflow-y: auto;
 }
 
