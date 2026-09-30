@@ -182,7 +182,8 @@
 
     function renderCart() {
       const items = getCartItems();
-      orderCart.hidden = items.length === 0;
+      orderCart.hidden = false;
+      orderCart.setAttribute('aria-hidden', String(items.length === 0));
 
       orderCartItems.innerHTML = items.map((item) => `
         <div class="order-cart__item">
