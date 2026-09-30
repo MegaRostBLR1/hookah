@@ -951,7 +951,7 @@ section {
   right: 0;
   bottom: 0;
   z-index: 1100;
-  width: min(420px, calc(100vw - 32px));
+  width: min(460px, calc(100vw - 32px));
   height: calc(100vh - 72px);
   overflow: hidden;
   background: rgba(10, 10, 11, 0.97);
