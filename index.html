@@ -61,7 +61,7 @@
     </div>
 </header>
 
-<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Мобильное меню">
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Мобильное меню">
     <nav class="mobile-nav">
         <ul class="nav-list-mobile">
             <li><a href="#how">Как работает</a></li>
@@ -191,8 +191,10 @@
             <div class="catalog-wide-list">
                 <div class="product-wide-card">
                     <div class="product-part hookah-small">
-                        <img class="hookah-small__desc" src="images/hookah-small_desc.jpg" loading="lazy" alt="Электрокальян E-Hookah Air One малый">
-                        <img class="hookah-small__mobile" src="images/hookah-small_mobile.jpg" loading="lazy" alt="Электрокальян E-Hookah Air One малый">
+                        <picture>
+                            <source media="(max-width: 1024px)" srcset="images/hookah-small_mobile.jpg">
+                            <img src="images/hookah-small_desc.jpg" loading="lazy" alt="Электрокальян E-Hookah Air One малый">
+                        </picture>
                     </div>
                     <div class="product-part info-main">
                         <div class="info-content">
@@ -207,16 +209,20 @@
                         </div>
                     </div>
                     <div class="product-part photo-kit hookah-small-accessories">
-                        <img class="hookah-small-accessories__desc" src="images/hookah-small-accessories-desc.jpg" loading="lazy" alt="Комплектация малого кальяна">
-                        <img class="hookah-small-accessories__mobile" src="images/hookah-small-accessories-mob.jpg" loading="lazy" alt="Комплектация малого кальяна">
+                        <picture>
+                            <source media="(max-width: 1024px)" srcset="images/hookah-small-accessories-mob.jpg">
+                            <img src="images/hookah-small-accessories-desc.jpg" loading="lazy" alt="Комплектация малого кальяна">
+                        </picture>
                     </div>
                 </div>
             </div>
             <div class="catalog-wide-list">
                 <div class="product-wide-card">
                     <div class="product-part hookah-big">
-                        <img class="hookah-big__desc" src="images/hookah-big_desc.jpg" loading="lazy" alt="Электрокальян E-Hookah Air One большой">
-                        <img class="hookah-big__mobile" src="images/hookah-big_mobile.jpg" loading="lazy" alt="Электрокальян E-Hookah Air One большой">
+                        <picture>
+                            <source media="(max-width: 1024px)" srcset="images/hookah-big_mobile.jpg">
+                            <img src="images/hookah-big_desc.jpg" loading="lazy" alt="Электрокальян E-Hookah Air One большой">
+                        </picture>
                     </div>
                     <div class="product-part info-main">
                         <div class="info-content">
@@ -231,8 +237,10 @@
                         </div>
                     </div>
                     <div class="product-part photo-kit">
-                        <img class="hookah-big-accessories__desc" src="images/hookah-big-accessories-desc.jpg" loading="lazy" alt="Комплектация большого кальяна">
-                        <img class="hookah-big-accessories__mobile" src="images/hookah-big-accessories-mob.jpg" loading="lazy" alt="Комплектация большого кальяна">
+                        <picture>
+                            <source media="(max-width: 1024px)" srcset="images/hookah-big-accessories-mob.jpg">
+                            <img src="images/hookah-big-accessories-desc.jpg" loading="lazy" alt="Комплектация большого кальяна">
+                        </picture>
                     </div>
                 </div>
             </div>
