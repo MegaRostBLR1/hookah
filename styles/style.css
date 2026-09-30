@@ -1244,6 +1244,20 @@ section {
   overflow-y: auto;
 }
 
+.order-form__field input:-webkit-autofill,
+.order-form__field input:-webkit-autofill:hover,
+.order-form__field input:-webkit-autofill:focus,
+.order-form__field textarea:-webkit-autofill,
+.order-form__field textarea:-webkit-autofill:hover,
+.order-form__field textarea:-webkit-autofill:focus,
+.order-form__field input:autofill,
+.order-form__field textarea:autofill {
+  -webkit-text-fill-color: var(--white);
+  caret-color: var(--white);
+  -webkit-box-shadow: 0 0 0 1000px #0a0a0b inset;
+  box-shadow: 0 0 0 1000px #0a0a0b inset;
+}
+
 .order-form__field input:focus-visible,
 .order-form__field textarea:focus-visible,
 .order-cart__quantity-btn:focus-visible,
