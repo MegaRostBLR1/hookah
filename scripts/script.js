@@ -102,11 +102,7 @@
       burgerButton.focus();
     }
 
-    burgerButton.addEventListener('click', function(event) {
-      event = event || window.event;
-      if (event.preventDefault) event.preventDefault();
-      toggleMobileMenu();
-    });
+    burgerButton.addEventListener('click', toggleMobileMenu);
 
     mobileMenuLinks.forEach((menuLink) => {
       menuLink.addEventListener('click', closeMobileMenu);
