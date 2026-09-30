@@ -1025,8 +1025,21 @@ section {
   font-size: 1.25rem;
 }
 
+.order-cart__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.order-cart__close {
+  width: 40px;
+  height: 40px;
+  color: var(--text-muted);
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
 .order-cart__clear,
-.order-cart__close,
 .order-modal__close {
   color: var(--text-muted);
 }
