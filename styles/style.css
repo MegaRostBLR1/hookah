@@ -1051,7 +1051,8 @@ section {
 }
 
 .order-cart__clear {
-  align-self: flex-end;
+  display: block;
+  margin-left: auto;
 }
 
 .order-cart__clear:hover,
