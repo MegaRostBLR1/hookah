@@ -25,6 +25,10 @@ body {
   overflow-x: hidden
 }
 
+body.no-scroll {
+  overflow: hidden;
+}
+
 img, svg {
   display: block;
   max-width: 100%;
