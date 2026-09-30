@@ -251,6 +251,8 @@
       renderModalSummary();
       setFormStatus('', '');
       orderModal.hidden = false;
+      const scrollBarWidth = getScrollbarWidth();
+      if (scrollBarWidth > 0) document.body.style.paddingRight = `${scrollBarWidth}px`;
       document.body.classList.add('no-scroll');
       document.getElementById('orderName').focus();
     }
@@ -258,6 +260,7 @@
     function closeModal() {
       orderModal.hidden = true;
       document.body.classList.remove('no-scroll');
+      document.body.style.paddingRight = '';
       if (lastFocusedElement) lastFocusedElement.focus();
     }
 
