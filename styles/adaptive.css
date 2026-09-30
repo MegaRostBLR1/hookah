@@ -258,3 +258,32 @@
     padding: var(--space-md) var(--space-sm)
   }
 }
+
+@media (max-width: 600px) {
+  .order-cart__header,
+  .order-cart__footer,
+  .order-cart__item {
+    align-items: flex-start;
+  }
+
+  .order-cart__item {
+    flex-direction: column;
+  }
+
+  .order-cart__controls {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .order-cart__footer {
+    flex-direction: column;
+  }
+
+  .order-cart__footer .btn {
+    width: 100%;
+  }
+
+  .order-modal__content {
+    padding: var(--space-md);
+  }
+}

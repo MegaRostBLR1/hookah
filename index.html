@@ -194,7 +194,7 @@
                                 <span class="price-label">Цена за комплект:</span>
                                 <span class="product-price">590 руб.</span>
                             </div>
-                            <a href="#contacts" class="btn btn-primary">Напишите нам</a>
+                            <button class="btn btn-primary product-order-btn" type="button" data-product-id="air-one">Добавить в заявку</button>
                         </div>
                     </div>
                     <div class="product-part photo-kit hookah-small-accessories">
@@ -218,7 +218,7 @@
                                 <span class="price-label">Цена за комплект:</span>
                                 <span class="product-price">850 руб.</span>
                             </div>
-                            <a href="#contacts" class="btn btn-primary">Напишите нам</a>
+                            <button class="btn btn-primary product-order-btn" type="button" data-product-id="air-one-pro">Добавить в заявку</button>
                         </div>
                     </div>
                     <div class="product-part photo-kit">
@@ -227,6 +227,26 @@
                     </div>
                 </div>
             </div>
+            <aside class="order-cart" id="orderCart" aria-labelledby="order-cart-title" hidden>
+                <div class="container order-cart__container">
+                    <div class="order-cart__header">
+                        <div>
+                            <span class="order-cart__eyebrow">Ваша заявка</span>
+                            <h2 class="order-cart__title" id="order-cart-title">Выбранные товары</h2>
+                        </div>
+                        <button class="order-cart__clear" id="orderCartClear" type="button">Очистить</button>
+                    </div>
+                    <div class="order-cart__items" id="orderCartItems"></div>
+                    <div class="order-cart__footer">
+                        <div class="order-cart__total">
+                            <span>Итого</span>
+                            <strong id="orderCartTotal">0 руб.</strong>
+                        </div>
+                        <button class="btn btn-primary" id="openOrderModal" type="button">Оформить заявку</button>
+                    </div>
+                </div>
+            </aside>
+
             <p class="price-disclaimer">Цены носят информативный характер и не являются публичной офертой.</p>
         </div>
     </section>
@@ -339,6 +359,34 @@
         </div>
     </div>
 </footer>
+
+<div class="order-modal" id="orderModal" hidden>
+    <div class="order-modal__backdrop" data-order-modal-close></div>
+    <section class="order-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="order-modal-title">
+        <button class="order-modal__close" id="closeOrderModal" type="button" aria-label="Закрыть форму">&times;</button>
+        <div class="order-modal__content">
+            <span class="order-cart__eyebrow">Оформление</span>
+            <h2 class="order-modal__title" id="order-modal-title">Оформить заявку</h2>
+            <div class="order-modal__summary" id="orderModalSummary"></div>
+            <form class="order-form" id="orderForm" novalidate>
+                <div class="order-form__field">
+                    <label for="orderName">Имя <span aria-hidden="true">*</span></label>
+                    <input id="orderName" name="name" type="text" autocomplete="name" required maxlength="80">
+                </div>
+                <div class="order-form__field">
+                    <label for="orderPhone">Телефон <span aria-hidden="true">*</span></label>
+                    <input id="orderPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="30">
+                </div>
+                <div class="order-form__field">
+                    <label for="orderComment">Комментарий</label>
+                    <textarea id="orderComment" name="comment" rows="4" maxlength="500"></textarea>
+                </div>
+                <p class="order-form__status" id="orderFormStatus" role="status" aria-live="polite"></p>
+                <button class="btn btn-primary btn-full" id="orderSubmit" type="submit">Отправить заявку</button>
+            </form>
+        </div>
+    </section>
+</div>
 
 <script src="scripts/script.js"></script>
 </body>
