@@ -259,11 +259,13 @@
     function openCart() {
       if (cart.size === 0) return;
       isCartOpen = true;
+      if (window.innerWidth <= 600) setBodyScrollLock(true);
       renderCart();
     }
 
     function closeCart() {
       isCartOpen = false;
+      if (window.innerWidth <= 600 && orderModal.hidden) setBodyScrollLock(false);
       renderCart();
     }
 
@@ -325,7 +327,7 @@
 
     function closeModal() {
       orderModal.hidden = true;
-      setBodyScrollLock(false);
+      setBodyScrollLock(window.innerWidth <= 600 && isCartOpen);
       if (lastFocusedElement) lastFocusedElement.focus();
     }
 
