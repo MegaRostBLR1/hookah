@@ -191,10 +191,10 @@
             <span>${formatPrice(item.price)} руб. × ${item.quantity}</span>
           </div>
           <div class="order-cart__controls">
+            <strong>${formatPrice(item.price * item.quantity)} руб.</strong>
             <button type="button" class="order-cart__quantity-btn" data-cart-action="decrease" data-product-id="${item.id}" aria-label="Уменьшить количество ${item.name}">−</button>
             <span aria-label="Количество: ${item.quantity}">${item.quantity}</span>
             <button type="button" class="order-cart__quantity-btn" data-cart-action="increase" data-product-id="${item.id}" aria-label="Увеличить количество ${item.name}">+</button>
-            <strong>${formatPrice(item.price * item.quantity)} руб.</strong>
           </div>
         </div>
       `).join('');
