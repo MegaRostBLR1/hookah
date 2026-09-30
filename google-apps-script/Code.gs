@@ -9,13 +9,14 @@ function doPost(e) {
     const items = Array.isArray(payload.items) ? payload.items : [];
     const name = String(payload.name || '').trim();
     const phone = String(payload.phone || '').trim();
+    const address = String(payload.address || '').trim();
     const comment = String(payload.comment || '').trim();
 
-    if (!name || !phone || !items.length) {
+    if (!name || !phone || !address || !items.length) {
       return jsonResponse({ success: false, error: 'Invalid request' });
     }
 
-    if (name.length > 80 || phone.length > 30 || comment.length > 500) {
+    if (name.length > 80 || phone.length > 30 || address.length > 200 || comment.length > 500) {
       return jsonResponse({ success: false, error: 'Invalid request' });
     }
 
@@ -45,6 +46,7 @@ function doPost(e) {
       '',
       `Имя: ${name}`,
       `Телефон: ${phone}`,
+      `Адрес: ${address}`,
       '',
       'Заказ:',
       itemsText,
