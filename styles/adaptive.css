@@ -256,6 +256,12 @@
 }
 
 @media (max-width: 600px) {
+  .order-cart {
+    width: calc(100vw - 16px);
+    max-height: 75vh;
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+  }
+
   .order-cart__header,
   .order-cart__footer,
   .order-cart__item {
