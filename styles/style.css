@@ -1039,25 +1039,38 @@ section {
 }
 
 .order-cart__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
   padding: 10px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .order-cart__product {
+  width: 100%;
+  min-width: 0;
+}
+
+.order-cart__product strong {
+  display: block;
+}
+
+.order-cart__details {
+  width: 100%;
   display: flex;
-  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.order-cart__price {
+  display: flex;
   flex-direction: column;
   gap: 2px;
   min-width: 0;
 }
 
-.order-cart__product strong {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.order-cart__product span {
+.order-cart__price span {
   color: var(--text-muted);
   font-size: 0.85rem;
 }
