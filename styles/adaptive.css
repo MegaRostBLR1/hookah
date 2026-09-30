@@ -131,7 +131,7 @@
     align-items: flex-start
   }
 
-  .photo-main img, .photo-kit img {
+  .photo-kit img {
     -o-object-fit: contain;
     object-fit: contain
   }
