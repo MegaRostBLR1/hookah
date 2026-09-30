@@ -253,6 +253,7 @@
       cart.set(productId, nextQuantity);
       saveCart();
       isCartOpen = true;
+      if (window.innerWidth <= 600) setBodyScrollLock(true);
       renderCart();
     }
 
