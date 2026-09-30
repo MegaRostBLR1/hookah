@@ -1241,7 +1241,6 @@ section {
 .order-form__field input:focus-visible,
 .order-form__field textarea:focus-visible,
 .order-cart__quantity-btn:focus-visible,
-.order-cart__clear:focus-visible,
 .order-modal__close:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
