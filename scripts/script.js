@@ -441,6 +441,7 @@
         })),
         name: String(formData.get('name') || '').trim(),
         phone: String(formData.get('phone') || '').trim(),
+        address: String(formData.get('address') || '').trim(),
         comment: String(formData.get('comment') || '').trim()
       };
 
