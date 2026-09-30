@@ -28,10 +28,17 @@
     return window.innerWidth - document.documentElement.clientWidth;
   }
 
+  const ORDER_ENDPOINT = '';
+  const ORDER_PRODUCTS = {
+    'air-one': { name: 'E-Hookah Air One', price: 590 },
+    'air-one-pro': { name: 'E-Hookah Air One Pro', price: 850 }
+  };
+
   onDOMReady(function() {
     initAccordion();
     initMobileMenu();
     initYear();
+    initOrderForm();
   });
 
   function initAccordion() {
@@ -136,6 +143,207 @@
     mobileMenu.addEventListener('click', function(event) {
       if (event.target === mobileMenu) closeMobileMenu();
     });
+  }
+
+  function initOrderForm() {
+    const orderCart = document.getElementById('orderCart');
+    const orderCartItems = document.getElementById('orderCartItems');
+    const orderCartTotal = document.getElementById('orderCartTotal');
+    const orderCartClear = document.getElementById('orderCartClear');
+    const openOrderModal = document.getElementById('openOrderModal');
+    const orderModal = document.getElementById('orderModal');
+    const closeOrderModal = document.getElementById('closeOrderModal');
+    const orderModalSummary = document.getElementById('orderModalSummary');
+    const orderForm = document.getElementById('orderForm');
+    const orderFormStatus = document.getElementById('orderFormStatus');
+    const orderSubmit = document.getElementById('orderSubmit');
+    const productOrderButtons = document.querySelectorAll('.product-order-btn');
+
+    if (!orderCart || !orderForm) return;
+
+    const cart = new Map();
+    let lastFocusedElement = null;
+
+    function getCartItems() {
+      return Array.from(cart.entries()).map(([id, quantity]) => ({
+        id,
+        quantity,
+        ...ORDER_PRODUCTS[id]
+      }));
+    }
+
+    function getCartTotal() {
+      return getCartItems().reduce((total, item) => total + item.price * item.quantity, 0);
+    }
+
+    function formatPrice(value) {
+      return new Intl.NumberFormat('ru-RU').format(value);
+    }
+
+    function renderCart() {
+      const items = getCartItems();
+      orderCart.hidden = items.length === 0;
+
+      orderCartItems.innerHTML = items.map((item) => `
+        <div class="order-cart__item">
+          <div class="order-cart__product">
+            <strong>${item.name}</strong>
+            <span>${formatPrice(item.price)} руб. × ${item.quantity}</span>
+          </div>
+          <div class="order-cart__controls">
+            <button type="button" class="order-cart__quantity-btn" data-cart-action="decrease" data-product-id="${item.id}" aria-label="Уменьшить количество ${item.name}">−</button>
+            <span aria-label="Количество: ${item.quantity}">${item.quantity}</span>
+            <button type="button" class="order-cart__quantity-btn" data-cart-action="increase" data-product-id="${item.id}" aria-label="Увеличить количество ${item.name}">+</button>
+            <strong>${formatPrice(item.price * item.quantity)} руб.</strong>
+          </div>
+        </div>
+      `).join('');
+
+      orderCartTotal.textContent = `${formatPrice(getCartTotal())} руб.`;
+    }
+
+    function addProduct(productId) {
+      if (!ORDER_PRODUCTS[productId]) return;
+      cart.set(productId, (cart.get(productId) || 0) + 1);
+      renderCart();
+    }
+
+    function updateQuantity(productId, delta) {
+      if (!cart.has(productId)) return;
+      const nextQuantity = cart.get(productId) + delta;
+      if (nextQuantity <= 0) {
+        cart.delete(productId);
+      } else {
+        cart.set(productId, nextQuantity);
+      }
+      renderCart();
+    }
+
+    function clearCart() {
+      cart.clear();
+      renderCart();
+    }
+
+    function renderModalSummary() {
+      const items = getCartItems();
+      orderModalSummary.innerHTML = items.map((item) => `
+        <div class="order-modal__summary-item">
+          <span>${item.name} × ${item.quantity}</span>
+          <strong>${formatPrice(item.price * item.quantity)} руб.</strong>
+        </div>
+      `).join('') + `
+        <div class="order-modal__summary-total">
+          <span>Итого</span>
+          <strong>${formatPrice(getCartTotal())} руб.</strong>
+        </div>
+      `;
+    }
+
+    function setFormStatus(message, type) {
+      orderFormStatus.textContent = message;
+      orderFormStatus.className = 'order-form__status';
+      if (type) orderFormStatus.classList.add(`is-${type}`);
+    }
+
+    function openModal() {
+      if (cart.size === 0) return;
+      lastFocusedElement = document.activeElement;
+      renderModalSummary();
+      setFormStatus('', '');
+      orderModal.hidden = false;
+      document.body.classList.add('no-scroll');
+      document.getElementById('orderName').focus();
+    }
+
+    function closeModal() {
+      orderModal.hidden = true;
+      document.body.classList.remove('no-scroll');
+      if (lastFocusedElement) lastFocusedElement.focus();
+    }
+
+    productOrderButtons.forEach((button) => {
+      button.addEventListener('click', function() {
+        addProduct(button.dataset.productId);
+      });
+    });
+
+    orderCartItems.addEventListener('click', function(event) {
+      const button = event.target.closest('[data-cart-action]');
+      if (!button) return;
+      const delta = button.dataset.cartAction === 'increase' ? 1 : -1;
+      updateQuantity(button.dataset.productId, delta);
+    });
+
+    orderCartClear.addEventListener('click', clearCart);
+    openOrderModal.addEventListener('click', openModal);
+    closeOrderModal.addEventListener('click', closeModal);
+
+    orderModal.addEventListener('click', function(event) {
+      if (event.target.hasAttribute('data-order-modal-close')) closeModal();
+    });
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && !orderModal.hidden) closeModal();
+    });
+
+    orderForm.addEventListener('submit', async function(event) {
+      event.preventDefault();
+
+      if (cart.size === 0) {
+        setFormStatus('Добавьте хотя бы один товар в заявку.', 'error');
+        return;
+      }
+
+      if (!orderForm.checkValidity()) {
+        orderForm.reportValidity();
+        return;
+      }
+
+      if (!ORDER_ENDPOINT) {
+        setFormStatus('Форма заказа пока не подключена к Google Apps Script.', 'error');
+        return;
+      }
+
+      const formData = new FormData(orderForm);
+      const payload = {
+        items: getCartItems().map((item) => ({
+          id: item.id,
+          quantity: item.quantity
+        })),
+        name: String(formData.get('name') || '').trim(),
+        phone: String(formData.get('phone') || '').trim(),
+        comment: String(formData.get('comment') || '').trim()
+      };
+
+      orderSubmit.disabled = true;
+      orderSubmit.textContent = 'Отправляем…';
+      setFormStatus('', '');
+
+      try {
+        const response = await fetch(ORDER_ENDPOINT, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) throw new Error('Request failed');
+
+        setFormStatus('Заявка отправлена. Мы свяжемся с вами.', 'success');
+        orderForm.reset();
+        clearCart();
+
+        window.setTimeout(closeModal, 1800);
+      } catch (error) {
+        setFormStatus('Не удалось отправить заявку. Попробуйте ещё раз или свяжитесь с нами по телефону.', 'error');
+      } finally {
+        orderSubmit.disabled = false;
+        orderSubmit.textContent = 'Отправить заявку';
+      }
+    });
+
+    renderCart();
   }
 
   function initYear() {
