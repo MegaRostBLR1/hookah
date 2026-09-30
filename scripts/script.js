@@ -271,13 +271,9 @@
     function updateQuantity(productId, delta) {
       if (!cart.has(productId)) return;
       const nextQuantity = cart.get(productId) + delta;
-      if (nextQuantity <= 0) {
-        cart.delete(productId);
-      } else {
-        cart.set(productId, Math.min(nextQuantity, MAX_QUANTITY));
-      }
+      const quantity = Math.max(1, Math.min(nextQuantity, MAX_QUANTITY));
 
-      if (cart.size === 0) isCartOpen = false;
+      cart.set(productId, quantity);
       saveCart();
       renderCart();
     }
