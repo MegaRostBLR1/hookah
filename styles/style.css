@@ -1045,9 +1045,16 @@ section {
 
 .order-cart__product {
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 2px;
   min-width: 0;
+}
+
+.order-cart__product strong {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .order-cart__product span {
