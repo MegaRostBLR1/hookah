@@ -362,10 +362,9 @@
 
 <div class="order-modal" id="orderModal" hidden>
     <div class="order-modal__backdrop" data-order-modal-close></div>
-    <section class="order-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="order-modal-title">
+    <div class="order-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="order-modal-title">
         <button class="order-modal__close" id="closeOrderModal" type="button" aria-label="Закрыть форму">&times;</button>
         <div class="order-modal__content">
-            <span class="order-cart__eyebrow">Оформление</span>
             <h2 class="order-modal__title" id="order-modal-title">Оформить заявку</h2>
             <div class="order-modal__summary" id="orderModalSummary"></div>
             <form class="order-form" id="orderForm" novalidate>
@@ -385,7 +384,7 @@
                 <button class="btn btn-primary btn-full" id="orderSubmit" type="submit">Отправить заявку</button>
             </form>
         </div>
-    </section>
+    </div>
 </div>
 
 <script src="scripts/script.js"></script>
