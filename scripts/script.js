@@ -127,7 +127,6 @@
     const orderCart = document.getElementById('orderCart');
     const orderCartItems = document.getElementById('orderCartItems');
     const orderCartTotal = document.getElementById('orderCartTotal');
-    const orderCartClear = document.getElementById('orderCartClear');
     const orderCartClose = document.getElementById('orderCartClose');
     const headerCart = document.getElementById('headerCart');
     const headerCartCount = document.getElementById('headerCartCount');
@@ -348,7 +347,6 @@
       updateQuantity(button.dataset.productId, delta);
     });
 
-    orderCartClear.addEventListener('click', clearCart);
     orderCartClose.addEventListener('click', closeCart);
     headerCart.addEventListener('click', openCart);
     openOrderModal.addEventListener('click', openModal);
