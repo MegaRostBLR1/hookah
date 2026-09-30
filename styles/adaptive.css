@@ -221,12 +221,13 @@
 
 @media (max-width: 600px) {
   .order-cart {
-    width: calc(100vw - 16px);
-    height: calc(100dvh - 72px);
-    border-radius: var(--border-radius) 0 0 var(--border-radius);
+    width: 100vw;
+    height: 100dvh;
+    min-height: 100dvh;
+    left: 0;
+    border-radius: 0;
   }
 
-  .order-cart__header,
   .order-cart__footer,
   .order-cart__item {
     align-items: flex-start;
@@ -237,7 +238,6 @@
   }
 
   .order-cart__controls {
-    width: 100%;
     justify-content: space-between;
   }
 
@@ -247,6 +247,15 @@
 
   .order-cart__footer .btn {
     width: 100%;
+  }
+
+  .order-modal {
+    padding: var(--space-sm);
+  }
+
+  .order-modal__dialog {
+    max-height: calc(100dvh - 32px);
+    height: auto;
   }
 
   .order-modal__content {

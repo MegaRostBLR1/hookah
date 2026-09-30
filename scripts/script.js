@@ -127,7 +127,6 @@
     const orderCart = document.getElementById('orderCart');
     const orderCartItems = document.getElementById('orderCartItems');
     const orderCartTotal = document.getElementById('orderCartTotal');
-    const orderCartClear = document.getElementById('orderCartClear');
     const orderCartClose = document.getElementById('orderCartClose');
     const headerCart = document.getElementById('headerCart');
     const headerCartCount = document.getElementById('headerCartCount');
@@ -228,14 +227,18 @@
           <div class="order-cart__item">
             <div class="order-cart__product">
               <strong>${escapeHtml(item.name)}</strong>
-              <span>${formatPrice(item.price)} руб. × ${item.quantity}</span>
-            </div>
-            <div class="order-cart__controls">
-              <strong>${formatPrice(item.price * item.quantity)} руб.</strong>
-              <button type="button" class="order-cart__quantity-btn" data-cart-action="decrease" data-product-id="${escapeHtml(item.id)}" aria-label="Уменьшить количество ${escapeHtml(item.name)}">−</button>
-              <span aria-label="Количество: ${item.quantity}">${item.quantity}</span>
-              <button type="button" class="order-cart__quantity-btn" data-cart-action="increase" data-product-id="${escapeHtml(item.id)}" aria-label="Увеличить количество ${escapeHtml(item.name)}"${item.quantity >= MAX_QUANTITY ? ' disabled' : ''}>+</button>
               <button type="button" class="order-cart__remove-btn" data-cart-action="remove" data-product-id="${escapeHtml(item.id)}" aria-label="Удалить ${escapeHtml(item.name)} из корзины">×</button>
+            </div>
+            <div class="order-cart__details">
+              <div class="order-cart__price">
+                <span>${formatPrice(item.price)} руб.</span>
+              </div>
+              <div class="order-cart__controls">
+                <strong>${formatPrice(item.price * item.quantity)} руб.</strong>
+                <button type="button" class="order-cart__quantity-btn" data-cart-action="decrease" data-product-id="${escapeHtml(item.id)}" aria-label="Уменьшить количество ${escapeHtml(item.name)}">−</button>
+                <span aria-label="Количество: ${item.quantity}">${item.quantity}</span>
+                <button type="button" class="order-cart__quantity-btn" data-cart-action="increase" data-product-id="${escapeHtml(item.id)}" aria-label="Увеличить количество ${escapeHtml(item.name)}"${item.quantity >= MAX_QUANTITY ? ' disabled' : ''}>+</button>
+              </div>
             </div>
           </div>
         `).join('');
@@ -250,30 +253,29 @@
       cart.set(productId, nextQuantity);
       saveCart();
       isCartOpen = true;
+      if (window.innerWidth <= 600) setBodyScrollLock(true);
       renderCart();
     }
 
     function openCart() {
       if (cart.size === 0) return;
       isCartOpen = true;
+      if (window.innerWidth <= 600) setBodyScrollLock(true);
       renderCart();
     }
 
     function closeCart() {
       isCartOpen = false;
+      if (window.innerWidth <= 600 && orderModal.hidden) setBodyScrollLock(false);
       renderCart();
     }
 
     function updateQuantity(productId, delta) {
       if (!cart.has(productId)) return;
       const nextQuantity = cart.get(productId) + delta;
-      if (nextQuantity <= 0) {
-        cart.delete(productId);
-      } else {
-        cart.set(productId, Math.min(nextQuantity, MAX_QUANTITY));
-      }
+      const quantity = Math.max(1, Math.min(nextQuantity, MAX_QUANTITY));
 
-      if (cart.size === 0) isCartOpen = false;
+      cart.set(productId, quantity);
       saveCart();
       renderCart();
     }
@@ -314,6 +316,82 @@
       if (type) orderFormStatus.classList.add(`is-${type}`);
     }
 
+    const formFields = {
+      name: {
+        input: document.getElementById('orderName'),
+        error: document.getElementById('orderNameError'),
+        validate(value) {
+          if (!value) return 'Введите имя.';
+          if (value.length < 2) return 'Имя должно содержать минимум 2 символа.';
+          if (value.length > 80) return 'Имя не должно превышать 80 символов.';
+          if (!/^[\p{L}\p{M}][\p{L}\p{M}'’ -]*$/u.test(value)) {
+            return 'Используйте только буквы, пробелы и дефисы.';
+          }
+          return '';
+        }
+      },
+      phone: {
+        input: document.getElementById('orderPhone'),
+        error: document.getElementById('orderPhoneError'),
+        validate(value) {
+          if (!value) return 'Введите номер телефона.';
+          if (!/^[+]?\d[\d\s().-]{6,28}\d$/.test(value)) {
+            return 'Введите корректный номер телефона.';
+          }
+          return '';
+        }
+      },
+      address: {
+        input: document.getElementById('orderAddress'),
+        error: document.getElementById('orderAddressError'),
+        validate(value) {
+          if (!value) return 'Введите адрес доставки.';
+          if (value.length < 5) return 'Введите полный адрес доставки.';
+          if (value.length > 200) return 'Адрес не должен превышать 200 символов.';
+          return '';
+        }
+      },
+      comment: {
+        input: document.getElementById('orderComment'),
+        error: document.getElementById('orderCommentError'),
+        validate(value) {
+          if (value.length > 500) return 'Комментарий не должен превышать 500 символов.';
+          return '';
+        }
+      }
+    };
+
+    function validateField(field) {
+      const value = field.input.value.trim();
+      const message = field.validate(value);
+
+      field.error.textContent = message;
+      field.input.setAttribute('aria-invalid', String(Boolean(message)));
+      field.input.classList.toggle('is-invalid', Boolean(message));
+
+      return !message;
+    }
+
+    function validateOrderForm(focusInvalidField = false) {
+      let isValid = true;
+      let firstInvalidField = null;
+
+      Object.values(formFields).forEach((field) => {
+        const fieldIsValid = validateField(field);
+        if (!fieldIsValid) {
+          isValid = false;
+          if (!firstInvalidField) firstInvalidField = field.input;
+        }
+      });
+
+      if (!isValid && focusInvalidField && firstInvalidField) {
+        firstInvalidField.focus();
+        setFormStatus('Проверьте данные в форме.', 'error');
+      }
+
+      return isValid;
+    }
+
     function openModal() {
       if (cart.size === 0) return;
       lastFocusedElement = document.activeElement;
@@ -326,9 +404,16 @@
 
     function closeModal() {
       orderModal.hidden = true;
-      setBodyScrollLock(false);
+      setBodyScrollLock(window.innerWidth <= 600 && isCartOpen);
       if (lastFocusedElement) lastFocusedElement.focus();
     }
+
+    Object.values(formFields).forEach((field) => {
+      field.input.addEventListener('blur', () => validateField(field));
+      field.input.addEventListener('input', () => {
+        if (field.input.classList.contains('is-invalid')) validateField(field);
+      });
+    });
 
     productOrderButtons.forEach((button) => {
       button.addEventListener('click', function() {
@@ -348,7 +433,6 @@
       updateQuantity(button.dataset.productId, delta);
     });
 
-    orderCartClear.addEventListener('click', clearCart);
     orderCartClose.addEventListener('click', closeCart);
     headerCart.addEventListener('click', openCart);
     openOrderModal.addEventListener('click', openModal);
@@ -423,8 +507,7 @@
         return;
       }
 
-      if (!orderForm.checkValidity()) {
-        orderForm.reportValidity();
+      if (!validateOrderForm(true)) {
         return;
       }
 
@@ -441,6 +524,7 @@
         })),
         name: String(formData.get('name') || '').trim(),
         phone: String(formData.get('phone') || '').trim(),
+        address: String(formData.get('address') || '').trim(),
         comment: String(formData.get('comment') || '').trim()
       };
 
