@@ -1050,6 +1050,10 @@ section {
   color: var(--text-muted);
 }
 
+.order-cart__clear {
+  align-self: flex-end;
+}
+
 .order-cart__clear:hover,
 .order-cart__close:hover,
 .order-modal__close:hover {
