@@ -242,6 +242,7 @@
 
     function clearCart() {
       cart.clear();
+      isCartOpen = false;
       renderCart();
     }
 
