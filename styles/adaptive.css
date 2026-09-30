@@ -250,6 +250,17 @@
     width: 100%;
   }
 
+  .order-modal {
+    padding: 0;
+  }
+
+  .order-modal__dialog {
+    width: 100vw;
+    max-height: 100dvh;
+    height: 100dvh;
+    border-radius: 0;
+  }
+
   .order-modal__content {
     padding: var(--space-md);
   }
