@@ -150,6 +150,9 @@
     const orderCartItems = document.getElementById('orderCartItems');
     const orderCartTotal = document.getElementById('orderCartTotal');
     const orderCartClear = document.getElementById('orderCartClear');
+    const orderCartClose = document.getElementById('orderCartClose');
+    const headerCart = document.getElementById('headerCart');
+    const headerCartCount = document.getElementById('headerCartCount');
     const openOrderModal = document.getElementById('openOrderModal');
     const orderModal = document.getElementById('orderModal');
     const closeOrderModal = document.getElementById('closeOrderModal');
@@ -163,6 +166,7 @@
 
     const cart = new Map();
     let lastFocusedElement = null;
+    let isCartOpen = false;
 
     function getCartItems() {
       return Array.from(cart.entries()).map(([id, quantity]) => ({
@@ -182,10 +186,12 @@
 
     function renderCart() {
       const items = getCartItems();
-      const isCartEmpty = items.length === 0;
+      const totalQuantity = items.reduce((total, item) => total + item.quantity, 0);
+      headerCartCount.textContent = String(totalQuantity);
+      headerCart.setAttribute('aria-expanded', String(isCartOpen));
       orderCart.hidden = false;
-      orderCart.inert = isCartEmpty;
-      orderCart.setAttribute('aria-hidden', String(isCartEmpty));
+      orderCart.inert = !isCartOpen;
+      orderCart.setAttribute('aria-hidden', String(!isCartOpen));
 
       orderCartItems.innerHTML = items.map((item) => `
         <div class="order-cart__item">
@@ -208,6 +214,18 @@
     function addProduct(productId) {
       if (!ORDER_PRODUCTS[productId]) return;
       cart.set(productId, (cart.get(productId) || 0) + 1);
+      isCartOpen = true;
+      renderCart();
+    }
+
+    function openCart() {
+      if (cart.size === 0) return;
+      isCartOpen = true;
+      renderCart();
+    }
+
+    function closeCart() {
+      isCartOpen = false;
       renderCart();
     }
 
@@ -281,6 +299,8 @@
     });
 
     orderCartClear.addEventListener('click', clearCart);
+    orderCartClose.addEventListener('click', closeCart);
+    headerCart.addEventListener('click', openCart);
     openOrderModal.addEventListener('click', openModal);
     closeOrderModal.addEventListener('click', closeModal);
 
