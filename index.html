@@ -386,19 +386,23 @@
             <form class="order-form" id="orderForm" novalidate>
                 <div class="order-form__field">
                     <label for="orderName">Имя <span aria-hidden="true">*</span></label>
-                    <input id="orderName" name="name" type="text" autocomplete="name" required maxlength="80">
+                    <input id="orderName" name="name" type="text" autocomplete="name" required maxlength="80" aria-describedby="orderNameError">
+                    <p class="order-form__error" id="orderNameError"></p>
                 </div>
                 <div class="order-form__field">
                     <label for="orderPhone">Телефон <span aria-hidden="true">*</span></label>
-                    <input id="orderPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="30">
+                    <input id="orderPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="30" aria-describedby="orderPhoneError">
+                    <p class="order-form__error" id="orderPhoneError"></p>
                 </div>
                 <div class="order-form__field">
                     <label for="orderAddress">Адрес <span aria-hidden="true">*</span></label>
-                    <input id="orderAddress" name="address" type="text" autocomplete="street-address" required maxlength="200">
+                    <input id="orderAddress" name="address" type="text" autocomplete="street-address" required maxlength="200" aria-describedby="orderAddressError">
+                    <p class="order-form__error" id="orderAddressError"></p>
                 </div>
                 <div class="order-form__field">
                     <label for="orderComment">Комментарий</label>
-                    <textarea id="orderComment" name="comment" rows="4" maxlength="500"></textarea>
+                    <textarea id="orderComment" name="comment" rows="4" maxlength="500" aria-describedby="orderCommentError"></textarea>
+                    <p class="order-form__error" id="orderCommentError"></p>
                 </div>
                 <p class="order-form__status" id="orderFormStatus" role="status" aria-live="polite"></p>
                 <button class="btn btn-primary btn-full" id="orderSubmit" type="submit">Отправить заявку</button>
