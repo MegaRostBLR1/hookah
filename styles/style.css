@@ -1163,10 +1163,16 @@ section {
   width: min(100%, 560px);
   max-height: calc(100vh - 32px);
   overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   background: var(--bg-card);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--border-radius);
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+}
+
+.order-modal__dialog::-webkit-scrollbar {
+  display: none;
 }
 
 .order-modal__content {
