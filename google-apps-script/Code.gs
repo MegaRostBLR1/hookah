@@ -12,7 +12,11 @@ function doPost(e) {
     const comment = String(payload.comment || '').trim();
 
     if (!name || !phone || !items.length) {
-      return jsonResponse({ success: false, error: 'Invalid request' }, 400);
+      return jsonResponse({ success: false, error: 'Invalid request' });
+    }
+
+    if (name.length > 80 || phone.length > 30 || comment.length > 500) {
+      return jsonResponse({ success: false, error: 'Invalid request' });
     }
 
     const orderItems = items.map((item) => {
@@ -76,11 +80,11 @@ function doPost(e) {
     return jsonResponse({ success: true });
   } catch (error) {
     console.error(error);
-    return jsonResponse({ success: false, error: 'Server error' }, 500);
+    return jsonResponse({ success: false, error: 'Server error' });
   }
 }
 
-function jsonResponse(data, statusCode) {
+function jsonResponse(data) {
   return ContentService
     .createTextOutput(JSON.stringify(data))
     .setMimeType(ContentService.MimeType.JSON);

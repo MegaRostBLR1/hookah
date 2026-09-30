@@ -42,8 +42,17 @@
                 <li><a href="#faq">FAQ</a></li>
             </ul>
         </nav>
-        <a href="#contacts" class="btn btn-primary desktop-btn">Позвонить</a>
-
+        <div class="header__actions">
+            <a href="#contacts" class="btn btn-primary desktop-btn">Позвонить</a>
+            <button class="header-cart" id="headerCart" type="button" aria-label="Открыть корзину" aria-controls="orderCart" aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                    <circle cx="9" cy="20" r="1"></circle>
+                    <circle cx="19" cy="20" r="1"></circle>
+                    <path d="M3 4h2l2.4 11.4a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 8H6"></path>
+                </svg>
+                <span class="header-cart__count" id="headerCartCount" aria-live="polite">0</span>
+            </button>
+        </div>
         <button class="burger-btn" id="burgerBtn" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
             <span></span>
             <span></span>
@@ -52,7 +61,7 @@
     </div>
 </header>
 
-<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Мобильное меню">
+<div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Мобильное меню">
     <nav class="mobile-nav">
         <ul class="nav-list-mobile">
             <li><a href="#how">Как работает</a></li>
@@ -182,8 +191,10 @@
             <div class="catalog-wide-list">
                 <div class="product-wide-card">
                     <div class="product-part hookah-small">
-                        <img class="hookah-small__desc" src="images/hookah-small_desc.jpg" loading="lazy" alt="Электрокальян E-Hookah Air One малый">
-                        <img class="hookah-small__mobile" src="images/hookah-small_mobile.jpg" loading="lazy" alt="Электрокальян E-Hookah Air One малый">
+                        <picture>
+                            <source media="(max-width: 1024px)" srcset="images/hookah-small_mobile.jpg">
+                            <img src="images/hookah-small_desc.jpg" loading="lazy" alt="Электрокальян E-Hookah Air One малый">
+                        </picture>
                     </div>
                     <div class="product-part info-main">
                         <div class="info-content">
@@ -198,16 +209,20 @@
                         </div>
                     </div>
                     <div class="product-part photo-kit hookah-small-accessories">
-                        <img class="hookah-small-accessories__desc" src="images/hookah-small-accessories-desc.jpg" loading="lazy" alt="Комплектация малого кальяна">
-                        <img class="hookah-small-accessories__mobile" src="images/hookah-small-accessories-mob.jpg" loading="lazy" alt="Комплектация малого кальяна">
+                        <picture>
+                            <source media="(max-width: 1024px)" srcset="images/hookah-small-accessories-mob.jpg">
+                            <img src="images/hookah-small-accessories-desc.jpg" loading="lazy" alt="Комплектация малого кальяна">
+                        </picture>
                     </div>
                 </div>
             </div>
             <div class="catalog-wide-list">
                 <div class="product-wide-card">
                     <div class="product-part hookah-big">
-                        <img class="hookah-big__desc" src="images/hookah-big_desc.jpg" loading="lazy" alt="Электрокальян E-Hookah Air One большой">
-                        <img class="hookah-big__mobile" src="images/hookah-big_mobile.jpg" loading="lazy" alt="Электрокальян E-Hookah Air One большой">
+                        <picture>
+                            <source media="(max-width: 1024px)" srcset="images/hookah-big_mobile.jpg">
+                            <img src="images/hookah-big_desc.jpg" loading="lazy" alt="Электрокальян E-Hookah Air One большой">
+                        </picture>
                     </div>
                     <div class="product-part info-main">
                         <div class="info-content">
@@ -222,20 +237,23 @@
                         </div>
                     </div>
                     <div class="product-part photo-kit">
-                        <img class="hookah-big-accessories__desc" src="images/hookah-big-accessories-desc.jpg" loading="lazy" alt="Комплектация большого кальяна">
-                        <img class="hookah-big-accessories__mobile" src="images/hookah-big-accessories-mob.jpg" loading="lazy" alt="Комплектация большого кальяна">
+                        <picture>
+                            <source media="(max-width: 1024px)" srcset="images/hookah-big-accessories-mob.jpg">
+                            <img src="images/hookah-big-accessories-desc.jpg" loading="lazy" alt="Комплектация большого кальяна">
+                        </picture>
                     </div>
                 </div>
             </div>
             <aside class="order-cart" id="orderCart" aria-labelledby="order-cart-title" hidden>
                 <div class="container order-cart__container">
-                    <div class="order-cart__header">
-                        <div>
+                    <div class="order-cart__content">
+                        <div class="order-cart__header">
                             <h2 class="order-cart__title" id="order-cart-title">Выбранные товары</h2>
+                            <button class="order-cart__close" id="orderCartClose" type="button" aria-label="Скрыть корзину">&times;</button>
                         </div>
+                        <div class="order-cart__items" id="orderCartItems"></div>
                         <button class="order-cart__clear" id="orderCartClear" type="button">Очистить</button>
                     </div>
-                    <div class="order-cart__items" id="orderCartItems"></div>
                     <div class="order-cart__footer">
                         <div class="order-cart__total">
                             <span>Итого</span>
