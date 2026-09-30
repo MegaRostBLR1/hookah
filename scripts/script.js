@@ -142,9 +142,45 @@
 
     if (!orderCart || !orderForm) return;
 
+    const CART_STORAGE_KEY = 'e-hookah-cart';
     const cart = new Map();
     let lastFocusedElement = null;
     let isCartOpen = false;
+
+    function loadCart() {
+      try {
+        const storedCart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY) || '[]');
+
+        if (!Array.isArray(storedCart)) return;
+
+        storedCart.forEach((item) => {
+          if (
+            item &&
+            ORDER_PRODUCTS[item.id] &&
+            Number.isInteger(item.quantity) &&
+            item.quantity > 0 &&
+            item.quantity <= 99
+          ) {
+            cart.set(item.id, item.quantity);
+          }
+        });
+      } catch (error) {
+        localStorage.removeItem(CART_STORAGE_KEY);
+      }
+    }
+
+    function saveCart() {
+      try {
+        const storedCart = Array.from(cart.entries()).map(([id, quantity]) => ({
+          id,
+          quantity
+        }));
+
+        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(storedCart));
+      } catch (error) {
+        // Корзина продолжает работать в памяти, даже если localStorage недоступен.
+      }
+    }
 
     function getCartItems() {
       return Array.from(cart.entries()).map(([id, quantity]) => ({
@@ -192,6 +228,7 @@
     function addProduct(productId) {
       if (!ORDER_PRODUCTS[productId]) return;
       cart.set(productId, (cart.get(productId) || 0) + 1);
+      saveCart();
       isCartOpen = true;
       renderCart();
     }
@@ -217,11 +254,13 @@
       }
 
       if (cart.size === 0) isCartOpen = false;
+      saveCart();
       renderCart();
     }
 
     function clearCart() {
       cart.clear();
+      saveCart();
       isCartOpen = false;
       renderCart();
     }
@@ -348,6 +387,7 @@
       }
     });
 
+    loadCart();
     renderCart();
   }
 
