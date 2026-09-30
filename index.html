@@ -229,13 +229,15 @@
             </div>
             <aside class="order-cart" id="orderCart" aria-labelledby="order-cart-title" hidden>
                 <div class="container order-cart__container">
-                    <div class="order-cart__header">
-                        <div>
-                            <h2 class="order-cart__title" id="order-cart-title">Выбранные товары</h2>
+                    <div>
+                        <div class="order-cart__header">
+                            <div>
+                                <h2 class="order-cart__title" id="order-cart-title">Выбранные товары</h2>
+                            </div>
+                            <button class="order-cart__clear" id="orderCartClear" type="button">Очистить</button>
                         </div>
-                        <button class="order-cart__clear" id="orderCartClear" type="button">Очистить</button>
+                        <div class="order-cart__items" id="orderCartItems"></div>
                     </div>
-                    <div class="order-cart__items" id="orderCartItems"></div>
                     <div class="order-cart__footer">
                         <div class="order-cart__total">
                             <span>Итого</span>

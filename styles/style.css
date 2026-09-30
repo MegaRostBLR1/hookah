@@ -966,6 +966,7 @@ section {
   padding: var(--space-md);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .order-cart__header,
