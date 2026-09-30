@@ -315,6 +315,82 @@
       if (type) orderFormStatus.classList.add(`is-${type}`);
     }
 
+    const formFields = {
+      name: {
+        input: document.getElementById('orderName'),
+        error: document.getElementById('orderNameError'),
+        validate(value) {
+          if (!value) return 'Введите имя.';
+          if (value.length < 2) return 'Имя должно содержать минимум 2 символа.';
+          if (value.length > 80) return 'Имя не должно превышать 80 символов.';
+          if (!/^[\p{L}\p{M}][\p{L}\p{M}'’ -]*$/u.test(value)) {
+            return 'Используйте только буквы, пробелы и дефисы.';
+          }
+          return '';
+        }
+      },
+      phone: {
+        input: document.getElementById('orderPhone'),
+        error: document.getElementById('orderPhoneError'),
+        validate(value) {
+          if (!value) return 'Введите номер телефона.';
+          if (!/^[+]?\d[\d\s().-]{6,28}\d$/.test(value)) {
+            return 'Введите корректный номер телефона.';
+          }
+          return '';
+        }
+      },
+      address: {
+        input: document.getElementById('orderAddress'),
+        error: document.getElementById('orderAddressError'),
+        validate(value) {
+          if (!value) return 'Введите адрес доставки.';
+          if (value.length < 5) return 'Введите полный адрес доставки.';
+          if (value.length > 200) return 'Адрес не должен превышать 200 символов.';
+          return '';
+        }
+      },
+      comment: {
+        input: document.getElementById('orderComment'),
+        error: document.getElementById('orderCommentError'),
+        validate(value) {
+          if (value.length > 500) return 'Комментарий не должен превышать 500 символов.';
+          return '';
+        }
+      }
+    };
+
+    function validateField(field) {
+      const value = field.input.value.trim();
+      const message = field.validate(value);
+
+      field.error.textContent = message;
+      field.input.setAttribute('aria-invalid', String(Boolean(message)));
+      field.input.classList.toggle('is-invalid', Boolean(message));
+
+      return !message;
+    }
+
+    function validateOrderForm(focusInvalidField = false) {
+      let isValid = true;
+      let firstInvalidField = null;
+
+      Object.values(formFields).forEach((field) => {
+        const fieldIsValid = validateField(field);
+        if (!fieldIsValid) {
+          isValid = false;
+          if (!firstInvalidField) firstInvalidField = field.input;
+        }
+      });
+
+      if (!isValid && focusInvalidField && firstInvalidField) {
+        firstInvalidField.focus();
+        setFormStatus('Проверьте данные в форме.', 'error');
+      }
+
+      return isValid;
+    }
+
     function openModal() {
       if (cart.size === 0) return;
       lastFocusedElement = document.activeElement;
@@ -330,6 +406,13 @@
       setBodyScrollLock(window.innerWidth <= 600 && isCartOpen);
       if (lastFocusedElement) lastFocusedElement.focus();
     }
+
+    Object.values(formFields).forEach((field) => {
+      field.input.addEventListener('blur', () => validateField(field));
+      field.input.addEventListener('input', () => {
+        if (field.input.classList.contains('is-invalid')) validateField(field);
+      });
+    });
 
     productOrderButtons.forEach((button) => {
       button.addEventListener('click', function() {
@@ -423,8 +506,7 @@
         return;
       }
 
-      if (!orderForm.checkValidity()) {
-        orderForm.reportValidity();
+      if (!validateOrderForm(true)) {
         return;
       }
 
