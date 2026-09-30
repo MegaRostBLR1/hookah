@@ -228,6 +228,7 @@
           <div class="order-cart__item">
             <div class="order-cart__product">
               <strong>${escapeHtml(item.name)}</strong>
+              <button type="button" class="order-cart__remove-btn" data-cart-action="remove" data-product-id="${escapeHtml(item.id)}" aria-label="Удалить ${escapeHtml(item.name)} из корзины">×</button>
             </div>
             <div class="order-cart__details">
               <div class="order-cart__price">
@@ -238,7 +239,6 @@
                 <button type="button" class="order-cart__quantity-btn" data-cart-action="decrease" data-product-id="${escapeHtml(item.id)}" aria-label="Уменьшить количество ${escapeHtml(item.name)}">−</button>
                 <span aria-label="Количество: ${item.quantity}">${item.quantity}</span>
                 <button type="button" class="order-cart__quantity-btn" data-cart-action="increase" data-product-id="${escapeHtml(item.id)}" aria-label="Увеличить количество ${escapeHtml(item.name)}"${item.quantity >= MAX_QUANTITY ? ' disabled' : ''}>+</button>
-                <button type="button" class="order-cart__remove-btn" data-cart-action="remove" data-product-id="${escapeHtml(item.id)}" aria-label="Удалить ${escapeHtml(item.name)} из корзины">×</button>
               </div>
             </div>
           </div>

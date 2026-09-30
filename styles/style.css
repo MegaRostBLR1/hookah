@@ -947,12 +947,12 @@ section {
 
 .order-cart {
   position: fixed;
-  top: 72px;
+  top: 0;
   right: 0;
   bottom: 0;
   z-index: 1100;
   width: min(460px, calc(100vw - 32px));
-  height: calc(100vh - 72px);
+  height: 100vh;
   overflow: hidden;
   background: rgba(10, 10, 11, 0.97);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1049,6 +1049,9 @@ section {
 .order-cart__product {
   width: 100%;
   min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .order-cart__product strong {

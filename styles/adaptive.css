@@ -221,8 +221,8 @@
 
 @media (max-width: 600px) {
   .order-cart {
-    width: calc(100vw - 16px);
-    height: calc(100dvh - 72px);
+    width: 100vw;
+    left: 0;
     border-radius: var(--border-radius) 0 0 var(--border-radius);
   }
 
@@ -237,7 +237,6 @@
   }
 
   .order-cart__controls {
-    width: 100%;
     justify-content: space-between;
   }
 
