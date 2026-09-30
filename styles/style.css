@@ -128,24 +128,6 @@ section {
   box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3)
 }
 
-.btn-outline {
-  background: transparent;
-  border: 2px solid #E63946;
-  color: #E63946
-}
-
-.btn-outline:hover {
-  background: #E63946;
-  color: #ffffff
-}
-
-.btn-large {
-  padding: 18px 40px;
-  font-size: 1.1rem;
-  background-color: #E63946;
-  color: #ffffff
-}
-
 .btn-full {
   width: 100%
 }
@@ -653,11 +635,10 @@ section {
   height: 100%
 }
 
-.hookah-small-accessories__mobile,
-.hookah-small__mobile,
-.hookah-big-accessories__mobile,
-.hookah-big__mobile {
-  display: none;
+.product-part picture {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .product-part img, .photo-kit img {
@@ -746,14 +727,6 @@ section {
   color: #ffffff
 }
 
-.hookah-small-accessories__desctop {
-  display: block
-}
-
-.hookah-small-accessories__mobile {
-  display: none
-}
-
 .contacts {
   background-color: #0a0a0b
 }
@@ -807,11 +780,6 @@ section {
   font-size: 1.5rem;
   margin-bottom: var(--space-sm);
   color: #ffffff
-}
-
-.contact-card p, .contact-subtext {
-  color: #a0a0a5;
-  font-size: 1rem
 }
 
 .contact-link {
