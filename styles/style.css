@@ -390,17 +390,6 @@ section {
   gap: var(--space-md)
 }
 
-@supports (display:grid) {
-  .steps {
-    display: grid;
-    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))
-  }
-
-  .step-card {
-    min-width: 0
-  }
-}
-
 .step-card {
   background: #161618;
   padding: var(--space-lg);
@@ -734,17 +723,6 @@ section {
   gap: var(--space-md)
 }
 
-@supports (display:grid) {
-  .contacts-grid {
-    display: grid;
-    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr))
-  }
-
-  .contact-card {
-    min-width: 0
-  }
-}
-
 .contact-card {
   background: #161618;
   padding: var(--space-lg) var(--space-md);
@@ -865,6 +843,25 @@ section {
 .footer {
   padding: var(--space-lg) 0;
   border-top: 1px solid rgba(255, 255, 255, 0.05)
+}
+
+.price-disclaimer {
+  margin-top: var(--space-md);
+  color: #a0a0a5;
+  font-size: 0.85rem;
+  text-align: left
+}
+
+.footer-legal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  color: #a0a0a5;
+  font-size: 0.85rem
+}
+
+.footer-legal p {
+  margin: 0
 }
 
 .footer-container {
