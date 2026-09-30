@@ -42,16 +42,17 @@
                 <li><a href="#faq">FAQ</a></li>
             </ul>
         </nav>
-        <a href="#contacts" class="btn btn-primary desktop-btn">Позвонить</a>
-        <button class="header-cart" id="headerCart" type="button" aria-label="Открыть корзину" aria-controls="orderCart" aria-expanded="false">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-                <circle cx="9" cy="20" r="1"></circle>
-                <circle cx="19" cy="20" r="1"></circle>
-                <path d="M3 4h2l2.4 11.4a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 8H6"></path>
-            </svg>
-            <span class="header-cart__count" id="headerCartCount" aria-live="polite">0</span>
-        </button>
-
+        <div class="header__actions">
+            <a href="#contacts" class="btn btn-primary desktop-btn">Позвонить</a>
+            <button class="header-cart" id="headerCart" type="button" aria-label="Открыть корзину" aria-controls="orderCart" aria-expanded="false">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                    <circle cx="9" cy="20" r="1"></circle>
+                    <circle cx="19" cy="20" r="1"></circle>
+                    <path d="M3 4h2l2.4 11.4a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.6L21 8H6"></path>
+                </svg>
+                <span class="header-cart__count" id="headerCartCount" aria-live="polite">0</span>
+            </button>
+        </div>
         <button class="burger-btn" id="burgerBtn" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
             <span></span>
             <span></span>

@@ -219,6 +219,11 @@ section {
   color: #E63946
 }
 
+.header__actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
 .header-cart {
   position: relative;
   display: inline-flex;
