@@ -228,14 +228,18 @@
           <div class="order-cart__item">
             <div class="order-cart__product">
               <strong>${escapeHtml(item.name)}</strong>
-              <span>${formatPrice(item.price)} руб. × ${item.quantity}</span>
             </div>
-            <div class="order-cart__controls">
-              <strong>${formatPrice(item.price * item.quantity)} руб.</strong>
-              <button type="button" class="order-cart__quantity-btn" data-cart-action="decrease" data-product-id="${escapeHtml(item.id)}" aria-label="Уменьшить количество ${escapeHtml(item.name)}">−</button>
-              <span aria-label="Количество: ${item.quantity}">${item.quantity}</span>
-              <button type="button" class="order-cart__quantity-btn" data-cart-action="increase" data-product-id="${escapeHtml(item.id)}" aria-label="Увеличить количество ${escapeHtml(item.name)}"${item.quantity >= MAX_QUANTITY ? ' disabled' : ''}>+</button>
-              <button type="button" class="order-cart__remove-btn" data-cart-action="remove" data-product-id="${escapeHtml(item.id)}" aria-label="Удалить ${escapeHtml(item.name)} из корзины">×</button>
+            <div class="order-cart__details">
+              <div class="order-cart__price">
+                <span>${formatPrice(item.price)} руб.</span>
+                <strong>${formatPrice(item.price * item.quantity)} руб.</strong>
+              </div>
+              <div class="order-cart__controls">
+                <button type="button" class="order-cart__quantity-btn" data-cart-action="decrease" data-product-id="${escapeHtml(item.id)}" aria-label="Уменьшить количество ${escapeHtml(item.name)}">−</button>
+                <span aria-label="Количество: ${item.quantity}">${item.quantity}</span>
+                <button type="button" class="order-cart__quantity-btn" data-cart-action="increase" data-product-id="${escapeHtml(item.id)}" aria-label="Увеличить количество ${escapeHtml(item.name)}"${item.quantity >= MAX_QUANTITY ? ' disabled' : ''}>+</button>
+                <button type="button" class="order-cart__remove-btn" data-cart-action="remove" data-product-id="${escapeHtml(item.id)}" aria-label="Удалить ${escapeHtml(item.name)} из корзины">×</button>
+              </div>
             </div>
           </div>
         `).join('');
