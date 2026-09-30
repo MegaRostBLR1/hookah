@@ -93,10 +93,6 @@
     transform: translateY(-9px) rotate(-45deg)
   }
 
-  body.no-scroll {
-    overflow: hidden
-  }
-
   .mobile-nav {
     text-align: center
   }
