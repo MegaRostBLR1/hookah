@@ -251,14 +251,12 @@
   }
 
   .order-modal {
-    padding: 0;
+    padding: var(--space-sm);
   }
 
   .order-modal__dialog {
-    width: 100vw;
-    max-height: 100dvh;
-    height: 100dvh;
-    border-radius: 0;
+    max-height: calc(100dvh - 32px);
+    height: auto;
   }
 
   .order-modal__content {
