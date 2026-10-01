@@ -283,8 +283,13 @@
     function removeProduct(productId) {
       if (!cart.has(productId)) return;
       cart.delete(productId);
-      if (cart.size === 0) isCartOpen = false;
       saveCart();
+
+      if (cart.size === 0) {
+        closeCart();
+        return;
+      }
+
       renderCart();
     }
 
