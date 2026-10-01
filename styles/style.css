@@ -727,6 +727,10 @@ section {
   color: #ffffff
 }
 
+.product-order-btn {
+  min-width: 205px;
+}
+
 .contacts {
   background-color: #0a0a0b
 }
