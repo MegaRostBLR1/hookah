@@ -208,6 +208,12 @@
   }
 }
 
+@media (max-width: 410px) {
+  .order-modal__summary-item span {
+    max-width: 140px;
+  }
+}
+
 @media (max-width: 374px) {
   .nav-list-mobile li {
     margin-bottom: var(--space-sm)
