@@ -56,14 +56,10 @@
   }
 
   .burger-btn {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex
   }
 
   .burger-btn.active span:nth-child(1) {
-    -webkit-transform: translateY(9px) rotate(45deg);
     transform: translateY(9px) rotate(45deg)
   }
 
@@ -72,7 +68,6 @@
   }
 
   .burger-btn.active span:nth-child(3) {
-    -webkit-transform: translateY(-9px) rotate(-45deg);
     transform: translateY(-9px) rotate(-45deg)
   }
 
@@ -85,10 +80,7 @@
   }
 
   .benefit-header {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
     flex-direction: column;
-    -webkit-box-align: start;
     align-items: flex-start;
     gap: var(--space-xs)
   }
@@ -113,10 +105,7 @@
   }
 
   .hero-btns {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
     flex-direction: column;
-    -webkit-box-align: start;
     align-items: flex-start
   }
 
@@ -138,7 +127,6 @@
   }
 
   .header-container {
-    -webkit-box-pack: justify;
     justify-content: space-between;
     gap: var(--space-lg)
   }
@@ -150,8 +138,6 @@
   }
 
   .footer-container {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
     flex-direction: column;
     gap: var(--space-md);
     text-align: center
