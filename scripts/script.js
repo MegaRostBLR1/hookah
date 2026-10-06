@@ -35,26 +35,19 @@
     updateBodyScrollLock();
   }
 
-  const CATALOG_ENDPOINT = 'https://script.google.com/macros/s/AKfycby5f25xnoYAmx8xH2ZMW61j8LaEBHo2vKTQhJJVtZ3YpWPnXZuTJvMKBFmi3s9UFjKogg/exec';
-  const ORDER_ENDPOINT = CATALOG_ENDPOINT;
+  const CONFIG = {
+    CATALOG_ENDPOINT: 'https://script.google.com/macros/s/AKfycby5f25xnoYAmx8xH2ZMW61j8LaEBHo2vKTQhJVtZ3YpWPnXZuTJvMKBFmi3s9UFjKogg/exec',
+    CART_STORAGE_KEY: 'e-hookah-cart',
+    MAX_QUANTITY: 99
+  };
 
+  const ORDER_ENDPOINT = CONFIG.CATALOG_ENDPOINT;
   let PRODUCTS = {};
-  let ORDER_PRODUCTS = {};
 
-  renderCatalog();
   initAccordion();
   initMobileMenu();
   initYear();
   loadCatalog();
-
-  function createOrderProducts(products) {
-    return Object.fromEntries(
-      Object.entries(products).map(([id, product]) => [
-        id,
-        { name: product.name, price: product.price }
-      ])
-    );
-  }
 
   function getProductId(name) {
     const slug = String(name)
@@ -114,14 +107,12 @@
         image: {
           desktop: desktopImage,
           mobile: mobileImage,
-          alt: name,
-          className: ''
+          alt: name
         },
         accessories: {
           desktop: accessoriesDesktop,
           mobile: accessoriesMobile,
-          alt: 'Комплектация',
-          className: ''
+          alt: 'Комплектация'
         }
       };
     });
@@ -130,11 +121,11 @@
   }
 
   function loadCatalog() {
-    if (!CATALOG_ENDPOINT) return;
+    if (!CONFIG.CATALOG_ENDPOINT) return;
 
     const callbackName = 'eHookahCatalog_' + Date.now();
     const script = document.createElement('script');
-    const url = new URL(CATALOG_ENDPOINT);
+    const url = new URL(CONFIG.CATALOG_ENDPOINT);
 
     url.searchParams.set('callback', callbackName);
 
@@ -142,7 +133,6 @@
       try {
         const normalizedProducts = normalizeCatalogProducts(catalog);
         PRODUCTS = normalizedProducts;
-        ORDER_PRODUCTS = createOrderProducts(PRODUCTS);
         renderCatalog();
         initOrderForm();
       } catch (error) {
@@ -178,7 +168,7 @@
 
     catalog.innerHTML = Object.entries(PRODUCTS).map(([id, product]) => `
       <article class="product-wide-card">
-        <div class="product-part ${escapeHtml(product.image.className || '')}">
+        <div class="product-part">
           <picture>
             <source media="(max-width: 1024px)" srcset="${escapeHtml(product.image.mobile)}">
             <img src="${escapeHtml(product.image.desktop)}" loading="lazy" alt="${escapeHtml(product.image.alt)}">
@@ -196,7 +186,7 @@
             <button class="btn btn-primary product-order-btn" type="button" data-product-id="${escapeHtml(id)}">В корзину</button>
           </div>
         </div>
-        <div class="product-part photo-kit ${escapeHtml(product.accessories.className || '')}">
+        <div class="product-part photo-kit">
           <picture>
             <source media="(max-width: 1024px)" srcset="${escapeHtml(product.accessories.mobile)}">
             <img src="${escapeHtml(product.accessories.desktop)}" loading="lazy" alt="${escapeHtml(product.accessories.alt)}">
@@ -318,32 +308,30 @@
 
     if (!orderCart || !orderForm) return;
 
-    const CART_STORAGE_KEY = 'e-hookah-cart';
-    const MAX_QUANTITY = 99;
     const cart = new Map();
     let lastFocusedElement = null;
     let isCartOpen = false;
 
     function loadCart() {
       try {
-        const storedCart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY) || '[]');
+        const storedCart = JSON.parse(localStorage.getItem(CONFIG.CART_STORAGE_KEY) || '[]');
 
         if (!Array.isArray(storedCart)) return;
 
         storedCart.forEach((item) => {
           if (
             item &&
-            ORDER_PRODUCTS[item.id] &&
+            PRODUCTS[item.id] &&
             Number.isInteger(item.quantity) &&
             item.quantity > 0 &&
-            item.quantity <= MAX_QUANTITY
+            item.quantity <= CONFIG.MAX_QUANTITY
           ) {
             cart.set(item.id, item.quantity);
           }
         });
       } catch (error) {
         try {
-          localStorage.removeItem(CART_STORAGE_KEY);
+          localStorage.removeItem(CONFIG.CART_STORAGE_KEY);
         } catch (storageError) {
           // localStorage недоступен, поэтому корзина остаётся только в памяти.
         }
@@ -357,7 +345,7 @@
           quantity
         }));
 
-        localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(storedCart));
+        localStorage.setItem(CONFIG.CART_STORAGE_KEY, JSON.stringify(storedCart));
       } catch (error) {
         // Корзина продолжает работать в памяти, даже если localStorage недоступен.
       }
@@ -367,7 +355,7 @@
       return Array.from(cart.entries()).map(([id, quantity]) => ({
         id,
         quantity,
-        ...ORDER_PRODUCTS[id]
+        ...PRODUCTS[id]
       }));
     }
 
@@ -405,7 +393,7 @@
                 <strong>${formatPrice(item.price * item.quantity)} руб.</strong>
                 <button type="button" class="order-cart__quantity-btn" data-cart-action="decrease" data-product-id="${escapeHtml(item.id)}" aria-label="Уменьшить количество ${escapeHtml(item.name)}">−</button>
                 <span aria-label="Количество: ${item.quantity}">${item.quantity}</span>
-                <button type="button" class="order-cart__quantity-btn" data-cart-action="increase" data-product-id="${escapeHtml(item.id)}" aria-label="Увеличить количество ${escapeHtml(item.name)}"${item.quantity >= MAX_QUANTITY ? ' disabled' : ''}>+</button>
+                <button type="button" class="order-cart__quantity-btn" data-cart-action="increase" data-product-id="${escapeHtml(item.id)}" aria-label="Увеличить количество ${escapeHtml(item.name)}"${item.quantity >= CONFIG.MAX_QUANTITY ? ' disabled' : ''}>+</button>
               </div>
             </div>
           </div>
@@ -416,8 +404,8 @@
     }
 
     function addProduct(productId) {
-      if (!ORDER_PRODUCTS[productId]) return;
-      const nextQuantity = Math.min((cart.get(productId) || 0) + 1, MAX_QUANTITY);
+      if (!PRODUCTS[productId]) return;
+      const nextQuantity = Math.min((cart.get(productId) || 0) + 1, CONFIG.MAX_QUANTITY);
       cart.set(productId, nextQuantity);
       saveCart();
       isCartOpen = true;
@@ -441,7 +429,7 @@
     function updateQuantity(productId, delta) {
       if (!cart.has(productId)) return;
       const nextQuantity = cart.get(productId) + delta;
-      const quantity = Math.max(1, Math.min(nextQuantity, MAX_QUANTITY));
+      const quantity = Math.max(1, Math.min(nextQuantity, CONFIG.MAX_QUANTITY));
 
       cart.set(productId, quantity);
       saveCart();
@@ -473,7 +461,7 @@
       const items = getCartItems();
       orderModalSummary.innerHTML = items.map((item) => `
         <div class="order-modal__summary-item">
-          <span>${item.name} × ${item.quantity}</span>
+          <span>${escapeHtml(item.name)} × ${item.quantity}</span>
           <strong>${formatPrice(item.price * item.quantity)} руб.</strong>
         </div>
       `).join('') + `
@@ -649,7 +637,7 @@
     });
 
     window.addEventListener('storage', function(event) {
-      if (event.key !== CART_STORAGE_KEY) return;
+      if (event.key !== CONFIG.CART_STORAGE_KEY) return;
 
       cart.clear();
 
@@ -660,10 +648,10 @@
           storedCart.forEach((item) => {
             if (
               item &&
-              ORDER_PRODUCTS[item.id] &&
+              PRODUCTS[item.id] &&
               Number.isInteger(item.quantity) &&
               item.quantity > 0 &&
-              item.quantity <= MAX_QUANTITY
+              item.quantity <= CONFIG.MAX_QUANTITY
             ) {
               cart.set(item.id, item.quantity);
             }
