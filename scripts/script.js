@@ -36,11 +36,55 @@
   }
 
   const ORDER_ENDPOINT = '';
-  const ORDER_PRODUCTS = {
-    'air-one': { name: 'E-Hookah Air One', price: 590 },
-    'air-one-pro': { name: 'E-Hookah Air One Pro', price: 850 }
+
+  const PRODUCTS = {
+    'air-one': {
+      name: 'E-Hookah Air One',
+      description: 'Базовая модель с интеллектуальным контролем тяги и увеличенным объемом пара. Идеально подходит для домашнего использования.',
+      price: 590,
+      status: 'В наличии',
+      statusClass: 'available',
+      image: {
+        desktop: 'images/hookah-small_desc.jpg',
+        mobile: 'images/hookah-small_mobile.jpg',
+        alt: 'Электрокальян E-Hookah Air One малый',
+        className: 'hookah-small'
+      },
+      accessories: {
+        desktop: 'images/hookah-small-accessories-desc.jpg',
+        mobile: 'images/hookah-small-accessories-mob.jpg',
+        alt: 'Комплектация малого кальяна',
+        className: 'hookah-small-accessories'
+      }
+    },
+    'air-one-pro': {
+      name: 'E-Hookah Air One Pro',
+      description: 'Расширенная модель с увеличенной батареей и премиальными материалами. Для ценителей длительного использования.',
+      price: 850,
+      status: 'В наличии',
+      statusClass: 'available',
+      image: {
+        desktop: 'images/hookah-big_desc.jpg',
+        mobile: 'images/hookah-big_mobile.jpg',
+        alt: 'Электрокальян E-Hookah Air One большой',
+        className: 'hookah-big'
+      },
+      accessories: {
+        desktop: 'images/hookah-big-accessories-desc.jpg',
+        mobile: 'images/hookah-big-accessories-mob.jpg',
+        alt: 'Комплектация большого кальяна'
+      }
+    }
   };
 
+  const ORDER_PRODUCTS = Object.fromEntries(
+    Object.entries(PRODUCTS).map(([id, product]) => [
+      id,
+      { name: product.name, price: product.price }
+    ])
+  );
+
+  renderCatalog();
   initAccordion();
   initMobileMenu();
   initYear();
