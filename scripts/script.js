@@ -36,8 +36,9 @@
   }
 
   const ORDER_ENDPOINT = '';
+  const CATALOG_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwPIvWTGsguef-i6tGoO85wD_NRY-pVAQl0rfsPh7Xp5dS-imR0pEeai_tkElU_DWlX/exec';
 
-  const PRODUCTS = {
+  const DEFAULT_PRODUCTS = {
     'air-one': {
       name: 'E-Hookah Air One',
       description: 'Базовая модель с интеллектуальным контролем тяги и увеличенным объемом пара. Идеально подходит для домашнего использования.',
@@ -77,18 +78,158 @@
     }
   };
 
-  const ORDER_PRODUCTS = Object.fromEntries(
-    Object.entries(PRODUCTS).map(([id, product]) => [
-      id,
-      { name: product.name, price: product.price }
-    ])
-  );
+  let PRODUCTS = DEFAULT_PRODUCTS;
+  let ORDER_PRODUCTS = createOrderProducts(PRODUCTS);
 
   renderCatalog();
   initAccordion();
   initMobileMenu();
   initYear();
   initOrderForm();
+  loadCatalog();
+
+  const KNOWN_PRODUCT_IDS = {
+    'E-Hookah Air One': 'air-one',
+    'E-Hookah Air One Pro': 'air-one-pro'
+  };
+
+  function createOrderProducts(products) {
+    return Object.fromEntries(
+      Object.entries(products).map(([id, product]) => [
+        id,
+        { name: product.name, price: product.price }
+      ])
+    );
+  }
+
+  function getProductId(name) {
+    if (KNOWN_PRODUCT_IDS[name]) return KNOWN_PRODUCT_IDS[name];
+
+    const slug = String(name)
+      .trim()
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}]+/gu, '-')
+      .replace(/^-+|-+$/g, '');
+
+    return slug || 'product';
+  }
+
+  function getStatusClass(status) {
+    if (status === 'В наличии') return 'available';
+    if (status === 'Нет в наличии') return 'none';
+    return 'available';
+  }
+
+  function getProductPresentation(id, name) {
+    if (DEFAULT_PRODUCTS[id]) {
+      return DEFAULT_PRODUCTS[id];
+    }
+
+    return {
+      image: {
+        desktop: '',
+        mobile: '',
+        alt: name,
+        className: ''
+      },
+      accessories: {
+        desktop: '',
+        mobile: '',
+        alt: 'Комплектация'
+      }
+    };
+  }
+
+  function normalizeCatalogProducts(catalog) {
+    if (!Array.isArray(catalog)) {
+      throw new Error('Каталог имеет неверный формат');
+    }
+
+    const products = {};
+    const usedIds = new Set();
+
+    catalog.forEach((item) => {
+      const name = String(item['Название'] || '').trim();
+      const description = String(item['Описание'] || '').trim();
+      const price = Number(item['Цена, BYN']);
+      const status = String(item['Статус'] || '').trim();
+      const desktopImage = String(item['Фото товара'] || '').trim();
+      const mobileImage = String(item['Фото товара (мобильное)'] || '').trim();
+      const accessoriesDesktop = String(item['Фото комплектации'] || '').trim();
+      const accessoriesMobile = String(item['Фото комплектации (мобильное)'] || '').trim();
+
+      if (!name || !description || !Number.isFinite(price) || !status || !desktopImage || !mobileImage || !accessoriesDesktop || !accessoriesMobile) {
+        return;
+      }
+
+      const presentationId = getProductId(name);
+      let id = presentationId;
+      let suffix = 2;
+
+      while (usedIds.has(id)) {
+        id = presentationId + '-' + suffix;
+        suffix += 1;
+      }
+
+      usedIds.add(id);
+      const presentation = getProductPresentation(presentationId, name);
+
+      products[id] = {
+        name,
+        description,
+        price,
+        status,
+        statusClass: getStatusClass(status),
+        image: {
+          desktop: desktopImage,
+          mobile: mobileImage,
+          alt: presentation.image.alt || name,
+          className: presentation.image.className || ''
+        },
+        accessories: {
+          desktop: accessoriesDesktop,
+          mobile: accessoriesMobile,
+          alt: presentation.accessories.alt || 'Комплектация',
+          className: presentation.accessories.className || ''
+        }
+      };
+    });
+
+    return products;
+  }
+
+  function loadCatalog() {
+    if (!CATALOG_ENDPOINT) return;
+
+    const callbackName = 'eHookahCatalog_' + Date.now();
+    const script = document.createElement('script');
+    const url = new URL(CATALOG_ENDPOINT);
+
+    url.searchParams.set('callback', callbackName);
+
+    window[callbackName] = function(catalog) {
+      try {
+        const normalizedProducts = normalizeCatalogProducts(catalog);
+        PRODUCTS = normalizedProducts;
+        ORDER_PRODUCTS = createOrderProducts(PRODUCTS);
+        renderCatalog();
+      } catch (error) {
+        console.error('Не удалось загрузить каталог из Google Apps Script:', error);
+      } finally {
+        delete window[callbackName];
+        script.remove();
+      }
+    };
+
+    script.src = url.toString();
+    script.onerror = function() {
+      console.error('Не удалось получить каталог из Google Apps Script. Используются локальные данные.');
+      delete window[callbackName];
+      script.remove();
+    };
+
+    document.head.appendChild(script);
+  }
 
   function escapeHtml(value) {
     return String(value)
@@ -242,7 +383,6 @@
     const orderForm = document.getElementById('orderForm');
     const orderFormStatus = document.getElementById('orderFormStatus');
     const orderSubmit = document.getElementById('orderSubmit');
-    const productOrderButtons = document.querySelectorAll('.product-order-btn');
 
     if (!orderCart || !orderForm) return;
 
@@ -517,11 +657,15 @@
       });
     });
 
-    productOrderButtons.forEach((button) => {
-      button.addEventListener('click', function() {
+    const productCatalog = document.getElementById('productCatalog');
+
+    if (productCatalog) {
+      productCatalog.addEventListener('click', function(event) {
+        const button = event.target.closest('.product-order-btn');
+        if (!button) return;
         addProduct(button.dataset.productId);
       });
-    });
+    }
 
     orderCartItems.addEventListener('click', function(event) {
       const button = event.target.closest('[data-cart-action]');
