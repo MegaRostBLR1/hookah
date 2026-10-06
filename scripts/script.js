@@ -90,6 +90,15 @@
   initYear();
   initOrderForm();
 
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
   function renderCatalog() {
     const catalog = document.getElementById('productCatalog');
     if (!catalog) return;
@@ -280,15 +289,6 @@
       } catch (error) {
         // Корзина продолжает работать в памяти, даже если localStorage недоступен.
       }
-    }
-
-    function escapeHtml(value) {
-      return String(value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
     }
 
     function getCartItems() {
