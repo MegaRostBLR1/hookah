@@ -113,7 +113,6 @@ section {
 .btn-primary:hover {
   background-color: var(--accent-hover);
   transform: translateY(-2px);
-  -webkit-box-shadow: 0 10px 20px rgba(var(--accent-rgb), 0.3);
   box-shadow: 0 10px 20px rgba(var(--accent-rgb), 0.3)
 }
 
@@ -142,15 +141,12 @@ section {
 
 .header-container {
   display: flex;
-  -webkit-box-pack: justify;
   justify-content: space-between;
-  -webkit-box-align: center;
   align-items: center
 }
 
 .logo {
   display: flex;
-  -webkit-box-align: center;
   align-items: center;
   gap: var(--space-xs);
   font-weight: 800;
@@ -218,10 +214,7 @@ section {
 
 .burger-btn {
   display: none;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
   flex-direction: column;
-  -webkit-box-pack: justify;
   justify-content: space-between;
   width: 30px;
   height: 20px;
@@ -249,9 +242,7 @@ section {
   background: var(--bg-dark);
   z-index: 999;
   display: flex;
-  -webkit-box-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
   align-items: center;
   transition: right 0.4s ease-in-out
 }
@@ -282,9 +273,7 @@ section {
   min-height: 700px;
   background: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%), url("../images/banner.jpg") center/cover no-repeat;
   display: flex;
-  -webkit-box-align: center;
   align-items: center;
-  -webkit-box-pack: start;
   justify-content: flex-start
 }
 
@@ -298,7 +287,6 @@ section {
 
 .hero-top-info {
   display: flex;
-  -webkit-box-align: center;
   align-items: center;
   gap: var(--space-sm);
   margin-bottom: var(--space-sm)
@@ -306,9 +294,7 @@ section {
 
 .age-badge {
   display: flex;
-  -webkit-box-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
   align-items: center;
   width: 44px;
   height: 44px;
@@ -354,7 +340,6 @@ section {
   border-radius: 16px;
   text-align: center;
   transition: color var(--transition-base), background-color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
-  -webkit-box-flex: 1;
   flex: 1 1 280px
 }
 
@@ -387,7 +372,6 @@ section {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-lg);
-  -webkit-box-align: stretch;
   align-items: stretch
 }
 
@@ -407,10 +391,8 @@ section {
   border-radius: 16px;
   padding: var(--space-lg);
   display: flex;
-  -webkit-box-align: end;
   align-items: flex-end;
   border: 1px solid rgba(255, 255, 255, 0.05);
-  -webkit-box-flex: 1;
   flex: 1 1 300px
 }
 
@@ -426,11 +408,8 @@ section {
 
 .benefits-list {
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
   flex-direction: column;
   gap: var(--space-sm);
-  -webkit-box-flex: 1;
   flex: 1 1 400px
 }
 
@@ -455,9 +434,7 @@ section {
 
 .benefit-header {
   display: flex;
-  -webkit-box-pack: justify;
   justify-content: space-between;
-  -webkit-box-align: center;
   align-items: center;
   gap: var(--space-md)
 }
@@ -481,9 +458,7 @@ section {
   background: url("../images/hookahs.jpg") bottom/contain no-repeat;
   transition: color var(--transition-base), background-color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
   display: flex;
-  -webkit-box-align: center;
   align-items: center;
-  -webkit-box-pack: start;
   justify-content: flex-start;
 }
 
@@ -492,7 +467,6 @@ section {
 }
 
 .product-wide-card {
-  display: -ms-grid;
   display: grid;
   grid-template-columns:1fr 1.2fr 1fr;
   background: var(--bg-card);
@@ -506,7 +480,6 @@ section {
 
 .product-wide-card:hover {
   border-color: var(--accent);
-  -webkit-box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
   background: var(--bg-card-hover)
 }
@@ -557,7 +530,6 @@ section {
 .info-main {
   padding: var(--space-lg);
   display: flex;
-  -webkit-box-align: center;
   align-items: center;
   border-left: 1px solid rgba(255, 255, 255, 0.05);
   border-right: 1px solid rgba(255, 255, 255, 0.05)
@@ -621,7 +593,6 @@ section {
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: color var(--transition-base), background-color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
-  -webkit-box-flex: 1;
   flex: 1 1 280px;
   font-style: normal;
 }
@@ -635,7 +606,6 @@ section {
   color: var(--accent);
   margin-bottom: var(--space-md);
   display: flex;
-  -webkit-box-pack: center;
   justify-content: center
 }
 
@@ -672,9 +642,7 @@ section {
   font-weight: 600;
   cursor: pointer;
   display: flex;
-  -webkit-box-pack: justify;
   justify-content: space-between;
-  -webkit-box-align: center;
   align-items: center;
   transition: color var(--transition-base), background-color var(--transition-base), border-color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-base);
   background: none;
@@ -733,9 +701,7 @@ section {
 
 .footer-container {
   display: flex;
-  -webkit-box-pack: justify;
   justify-content: space-between;
-  -webkit-box-align: center;
   align-items: center
 }
 
@@ -775,7 +741,6 @@ section {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
-    -webkit-transition-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important
   }
@@ -1102,7 +1067,6 @@ section {
 .order-form__field textarea:autofill {
   -webkit-text-fill-color: var(--white);
   caret-color: var(--white);
-  -webkit-box-shadow: 0 0 0 1000px var(--bg-dark) inset;
   box-shadow: 0 0 0 1000px var(--bg-dark) inset;
 }
 
