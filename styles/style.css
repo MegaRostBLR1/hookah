@@ -461,8 +461,9 @@ section {
   justify-content: flex-start;
 }
 
-.catalog-wide-list:not(:last-child) {
-  margin-bottom: var(--space-md)
+.catalog-wide-list {
+  display: grid;
+  gap: var(--space-md)
 }
 
 .product-wide-card {
