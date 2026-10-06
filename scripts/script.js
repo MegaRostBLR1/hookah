@@ -90,6 +90,40 @@
   initYear();
   initOrderForm();
 
+  function renderCatalog() {
+    const catalog = document.getElementById('productCatalog');
+    if (!catalog) return;
+
+    catalog.innerHTML = Object.entries(PRODUCTS).map(([id, product]) => `
+      <article class="product-wide-card">
+        <div class="product-part ${escapeHtml(product.image.className || '')}">
+          <picture>
+            <source media="(max-width: 1024px)" srcset="${escapeHtml(product.image.mobile)}">
+            <img src="${escapeHtml(product.image.desktop)}" loading="lazy" alt="${escapeHtml(product.image.alt)}">
+          </picture>
+        </div>
+        <div class="product-part info-main">
+          <div class="info-content">
+            <span class="product-status ${escapeHtml(product.statusClass)}">${escapeHtml(product.status)}</span>
+            <h3>${escapeHtml(product.name)}</h3>
+            <p>${escapeHtml(product.description)}</p>
+            <div class="product-price-wrapper">
+              <span class="price-label">Цена за комплект:</span>
+              <span class="product-price">${escapeHtml(product.price)} руб.</span>
+            </div>
+            <button class="btn btn-primary product-order-btn" type="button" data-product-id="${escapeHtml(id)}">В корзину</button>
+          </div>
+        </div>
+        <div class="product-part photo-kit ${escapeHtml(product.accessories.className || '')}">
+          <picture>
+            <source media="(max-width: 1024px)" srcset="${escapeHtml(product.accessories.mobile)}">
+            <img src="${escapeHtml(product.accessories.desktop)}" loading="lazy" alt="${escapeHtml(product.accessories.alt)}">
+          </picture>
+        </div>
+      </article>
+    `).join('');
+  }
+
   function initAccordion() {
     const accordionItems = document.querySelectorAll('.accordion-item');
 
