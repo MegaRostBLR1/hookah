@@ -1,18 +1,15 @@
 @media screen and (max-width: 1024px) {
   .product-wide-card {
-    -ms-grid-columns: 1fr;
     grid-template-columns:1fr;
     max-height: none;
   }
 
     .benefits-wrapper {
-    -ms-grid-columns: 1fr;
     grid-template-columns:1fr;
     gap: var(--space-md)
   }
 
   .benefits-accent {
-    background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../images/benefits-mob.jpg");
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)), url("../images/benefits-mob.jpg");
     aspect-ratio: 16/9;
     padding: var(--space-md) var(--space-sm)
@@ -90,12 +87,8 @@
   .benefit-header {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
     -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
     align-items: flex-start;
     gap: var(--space-xs)
   }
@@ -122,17 +115,12 @@
   .hero-btns {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
     -webkit-box-align: start;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
     align-items: flex-start
   }
 
   .photo-kit img {
-    -o-object-fit: contain;
     object-fit: contain
   }
 
@@ -151,8 +139,6 @@
 
   .header-container {
     -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
     justify-content: space-between;
     gap: var(--space-lg)
   }
@@ -166,8 +152,6 @@
   .footer-container {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
     flex-direction: column;
     gap: var(--space-md);
     text-align: center
@@ -194,9 +178,6 @@
   .product-price {
     font-size: 2rem
   }
-}
-
-@media (max-width: 576px) {
 }
 
 @media (max-width: 374px) {
