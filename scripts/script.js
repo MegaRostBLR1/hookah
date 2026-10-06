@@ -35,8 +35,8 @@
     updateBodyScrollLock();
   }
 
-  const ORDER_ENDPOINT = 'https://script.google.com/macros/s/AKfycby5f25xnoYAmx8xH2ZMW61j8LaEBHo2vKTQhJJVtZ3YpWPnXZuTJvMKBFmi3s9UFjKogg/exec';
-  const CATALOG_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwPIvWTGsguef-i6tGoO85wD_NRY-pVAQl0rfsPh7Xp5dS-imR0pEeai_tkElU_DWlX/exec';
+  const CATALOG_ENDPOINT = 'https://script.google.com/macros/s/AKfycby5f25xnoYAmx8xH2ZMW61j8LaEBHo2vKTQhJJVtZ3YpWPnXZuTJvMKBFmi3s9UFjKogg/exec';
+  const ORDER_ENDPOINT = CATALOG_ENDPOINT;
 
   let PRODUCTS = {};
   let ORDER_PRODUCTS = {};
@@ -155,7 +155,7 @@
 
     script.src = url.toString();
     script.onerror = function() {
-      console.error('Не удалось получить каталог из Google Apps Script. Используются локальные данные.');
+      console.error('Не удалось получить каталог из Google Apps Script.');
       delete window[callbackName];
       script.remove();
     };
