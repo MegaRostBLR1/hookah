@@ -1,20 +1,38 @@
 (function() {
   'use strict';
 
+  const SCROLL_LOCKS = {
+    MOBILE_MENU: 'mobile-menu',
+    MOBILE_CART: 'mobile-cart',
+    ORDER_MODAL: 'order-modal'
+  };
+
+  const activeScrollLocks = new Set();
+
   function getScrollbarWidth() {
     return window.innerWidth - document.documentElement.clientWidth;
   }
 
-  function setBodyScrollLock(locked) {
-    if (locked) {
+  function updateBodyScrollLock() {
+    if (activeScrollLocks.size > 0) {
       const scrollBarWidth = getScrollbarWidth();
-      if (scrollBarWidth > 0) document.body.style.paddingRight = `${scrollBarWidth}px`;
       document.body.classList.add('no-scroll');
+      document.body.style.paddingRight = scrollBarWidth > 0 ? `${scrollBarWidth}px` : '';
       return;
     }
 
     document.body.classList.remove('no-scroll');
     document.body.style.paddingRight = '';
+  }
+
+  function setBodyScrollLock(source, locked) {
+    if (locked) {
+      activeScrollLocks.add(source);
+    } else {
+      activeScrollLocks.delete(source);
+    }
+
+    updateBodyScrollLock();
   }
 
   const ORDER_ENDPOINT = '';
@@ -79,7 +97,7 @@
       const isOpening = !mobileMenu.classList.contains('active');
 
       if (isOpening) {
-        setBodyScrollLock(true);
+        setBodyScrollLock(SCROLL_LOCKS.MOBILE_MENU, true);
         burgerButton.setAttribute('aria-expanded', 'true');
         mobileMenu.setAttribute('aria-hidden', 'false');
         const firstFocusableElement = mobileMenu.querySelector('a, button');
@@ -94,7 +112,7 @@
     }
 
     function closeMobileMenu() {
-      setBodyScrollLock(false);
+      setBodyScrollLock(SCROLL_LOCKS.MOBILE_MENU, false);
       burgerButton.classList.remove('active');
       mobileMenu.classList.remove('active');
       burgerButton.setAttribute('aria-expanded', 'false');
@@ -253,20 +271,20 @@
       cart.set(productId, nextQuantity);
       saveCart();
       isCartOpen = true;
-      if (window.innerWidth <= 600) setBodyScrollLock(true);
+      setBodyScrollLock(SCROLL_LOCKS.MOBILE_CART, window.innerWidth <= 600);
       renderCart();
     }
 
     function openCart() {
       if (cart.size === 0) return;
       isCartOpen = true;
-      if (window.innerWidth <= 600) setBodyScrollLock(true);
+      setBodyScrollLock(SCROLL_LOCKS.MOBILE_CART, window.innerWidth <= 600);
       renderCart();
     }
 
     function closeCart() {
       isCartOpen = false;
-      if (window.innerWidth <= 600 && orderModal.hidden) setBodyScrollLock(false);
+      setBodyScrollLock(SCROLL_LOCKS.MOBILE_CART, false);
       renderCart();
     }
 
@@ -297,6 +315,7 @@
       cart.clear();
       saveCart();
       isCartOpen = false;
+      setBodyScrollLock(SCROLL_LOCKS.MOBILE_CART, false);
       renderCart();
     }
 
@@ -403,13 +422,13 @@
       renderModalSummary();
       setFormStatus('', '');
       orderModal.hidden = false;
-      setBodyScrollLock(true);
+      setBodyScrollLock(SCROLL_LOCKS.ORDER_MODAL, true);
       document.getElementById('orderName').focus();
     }
 
     function closeModal() {
       orderModal.hidden = true;
-      setBodyScrollLock(window.innerWidth <= 600 && isCartOpen);
+      setBodyScrollLock(SCROLL_LOCKS.ORDER_MODAL, false);
       if (lastFocusedElement) lastFocusedElement.focus();
     }
 
@@ -500,8 +519,16 @@
         // Некорректные данные из другой вкладки игнорируются.
       }
 
-      if (cart.size === 0) isCartOpen = false;
+      if (cart.size === 0) {
+        isCartOpen = false;
+        setBodyScrollLock(SCROLL_LOCKS.MOBILE_CART, false);
+      }
+
       renderCart();
+    });
+
+    window.addEventListener('resize', function() {
+      setBodyScrollLock(SCROLL_LOCKS.MOBILE_CART, isCartOpen && window.innerWidth <= 600);
     });
 
     orderForm.addEventListener('submit', async function(event) {
