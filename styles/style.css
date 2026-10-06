@@ -523,9 +523,6 @@ section {
   }
 }
 
-.hookah-small img {
-  object-position: 56%
-}
 
 .info-main {
   padding: var(--space-lg);
