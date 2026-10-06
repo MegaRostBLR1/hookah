@@ -38,60 +38,14 @@
   const ORDER_ENDPOINT = 'https://script.google.com/macros/s/AKfycby5f25xnoYAmx8xH2ZMW61j8LaEBHo2vKTQhJJVtZ3YpWPnXZuTJvMKBFmi3s9UFjKogg/exec';
   const CATALOG_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwPIvWTGsguef-i6tGoO85wD_NRY-pVAQl0rfsPh7Xp5dS-imR0pEeai_tkElU_DWlX/exec';
 
-  const DEFAULT_PRODUCTS = {
-    'air-one': {
-      name: 'E-Hookah Air One',
-      description: 'Базовая модель с интеллектуальным контролем тяги и увеличенным объемом пара. Идеально подходит для домашнего использования.',
-      price: 590,
-      status: 'В наличии',
-      statusClass: 'available',
-      image: {
-        desktop: 'images/hookah-small_desc.jpg',
-        mobile: 'images/hookah-small_mobile.jpg',
-        alt: 'Электрокальян E-Hookah Air One малый',
-        className: 'hookah-small'
-      },
-      accessories: {
-        desktop: 'images/hookah-small-accessories-desc.jpg',
-        mobile: 'images/hookah-small-accessories-mob.jpg',
-        alt: 'Комплектация малого кальяна',
-        className: 'hookah-small-accessories'
-      }
-    },
-    'air-one-pro': {
-      name: 'E-Hookah Air One Pro',
-      description: 'Расширенная модель с увеличенной батареей и премиальными материалами. Для ценителей длительного использования.',
-      price: 850,
-      status: 'В наличии',
-      statusClass: 'available',
-      image: {
-        desktop: 'images/hookah-big_desc.jpg',
-        mobile: 'images/hookah-big_mobile.jpg',
-        alt: 'Электрокальян E-Hookah Air One большой',
-        className: 'hookah-big'
-      },
-      accessories: {
-        desktop: 'images/hookah-big-accessories-desc.jpg',
-        mobile: 'images/hookah-big-accessories-mob.jpg',
-        alt: 'Комплектация большого кальяна'
-      }
-    }
-  };
-
-  let PRODUCTS = DEFAULT_PRODUCTS;
-  let ORDER_PRODUCTS = createOrderProducts(PRODUCTS);
+  let PRODUCTS = {};
+  let ORDER_PRODUCTS = {};
 
   renderCatalog();
   initAccordion();
   initMobileMenu();
   initYear();
-  initOrderForm();
   loadCatalog();
-
-  const KNOWN_PRODUCT_IDS = {
-    'E-Hookah Air One': 'air-one',
-    'E-Hookah Air One Pro': 'air-one-pro'
-  };
 
   function createOrderProducts(products) {
     return Object.fromEntries(
@@ -103,8 +57,6 @@
   }
 
   function getProductId(name) {
-    if (KNOWN_PRODUCT_IDS[name]) return KNOWN_PRODUCT_IDS[name];
-
     const slug = String(name)
       .trim()
       .toLowerCase()
@@ -118,26 +70,6 @@
     if (status === 'В наличии') return 'available';
     if (status === 'Нет в наличии') return 'none';
     return 'available';
-  }
-
-  function getProductPresentation(id, name) {
-    if (DEFAULT_PRODUCTS[id]) {
-      return DEFAULT_PRODUCTS[id];
-    }
-
-    return {
-      image: {
-        desktop: '',
-        mobile: '',
-        alt: name,
-        className: ''
-      },
-      accessories: {
-        desktop: '',
-        mobile: '',
-        alt: 'Комплектация'
-      }
-    };
   }
 
   function normalizeCatalogProducts(catalog) {
@@ -162,17 +94,16 @@
         return;
       }
 
-      const presentationId = getProductId(name);
-      let id = presentationId;
+      const baseId = getProductId(name);
+      let id = baseId;
       let suffix = 2;
 
       while (usedIds.has(id)) {
-        id = presentationId + '-' + suffix;
+        id = baseId + '-' + suffix;
         suffix += 1;
       }
 
       usedIds.add(id);
-      const presentation = getProductPresentation(presentationId, name);
 
       products[id] = {
         name,
@@ -183,14 +114,14 @@
         image: {
           desktop: desktopImage,
           mobile: mobileImage,
-          alt: presentation.image.alt || name,
-          className: presentation.image.className || ''
+          alt: name,
+          className: ''
         },
         accessories: {
           desktop: accessoriesDesktop,
           mobile: accessoriesMobile,
-          alt: presentation.accessories.alt || 'Комплектация',
-          className: presentation.accessories.className || ''
+          alt: 'Комплектация',
+          className: ''
         }
       };
     });
@@ -213,6 +144,7 @@
         PRODUCTS = normalizedProducts;
         ORDER_PRODUCTS = createOrderProducts(PRODUCTS);
         renderCatalog();
+        initOrderForm();
       } catch (error) {
         console.error('Не удалось загрузить каталог из Google Apps Script:', error);
       } finally {
@@ -789,6 +721,7 @@
       try {
         const response = await fetch(ORDER_ENDPOINT, {
           method: 'POST',
+          redirect: 'follow',
           headers: {
             'Content-Type': 'text/plain;charset=utf-8'
           },
