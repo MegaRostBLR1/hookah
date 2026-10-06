@@ -88,12 +88,6 @@
   initOrderForm();
   loadCatalog();
 
-  renderCatalog();
-  initAccordion();
-  initMobileMenu();
-  initYear();
-  initOrderForm();
-
   const KNOWN_PRODUCT_IDS = {
     'E-Hookah Air One': 'air-one',
     'E-Hookah Air One Pro': 'air-one-pro'
