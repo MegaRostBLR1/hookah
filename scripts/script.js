@@ -69,6 +69,10 @@
   }
 
   function normalizeCatalogProducts(catalog) {
+    if (catalog && catalog.success === false) {
+      throw new Error(catalog.error || 'Google Apps Script вернул ошибку');
+    }
+
     if (!Array.isArray(catalog)) {
       throw new Error('Каталог имеет неверный формат');
     }
@@ -129,29 +133,46 @@
     const callbackName = 'eHookahCatalog_' + Date.now();
     const script = document.createElement('script');
     const url = new URL(CONFIG.CATALOG_ENDPOINT);
+    let timeoutId;
 
     url.searchParams.set('callback', callbackName);
+    url.searchParams.set('_', String(Date.now()));
+
+    function cleanup() {
+      window.clearTimeout(timeoutId);
+      delete window[callbackName];
+      script.remove();
+    }
 
     window[callbackName] = function(catalog) {
       try {
         const normalizedProducts = normalizeCatalogProducts(catalog);
+
+        if (Object.keys(normalizedProducts).length === 0) {
+          throw new Error('Google Apps Script вернул пустой каталог');
+        }
+
         PRODUCTS = normalizedProducts;
         renderCatalog();
         initOrderForm();
       } catch (error) {
         console.error('Не удалось загрузить каталог из Google Apps Script:', error);
       } finally {
-        delete window[callbackName];
-        script.remove();
+        cleanup();
       }
     };
 
     script.src = url.toString();
+
     script.onerror = function() {
       console.error('Не удалось получить каталог из Google Apps Script.');
-      delete window[callbackName];
-      script.remove();
+      cleanup();
     };
+
+    timeoutId = window.setTimeout(function() {
+      console.error('Превышено время ожидания ответа Google Apps Script.');
+      cleanup();
+    }, 15000);
 
     document.head.appendChild(script);
   }
