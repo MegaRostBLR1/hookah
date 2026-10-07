@@ -536,9 +536,9 @@
         input: document.getElementById('orderName'),
         error: document.getElementById('orderNameError'),
         validate(value) {
-          if (!value) return 'Введите имя.';
-          if (value.length < 2) return 'Имя должно содержать минимум 2 символа.';
-          if (value.length > 80) return 'Имя не должно превышать 80 символов.';
+          if (!value) return 'Введите ФИО.';
+          if (value.length < 2) return 'ФИО должно содержать минимум 2 символа.';
+          if (value.length > 80) return 'ФИО не должно превышать 80 символов.';
           if (!/^[\p{L}\p{M}][\p{L}\p{M}'’ -]*$/u.test(value)) {
             return 'Используйте только буквы, пробелы и дефисы.';
           }
