@@ -38,11 +38,14 @@
   const CONFIG = {
     CATALOG_ENDPOINT: 'https://script.google.com/macros/s/AKfycby5f25xnoYAmx8xH2ZMW61j8LaEBHo2vKTQhJJVtZ3YpWPnXZuTJvMKBFmi3s9UFjKogg/exec',
     CART_STORAGE_KEY: 'e-hookah-cart',
-    MAX_QUANTITY: 99
+    MAX_QUANTITY: 99,
+    CATALOG_TIMEOUT_MS: 15000,
+    ORDER_TIMEOUT_MS: 20000
   };
 
   const ORDER_ENDPOINT = CONFIG.CATALOG_ENDPOINT;
   let PRODUCTS = {};
+  let orderFormInitialized = false;
 
   initAccordion();
   initMobileMenu();
@@ -63,9 +66,7 @@
   }
 
   function getStatusClass(status) {
-    if (status === 'В наличии') return 'available';
-    if (status === 'Нет в наличии') return 'none';
-    return 'available';
+    return status === 'В наличии' ? 'available' : 'none';
   }
 
   function normalizeCatalogProducts(catalog) {
@@ -123,35 +124,82 @@
     return products;
   }
 
+  function showCatalogMessage(message, canRetry) {
+    const catalog = document.getElementById('productCatalog');
+    if (!catalog) return;
+
+    catalog.innerHTML = '<div class="catalog-message" role="status">' +
+      '<p>' + escapeHtml(message) + '</p>' +
+      (canRetry ? '<button class="btn btn-primary catalog-retry-btn" type="button">Повторить загрузку</button>' : '') +
+      '</div>';
+
+    if (canRetry) {
+      const retryButton = catalog.querySelector('.catalog-retry-btn');
+      if (retryButton) retryButton.addEventListener('click', loadCatalog, { once: true });
+    }
+  }
+
   function loadCatalog() {
-    if (!CONFIG.CATALOG_ENDPOINT) return;
+    if (!CONFIG.CATALOG_ENDPOINT) {
+      showCatalogMessage('Каталог временно недоступен.', false);
+      return;
+    }
+
+    showCatalogMessage('Загружаем ассортимент…', false);
 
     const callbackName = 'eHookahCatalog_' + Date.now();
     const script = document.createElement('script');
     const url = new URL(CONFIG.CATALOG_ENDPOINT);
+    let finished = false;
+    let timeoutId = null;
 
     url.searchParams.set('callback', callbackName);
 
+    const cleanup = function() {
+      if (finished) return;
+      finished = true;
+      if (timeoutId) window.clearTimeout(timeoutId);
+      delete window[callbackName];
+      script.remove();
+    };
+
+    const fail = function(message, error) {
+      cleanup();
+      if (error) {
+        console.error(message, error);
+      } else {
+        console.error(message);
+      }
+      showCatalogMessage('Не удалось загрузить ассортимент. Попробуйте ещё раз.', true);
+    };
+
     window[callbackName] = function(catalog) {
+      if (finished) return;
+
       try {
         const normalizedProducts = normalizeCatalogProducts(catalog);
+
+        if (Object.keys(normalizedProducts).length === 0) {
+          throw new Error('Каталог не содержит корректных товаров');
+        }
+
         PRODUCTS = normalizedProducts;
         renderCatalog();
         initOrderForm();
+        cleanup();
       } catch (error) {
-        console.error('Не удалось загрузить каталог из Google Apps Script:', error);
-      } finally {
-        delete window[callbackName];
-        script.remove();
+        fail('Не удалось загрузить каталог из Google Apps Script:', error);
       }
     };
 
     script.src = url.toString();
     script.onerror = function() {
-      console.error('Не удалось получить каталог из Google Apps Script.');
-      delete window[callbackName];
-      script.remove();
+      fail('Не удалось получить каталог из Google Apps Script.');
     };
+
+    timeoutId = window.setTimeout(function() {
+      fail('Превышено время ожидания каталога из Google Apps Script.');
+    }, CONFIG.CATALOG_TIMEOUT_MS);
 
     document.head.appendChild(script);
   }
@@ -186,7 +234,7 @@
               <span class="price-label">Цена за комплект:</span>
               <span class="product-price">${escapeHtml(product.price)} руб.</span>
             </div>
-            <button class="btn btn-primary product-order-btn" type="button" data-product-id="${escapeHtml(id)}">В корзину</button>
+            <button class="btn btn-primary product-order-btn" type="button" data-product-id="${escapeHtml(id)}"${product.status !== 'В наличии' ? ' disabled' : ''}>${product.status === 'В наличии' ? 'В корзину' : 'Недоступно'}</button>
           </div>
         </div>
         <div class="product-part photo-kit">
@@ -309,8 +357,9 @@
     const orderFormStatus = document.getElementById('orderFormStatus');
     const orderSubmit = document.getElementById('orderSubmit');
 
-    if (!orderCart || !orderForm) return;
+    if (!orderCart || !orderForm || orderFormInitialized) return;
 
+    orderFormInitialized = true;
     const cart = new Map();
     let lastFocusedElement = null;
     let isCartOpen = false;
@@ -407,7 +456,8 @@
     }
 
     function addProduct(productId) {
-      if (!PRODUCTS[productId]) return;
+      const product = PRODUCTS[productId];
+      if (!product || product.status !== 'В наличии') return;
       const nextQuantity = Math.min((cart.get(productId) || 0) + 1, CONFIG.MAX_QUANTITY);
       cart.set(productId, nextQuantity);
       saveCart();
@@ -693,9 +743,16 @@
         return;
       }
 
+      const items = getCartItems();
+
+      if (items.some((item) => item.status !== 'В наличии')) {
+        setFormStatus('Один из выбранных товаров сейчас недоступен. Обновите корзину и попробуйте снова.', 'error');
+        return;
+      }
+
       const formData = new FormData(orderForm);
       const payload = {
-        items: getCartItems().map((item) => ({
+        items: items.map((item) => ({
           id: item.id,
           quantity: item.quantity
         })),
@@ -709,6 +766,11 @@
       orderSubmit.textContent = 'Отправляем…';
       setFormStatus('', '');
 
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(function() {
+        controller.abort();
+      }, CONFIG.ORDER_TIMEOUT_MS);
+
       try {
         const response = await fetch(ORDER_ENDPOINT, {
           method: 'POST',
@@ -716,7 +778,8 @@
           headers: {
             'Content-Type': 'text/plain;charset=utf-8'
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify(payload),
+          signal: controller.signal
         });
 
         const result = await response.json().catch(() => null);
@@ -728,8 +791,13 @@
 
         window.setTimeout(closeModal, 1800);
       } catch (error) {
-        setFormStatus('Не удалось отправить заявку. Попробуйте ещё раз или свяжитесь с нами по телефону.', 'error');
+        if (error.name === 'AbortError') {
+          setFormStatus('Сервис не ответил вовремя. Проверьте соединение и попробуйте ещё раз.', 'error');
+        } else {
+          setFormStatus('Не удалось отправить заявку. Попробуйте ещё раз или свяжитесь с нами по телефону.', 'error');
+        }
       } finally {
+        window.clearTimeout(timeoutId);
         orderSubmit.disabled = false;
         orderSubmit.textContent = 'Отправить заявку';
       }
