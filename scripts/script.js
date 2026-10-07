@@ -36,7 +36,7 @@
   }
 
   const CONFIG = {
-    CATALOG_ENDPOINT: 'https://script.google.com/macros/s/AKfycby5f25xnoYAmx8xH2ZMW61j8LaEBHo2vKTQhJVtZ3YpWPnXZuTJvMKBFmi3s9UFjKogg/exec',
+    CATALOG_ENDPOINT: 'https://script.google.com/macros/s/AKfycby5f25xnoYAmx8xH2ZMW61j8LaEBHo2vKTQhJJVtZ3YpWPnXZuTJvMKBFmi3s9UFjKogg/exec',
     CART_STORAGE_KEY: 'e-hookah-cart',
     MAX_QUANTITY: 99
   };
