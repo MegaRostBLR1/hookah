@@ -802,7 +802,9 @@
       };
 
       orderSubmit.disabled = true;
-      orderSubmit.textContent = 'Отправляем…';
+      orderSubmit.classList.add('is-loading');
+      orderSubmit.setAttribute('aria-busy', 'true');
+      orderSubmit.textContent = 'Отправляем';
       setFormStatus('', '');
 
       const controller = new AbortController();
@@ -828,7 +830,7 @@
         orderForm.reset();
         clearCart();
 
-        window.setTimeout(closeModal, 1800);
+        window.setTimeout(closeModal, 3000);
       } catch (error) {
         if (error.name === 'AbortError') {
           setFormStatus('Сервис не ответил вовремя. Проверьте соединение и попробуйте ещё раз.', 'error');
@@ -838,6 +840,8 @@
       } finally {
         window.clearTimeout(timeoutId);
         orderSubmit.disabled = false;
+        orderSubmit.classList.remove('is-loading');
+        orderSubmit.removeAttribute('aria-busy');
         orderSubmit.textContent = 'Отправить заявку';
       }
     });
