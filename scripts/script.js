@@ -76,6 +76,7 @@
 
     const products = {};
     const usedIds = new Set();
+    let skippedItems = 0;
 
     catalog.forEach((item) => {
       const name = String(item['Название'] || '').trim();
@@ -87,7 +88,8 @@
       const accessoriesDesktop = String(item['Фото комплектации'] || '').trim();
       const accessoriesMobile = String(item['Фото комплектации (мобильное)'] || '').trim();
 
-      if (!name || !description || !Number.isFinite(price) || !status || !desktopImage || !mobileImage || !accessoriesDesktop || !accessoriesMobile) {
+      if (!name || !description || !Number.isFinite(price) || price < 0 || !status || !desktopImage || !mobileImage || !accessoriesDesktop || !accessoriesMobile) {
+        skippedItems += 1;
         return;
       }
 
@@ -120,6 +122,10 @@
         }
       };
     });
+
+    if (skippedItems > 0) {
+      console.warn(`Google Apps Script returned ${skippedItems} invalid catalog item(s); they were skipped.`);
+    }
 
     return products;
   }
@@ -291,13 +297,21 @@
     const mobileMenu = document.getElementById('mobileMenu');
     const mobileMenuLinks = document.querySelectorAll('.nav-list-mobile a');
     const mobileMenuActionButton = mobileMenu ? mobileMenu.querySelector('.btn-primary') : null;
+    let lastFocusedElement = null;
 
     if (!burgerButton || !mobileMenu) return;
+
+    function getFocusableElements() {
+      return Array.from(mobileMenu.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      ));
+    }
 
     function toggleMobileMenu() {
       const isOpening = !mobileMenu.classList.contains('active');
 
       if (isOpening) {
+        lastFocusedElement = document.activeElement;
         setBodyScrollLock(SCROLL_LOCKS.MOBILE_MENU, true);
         burgerButton.setAttribute('aria-expanded', 'true');
         mobileMenu.setAttribute('aria-hidden', 'false');
@@ -318,7 +332,12 @@
       mobileMenu.classList.remove('active');
       burgerButton.setAttribute('aria-expanded', 'false');
       mobileMenu.setAttribute('aria-hidden', 'true');
-      burgerButton.focus();
+      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus();
+      } else {
+        burgerButton.focus();
+      }
+      lastFocusedElement = null;
     }
 
     burgerButton.addEventListener('click', toggleMobileMenu);
@@ -332,8 +351,28 @@
     }
 
     document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape' && mobileMenu.classList.contains('active')) {
+      if (!mobileMenu.classList.contains('active')) return;
+
+      if (event.key === 'Escape') {
+        event.preventDefault();
         closeMobileMenu();
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+
+      const focusableElements = getFocusableElements();
+      if (!focusableElements.length) return;
+
+      const firstFocusableElement = focusableElements[0];
+      const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstFocusableElement) {
+        event.preventDefault();
+        lastFocusableElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastFocusableElement) {
+        event.preventDefault();
+        firstFocusableElement.focus();
       }
     });
 
