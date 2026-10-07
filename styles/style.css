@@ -1111,3 +1111,38 @@ section {
   cursor: wait;
   opacity: 0.65;
 }
+
+.order-submit.is-loading::after {
+  content: '...';
+  display: inline-block;
+  width: 1.25em;
+  overflow: hidden;
+  vertical-align: bottom;
+  animation: order-submit-dots 1.2s steps(4, end) infinite;
+}
+
+@keyframes order-submit-dots {
+  0% {
+    width: 0;
+  }
+
+  25% {
+    width: 0.4em;
+  }
+
+  50% {
+    width: 0.8em;
+  }
+
+  75%,
+  100% {
+    width: 1.25em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .order-submit.is-loading::after {
+    animation: none;
+    width: 1.25em;
+  }
+}
