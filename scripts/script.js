@@ -50,13 +50,16 @@
   loadCatalog();
 
   function getProductId(name) {
-    const slug = String(name)
+    const normalizedName = String(name)
       .trim()
-      .toLowerCase()
-      .replace(/[^\p{L}\p{N}]+/gu, '-')
-      .replace(/^-+|-+$/g, '');
+      .toLowerCase();
 
-    return slug || 'product';
+    const productIds = {
+      'e-hookah air one': 'air-one',
+      'e-hookah air one pro': 'air-one-pro'
+    };
+
+    return productIds[normalizedName] || 'product';
   }
 
   function getStatusClass(status) {
