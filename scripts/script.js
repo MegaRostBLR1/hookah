@@ -130,12 +130,12 @@
     return products;
   }
 
-  function showCatalogMessage(message, canRetry) {
+  function showCatalogMessage(message, canRetry, isLoading = false) {
     const catalog = document.getElementById('productCatalog');
     if (!catalog) return;
 
     catalog.innerHTML = '<div class="catalog-message" role="status">' +
-      '<p>' + escapeHtml(message) + '</p>' +
+      '<p' + (isLoading ? ' class="catalog-message__loading"' : '') + '>' + escapeHtml(message) + '</p>' +
       (canRetry ? '<button class="btn btn-primary catalog-retry-btn" type="button">Повторить загрузку</button>' : '') +
       '</div>';
 
@@ -151,7 +151,7 @@
       return;
     }
 
-    showCatalogMessage('Загружаем ассортимент…', false);
+    showCatalogMessage('Загружаем ассортимент', false, true);
 
     const callbackName = 'eHookahCatalog_' + Date.now();
     const script = document.createElement('script');
