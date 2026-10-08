@@ -466,6 +466,39 @@ section {
   gap: var(--space-md)
 }
 
+.catalog-message__loading::after {
+  content: ".";
+  display: inline-block;
+  width: 1.5em;
+  text-align: left;
+  animation: catalog-loading-dots 1.2s steps(1, end) infinite;
+}
+
+@keyframes catalog-loading-dots {
+  0%, 24% {
+    content: ".";
+  }
+
+  25%, 49% {
+    content: "..";
+  }
+
+  50%, 74% {
+    content: "...";
+  }
+
+  75%, 100% {
+    content: ".";
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .catalog-message__loading::after {
+    animation: none;
+    content: "...";
+  }
+}
+
 .product-wide-card {
   display: grid;
   grid-template-columns:1fr 1.2fr 1fr;
